@@ -407,10 +407,6 @@ class SLAM:
         # so the reported full-trajectory ATE reflects the refined poses.
         self.frontend.final_pose_refinement()
 
-        # P2b (doc 14): offline KF-only geometric pose-graph BA. Writes optimized KF
-        # poses into frontend.cameras BEFORE save_final_tracking_raw so the reported
-        # ATE reflects them. Gauge-fixes KF0; held-out validation edges guard vs
-        # train-edge overfit. Default-off (DBALite.enabled).
         if self.config["Results"].get("save_final_tracking", True):
             save_final_tracking_raw(
                 self.frontend.cameras,
