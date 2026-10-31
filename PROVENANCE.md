@@ -100,4 +100,4 @@ dyn_port_buffer, dyn_port_online, dyn_port_offline, dynport_causal_log}.py`
 | `py_compile` slam.py / slam_frontend.py / slam_backend.py | 通过 |
 | `pytest tests/densification tests/paper3_bpw tests/test_config_valid.py` | **105 passed**（monogs-ours 基线 96 + config 校验） |
 | submodule pin | `diff-gaussian-rasterization@43e21bff`、`simple-knn@44f764299`（与 monogs-ours 历史及 upstream MonoGS 一致） |
-| 2060 冒烟（40 帧，bpw_off） | 待补 |
+| 2060 冒烟 A/B（40 帧，bpw_off，seed 0） | 裁剪仓 vs monogs-ours@31b0f0367 纯净参照：ATE RMSE 1.1688 vs 1.1718 cm（Δ=0.003cm ≈ 0.26%，CUDA 非确定性量级，低于同配置跨批噪声 0.18–0.62cm）；stats_final/per_frame_ape/tracking_raw 全字段一致（仅时间戳与噪声级小数差）。**减法未改变管线行为** |
