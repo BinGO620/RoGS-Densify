@@ -1,0 +1,52 @@
+{
+ "prereg": [
+  "paper3/results/evidence/prereg_cgb_2026-10-30.md §6",
+  "paper3/results/evidence/prereg_cgb_amendment_a1_2026-10-30.md §3",
+  "paper3/results/evidence/prereg_cgb_amendment_a2_2026-10-30.md §2"
+ ],
+ "sequence": "person_tracking",
+ "floor_cm": 3.8301936065142494,
+ "arms": {
+  "g1": {
+   "run_dir": "results/paper3_bpw/cgb_g1_person_tracking/datasets_bonn/cgb_g1_person_tracking/seed_0/2026-10-30-18-35-13",
+   "ate_cm": 13.4841,
+   "num_gaussians": 68490.0,
+   "refined_gaussians": 68490.0,
+   "num_frames": 580.0
+  },
+  "g0": {
+   "run_dir": "results/paper3_bpw/cgb_g0_person_tracking/datasets_bonn/cgb_g0_person_tracking/seed_0/2026-10-30-19-19-18",
+   "ate_cm": 11.2251,
+   "num_gaussians": 64340.0,
+   "refined_gaussians": 69340.0,
+   "num_frames": 580.0
+  },
+  "off": {
+   "run_dir": "results/paper3_bpw/bpw_off_person_tracking/datasets_bonn/bpw_off_person_tracking/seed_0/2026-10-28-20-52-14",
+   "ate_cm": 11.5375,
+   "num_gaussians": 66882.0,
+   "refined_gaussians": 66882.0,
+   "num_frames": 580.0
+  }
+ },
+ "deltas_cm": {
+  "g1_minus_off": 1.9466,
+  "g0_minus_off": -0.31240000000000023,
+  "g1_minus_g0": 2.2590000000000003
+ },
+ "dose": {
+  "relative_gap": 0.06450108797015854,
+  "relative_gap_online": 0.06450108797015854,
+  "relative_gap_refined": 0.012258436688779925,
+  "columns_agree_in_sign": false,
+  "ambiguous": true,
+  "gate_5pct": false,
+  "both_worse_than_off_by_1cm": false,
+  "both_inflated_above_1.15x": false
+ },
+ "verdict": "DOSE_AMBIGUOUS — online/refined 两列给出相反符号（末端竞态），剂量门不可判；ΔATE 不得读作放置效应（A1 §3a + 测量口径 #12）",
+ "caveats": [
+  "单 seed ⇒ 按 §5 一切 |ΔATE| < floor_cm 的读数一律「不可判」；本判定的方向项只用于决定是否补 seed，不是效应量证据。",
+  "本地 2060 产物（远程不可达）⇒ 按 G-算力条标注「非权威」，不得进论文表。"
+ ]
+}

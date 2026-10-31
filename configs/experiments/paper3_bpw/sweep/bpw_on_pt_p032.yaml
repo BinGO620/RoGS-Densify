@@ -1,0 +1,19 @@
+# p0 扫描臂：与 bpw_on_person_tracking.yaml 只差 p0
+# p0=0 应逐位复现 off（e_i = accum/denom = 平均梯度），用作实现正确性校验
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "persistence_budget"
+  p0: 32
+  tau_low_factor: 0.5
+  placebo: false
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/sweep_p0_32_person_tracking"
+  save_per_frame_ape: true

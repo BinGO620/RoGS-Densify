@@ -1,0 +1,41 @@
+{
+ "prereg": "paper3/results/evidence/prereg_cgb_2026-10-30.md §4 R1",
+ "swap_frac": 0.05,
+ "arms": [
+  {
+   "label": "gamma=1 (mechanism)",
+   "events": 19,
+   "g1_budget_err_max_abs": 0,
+   "g1_budget_err_frac_exact": 1.0,
+   "g1_extra_per_event_mean": 73.63157894736842,
+   "g2_extra_s_mean": 3.0127202931050636,
+   "g2_ref_s_mean": 1.1272162243932546,
+   "g2_delta_s_mean": 1.885504068711809,
+   "g2_ratio_mean": 2.6986372148034135,
+   "g2_events_extra_sparser": 19,
+   "g3_ref_extra_overlap": 0,
+   "g3_extra_below_pool": 0
+  },
+  {
+   "label": "gamma=0 (dose control)",
+   "events": 18,
+   "g1_budget_err_max_abs": 0,
+   "g1_budget_err_frac_exact": 1.0,
+   "g1_extra_per_event_mean": 73.83333333333333,
+   "g2_extra_s_mean": 1.1219495476901515,
+   "g2_ref_s_mean": 1.1717753372827824,
+   "g2_delta_s_mean": -0.049825789592630766,
+   "g2_ratio_mean": 0.9747427380547453,
+   "g2_events_extra_sparser": 8,
+   "g3_ref_extra_overlap": 0,
+   "g3_extra_below_pool": 0
+  }
+ ],
+ "gate": {
+  "g1_dose": true,
+  "g2_placement": true,
+  "g3_disjoint": true,
+  "all_pass": true
+ },
+ "note": "机制门判装置，不判效果。all_pass=False ⇒ 冻结读数、修装置，不得解释机制。"
+}

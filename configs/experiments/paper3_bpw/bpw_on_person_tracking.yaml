@@ -1,0 +1,32 @@
+# Phase 0 BPW — arm `on`（person_tracking）：预算匹配的持久性加权致密化。
+#
+# 与 bpw_off_person_tracking.yaml 只差 SelectiveDensification 块：其余训练/采样/优化
+# 与预算规则完全不变，保证单变量。
+#
+# 每个 densify 事件：
+#   P0     = { i : g_i >= densify_grad_threshold }        # 参考选中集
+#   budget = |P0|                                          # 净新增高斯数（不变）
+#   P      = { i : g_i >= tau_low_factor * threshold }     # 放宽池
+#   S      = P 内按 e_i = accum_i/(denom_i+p0) 取前 |budget| 个
+# p0=8.0、tau_low_factor=0.5 均为先验锁定值，跑后不得调整。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+# 三臂必须互为因果孪生：初始点云与随机 KF 顺序必须一致。
+# slam.py:736 会用 config 文件名（含臂名）覆写 Dataset.sequence，
+# 因此 RNG tag 走顶层键，值在三臂中完全相同、与臂名无关。
+# 见 paper3/results/evidence/phase0_audit_2026-10-28_invalid_batch.md
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "persistence_budget"
+  p0: 8.0
+  tau_low_factor: 0.5
+  placebo: false
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/bpw_on_person_tracking"
+  save_per_frame_ape: true

@@ -1,0 +1,23 @@
+# Phase 0 BPW — arm `off`（balloon）：现有默认致密化，作为基线。
+#
+# 与 configs/rgbd/bonn/balloon.yaml + combined_prune/method.yaml 完全同链，
+# 唯一差别是 save_dir。SelectiveDensification.enabled=false ⇒ 走原标量路径，
+# 与主线逐位一致（这是 default-off 安全承诺的回归测点）。
+#
+# 用法：python slam.py --config configs/experiments/paper3_bpw/bpw_off_balloon.yaml --eval
+inherit_from: "configs/rgbd/bonn/balloon.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+# 三臂必须互为因果孪生：初始点云与随机 KF 顺序必须一致。
+# slam.py:736 会用 config 文件名（含臂名）覆写 Dataset.sequence，
+# 因此 RNG tag 走顶层键，值在三臂中完全相同、与臂名无关。
+# 见 paper3/results/evidence/phase0_audit_2026-10-28_invalid_batch.md
+rng_sequence: "balloon"
+
+SelectiveDensification:
+  enabled: false
+
+Results:
+  save_dir: "results/paper3_bpw/bpw_off_balloon"
+  save_per_frame_ape: true

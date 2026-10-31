@@ -1,0 +1,2175 @@
+{
+  "p0_values": [
+    0.0,
+    2.0,
+    8.0,
+    32.0,
+    128.0
+  ],
+  "ate_cm": {
+    "0.0": 10.0142,
+    "2.0": 12.2084,
+    "8.0": 11.7594,
+    "32.0": 10.7293,
+    "128.0": 12.6104
+  },
+  "num_gaussians": {
+    "0.0": 54219.0,
+    "2.0": 69607.0,
+    "8.0": 72786.0,
+    "32.0": 60669.0,
+    "128.0": 68451.0
+  },
+  "n_events": {
+    "0.0": 69,
+    "2.0": 68,
+    "8.0": 66,
+    "32.0": 66,
+    "128.0": 70
+  },
+  "sum_budget": {
+    "0.0": 297007,
+    "2.0": 308354,
+    "8.0": 294858,
+    "32.0": 299377,
+    "128.0": 323823
+  },
+  "first_budget": {
+    "0.0": 2638,
+    "2.0": 2638,
+    "8.0": 2638,
+    "32.0": 2638,
+    "128.0": 2638
+  },
+  "adjacent_deltas": [
+    {
+      "from": 0.0,
+      "to": 2.0,
+      "delta_cm": 2.1941999999999986
+    },
+    {
+      "from": 2.0,
+      "to": 8.0,
+      "delta_cm": -0.44899999999999984
+    },
+    {
+      "from": 8.0,
+      "to": 32.0,
+      "delta_cm": -1.0300999999999991
+    },
+    {
+      "from": 32.0,
+      "to": 128.0,
+      "delta_cm": 1.8811
+    }
+  ],
+  "ate_span_cm": 2.5961999999999996,
+  "ate_median_abs_dev_from_baseline_cm": 0.8510000000000009,
+  "off": {
+    "run_dir": "/data/monogs-ours/results/paper3_bpw/bpw_off_person_tracking/datasets_bonn/bpw_off_person_tracking/seed_0/2026-10-28-20-52-14",
+    "status": "OK",
+    "ate_cm": 11.5375,
+    "kf_ate_cm": 11.4903,
+    "num_gaussians": 66882.0,
+    "n_events": 0,
+    "sum_budget": 0,
+    "first_budget": null,
+    "events": []
+  },
+  "arms": {
+    "0.0": {
+      "run_dir": "/data/monogs-ours/results/paper3_bpw/sweep_p0_0_person_tracking/datasets_bonn/bpw_on_pt_p00/seed_0/2026-10-29-17-12-17",
+      "status": "OK",
+      "ate_cm": 10.0142,
+      "kf_ate_cm": 9.9469,
+      "num_gaussians": 54219.0,
+      "n_events": 69,
+      "sum_budget": 297007,
+      "first_budget": 2638,
+      "events": [
+        {
+          "iter": 1,
+          "pool": 4632,
+          "budget": 2638,
+          "accepted": 2638
+        },
+        {
+          "iter": 101,
+          "pool": 7609,
+          "budget": 2993,
+          "accepted": 2993
+        },
+        {
+          "iter": 201,
+          "pool": 7842,
+          "budget": 1419,
+          "accepted": 1419
+        },
+        {
+          "iter": 301,
+          "pool": 2145,
+          "budget": 648,
+          "accepted": 648
+        },
+        {
+          "iter": 401,
+          "pool": 1742,
+          "budget": 609,
+          "accepted": 609
+        },
+        {
+          "iter": 501,
+          "pool": 1914,
+          "budget": 631,
+          "accepted": 631
+        },
+        {
+          "iter": 601,
+          "pool": 2513,
+          "budget": 702,
+          "accepted": 702
+        },
+        {
+          "iter": 701,
+          "pool": 1670,
+          "budget": 528,
+          "accepted": 528
+        },
+        {
+          "iter": 801,
+          "pool": 1705,
+          "budget": 555,
+          "accepted": 555
+        },
+        {
+          "iter": 901,
+          "pool": 1741,
+          "budget": 568,
+          "accepted": 568
+        },
+        {
+          "iter": 1001,
+          "pool": 1760,
+          "budget": 565,
+          "accepted": 565
+        },
+        {
+          "iter": 1100,
+          "pool": 4574,
+          "budget": 2146,
+          "accepted": 2146
+        },
+        {
+          "iter": 1250,
+          "pool": 4251,
+          "budget": 1945,
+          "accepted": 1945
+        },
+        {
+          "iter": 1400,
+          "pool": 4595,
+          "budget": 2073,
+          "accepted": 2073
+        },
+        {
+          "iter": 1550,
+          "pool": 4629,
+          "budget": 1850,
+          "accepted": 1850
+        },
+        {
+          "iter": 1700,
+          "pool": 5048,
+          "budget": 1998,
+          "accepted": 1998
+        },
+        {
+          "iter": 1850,
+          "pool": 5423,
+          "budget": 2201,
+          "accepted": 2201
+        },
+        {
+          "iter": 2000,
+          "pool": 5698,
+          "budget": 2213,
+          "accepted": 2213
+        },
+        {
+          "iter": 2150,
+          "pool": 6035,
+          "budget": 2253,
+          "accepted": 2253
+        },
+        {
+          "iter": 2300,
+          "pool": 6290,
+          "budget": 2524,
+          "accepted": 2524
+        },
+        {
+          "iter": 2600,
+          "pool": 5995,
+          "budget": 2216,
+          "accepted": 2216
+        },
+        {
+          "iter": 2750,
+          "pool": 6259,
+          "budget": 2526,
+          "accepted": 2526
+        },
+        {
+          "iter": 2900,
+          "pool": 6357,
+          "budget": 2640,
+          "accepted": 2640
+        },
+        {
+          "iter": 3200,
+          "pool": 6547,
+          "budget": 2721,
+          "accepted": 2721
+        },
+        {
+          "iter": 3350,
+          "pool": 6025,
+          "budget": 2565,
+          "accepted": 2565
+        },
+        {
+          "iter": 3500,
+          "pool": 6568,
+          "budget": 2854,
+          "accepted": 2854
+        },
+        {
+          "iter": 3650,
+          "pool": 6513,
+          "budget": 2916,
+          "accepted": 2916
+        },
+        {
+          "iter": 3800,
+          "pool": 7088,
+          "budget": 3138,
+          "accepted": 3138
+        },
+        {
+          "iter": 3950,
+          "pool": 6845,
+          "budget": 3064,
+          "accepted": 3064
+        },
+        {
+          "iter": 4100,
+          "pool": 7297,
+          "budget": 3199,
+          "accepted": 3199
+        },
+        {
+          "iter": 4250,
+          "pool": 7598,
+          "budget": 3529,
+          "accepted": 3529
+        },
+        {
+          "iter": 4400,
+          "pool": 7762,
+          "budget": 3611,
+          "accepted": 3611
+        },
+        {
+          "iter": 4550,
+          "pool": 8326,
+          "budget": 3949,
+          "accepted": 3949
+        },
+        {
+          "iter": 4700,
+          "pool": 8303,
+          "budget": 3902,
+          "accepted": 3902
+        },
+        {
+          "iter": 4850,
+          "pool": 8331,
+          "budget": 3777,
+          "accepted": 3777
+        },
+        {
+          "iter": 5000,
+          "pool": 8613,
+          "budget": 3879,
+          "accepted": 3879
+        },
+        {
+          "iter": 5150,
+          "pool": 9383,
+          "budget": 4272,
+          "accepted": 4272
+        },
+        {
+          "iter": 5300,
+          "pool": 10081,
+          "budget": 4723,
+          "accepted": 4723
+        },
+        {
+          "iter": 5450,
+          "pool": 10268,
+          "budget": 4924,
+          "accepted": 4924
+        },
+        {
+          "iter": 5600,
+          "pool": 10551,
+          "budget": 4821,
+          "accepted": 4821
+        },
+        {
+          "iter": 5750,
+          "pool": 10663,
+          "budget": 5031,
+          "accepted": 5031
+        },
+        {
+          "iter": 5900,
+          "pool": 6380,
+          "budget": 3468,
+          "accepted": 3468
+        },
+        {
+          "iter": 6200,
+          "pool": 11602,
+          "budget": 5389,
+          "accepted": 5389
+        },
+        {
+          "iter": 6350,
+          "pool": 11392,
+          "budget": 5573,
+          "accepted": 5573
+        },
+        {
+          "iter": 6500,
+          "pool": 12237,
+          "budget": 6383,
+          "accepted": 6383
+        },
+        {
+          "iter": 6650,
+          "pool": 12470,
+          "budget": 6095,
+          "accepted": 6095
+        },
+        {
+          "iter": 6800,
+          "pool": 13204,
+          "budget": 6213,
+          "accepted": 6213
+        },
+        {
+          "iter": 7100,
+          "pool": 9932,
+          "budget": 5210,
+          "accepted": 5210
+        },
+        {
+          "iter": 7250,
+          "pool": 13952,
+          "budget": 7115,
+          "accepted": 7115
+        },
+        {
+          "iter": 7400,
+          "pool": 13703,
+          "budget": 6733,
+          "accepted": 6733
+        },
+        {
+          "iter": 7550,
+          "pool": 14133,
+          "budget": 6606,
+          "accepted": 6606
+        },
+        {
+          "iter": 7700,
+          "pool": 15032,
+          "budget": 7140,
+          "accepted": 7140
+        },
+        {
+          "iter": 7850,
+          "pool": 15196,
+          "budget": 6928,
+          "accepted": 6928
+        },
+        {
+          "iter": 8000,
+          "pool": 15156,
+          "budget": 6943,
+          "accepted": 6943
+        },
+        {
+          "iter": 8150,
+          "pool": 14974,
+          "budget": 6378,
+          "accepted": 6378
+        },
+        {
+          "iter": 8450,
+          "pool": 14939,
+          "budget": 7121,
+          "accepted": 7121
+        },
+        {
+          "iter": 8600,
+          "pool": 10592,
+          "budget": 5731,
+          "accepted": 5731
+        },
+        {
+          "iter": 8750,
+          "pool": 14393,
+          "budget": 6899,
+          "accepted": 6899
+        },
+        {
+          "iter": 8900,
+          "pool": 14198,
+          "budget": 7159,
+          "accepted": 7159
+        },
+        {
+          "iter": 9050,
+          "pool": 15339,
+          "budget": 7538,
+          "accepted": 7538
+        },
+        {
+          "iter": 9200,
+          "pool": 15488,
+          "budget": 7461,
+          "accepted": 7461
+        },
+        {
+          "iter": 9350,
+          "pool": 16199,
+          "budget": 7483,
+          "accepted": 7483
+        },
+        {
+          "iter": 9500,
+          "pool": 16723,
+          "budget": 7754,
+          "accepted": 7754
+        },
+        {
+          "iter": 9650,
+          "pool": 16579,
+          "budget": 7500,
+          "accepted": 7500
+        },
+        {
+          "iter": 9800,
+          "pool": 17505,
+          "budget": 8259,
+          "accepted": 8259
+        },
+        {
+          "iter": 9950,
+          "pool": 17388,
+          "budget": 8449,
+          "accepted": 8449
+        },
+        {
+          "iter": 10100,
+          "pool": 17022,
+          "budget": 7566,
+          "accepted": 7566
+        },
+        {
+          "iter": 10250,
+          "pool": 16494,
+          "budget": 8159,
+          "accepted": 8159
+        },
+        {
+          "iter": 10550,
+          "pool": 16630,
+          "budget": 8438,
+          "accepted": 8438
+        }
+      ]
+    },
+    "2.0": {
+      "run_dir": "/data/monogs-ours/results/paper3_bpw/sweep_p0_2_person_tracking/datasets_bonn/bpw_on_pt_p02/seed_0/2026-10-29-17-55-03",
+      "status": "OK",
+      "ate_cm": 12.2084,
+      "kf_ate_cm": 12.2341,
+      "num_gaussians": 69607.0,
+      "n_events": 68,
+      "sum_budget": 308354,
+      "first_budget": 2638,
+      "events": [
+        {
+          "iter": 1,
+          "pool": 4632,
+          "budget": 2638,
+          "accepted": 2638
+        },
+        {
+          "iter": 101,
+          "pool": 7588,
+          "budget": 2978,
+          "accepted": 2978
+        },
+        {
+          "iter": 201,
+          "pool": 7838,
+          "budget": 1459,
+          "accepted": 1459
+        },
+        {
+          "iter": 301,
+          "pool": 2120,
+          "budget": 617,
+          "accepted": 617
+        },
+        {
+          "iter": 401,
+          "pool": 1782,
+          "budget": 626,
+          "accepted": 626
+        },
+        {
+          "iter": 501,
+          "pool": 1873,
+          "budget": 614,
+          "accepted": 614
+        },
+        {
+          "iter": 601,
+          "pool": 2434,
+          "budget": 623,
+          "accepted": 623
+        },
+        {
+          "iter": 701,
+          "pool": 1636,
+          "budget": 519,
+          "accepted": 519
+        },
+        {
+          "iter": 801,
+          "pool": 1657,
+          "budget": 554,
+          "accepted": 554
+        },
+        {
+          "iter": 901,
+          "pool": 1706,
+          "budget": 588,
+          "accepted": 588
+        },
+        {
+          "iter": 1001,
+          "pool": 1820,
+          "budget": 614,
+          "accepted": 614
+        },
+        {
+          "iter": 1100,
+          "pool": 4519,
+          "budget": 2169,
+          "accepted": 2169
+        },
+        {
+          "iter": 1250,
+          "pool": 4278,
+          "budget": 1960,
+          "accepted": 1960
+        },
+        {
+          "iter": 1400,
+          "pool": 4618,
+          "budget": 2059,
+          "accepted": 2059
+        },
+        {
+          "iter": 1550,
+          "pool": 4683,
+          "budget": 1831,
+          "accepted": 1831
+        },
+        {
+          "iter": 1700,
+          "pool": 5213,
+          "budget": 1934,
+          "accepted": 1934
+        },
+        {
+          "iter": 1850,
+          "pool": 5549,
+          "budget": 2253,
+          "accepted": 2253
+        },
+        {
+          "iter": 2000,
+          "pool": 5706,
+          "budget": 2194,
+          "accepted": 2194
+        },
+        {
+          "iter": 2150,
+          "pool": 6102,
+          "budget": 2206,
+          "accepted": 2206
+        },
+        {
+          "iter": 2300,
+          "pool": 6297,
+          "budget": 2407,
+          "accepted": 2407
+        },
+        {
+          "iter": 2450,
+          "pool": 6084,
+          "budget": 2216,
+          "accepted": 2216
+        },
+        {
+          "iter": 2600,
+          "pool": 6057,
+          "budget": 2299,
+          "accepted": 2299
+        },
+        {
+          "iter": 2750,
+          "pool": 6393,
+          "budget": 2617,
+          "accepted": 2617
+        },
+        {
+          "iter": 3050,
+          "pool": 6530,
+          "budget": 2633,
+          "accepted": 2633
+        },
+        {
+          "iter": 3200,
+          "pool": 6102,
+          "budget": 2574,
+          "accepted": 2574
+        },
+        {
+          "iter": 3350,
+          "pool": 6212,
+          "budget": 2682,
+          "accepted": 2682
+        },
+        {
+          "iter": 3500,
+          "pool": 6604,
+          "budget": 2883,
+          "accepted": 2883
+        },
+        {
+          "iter": 3650,
+          "pool": 6487,
+          "budget": 2854,
+          "accepted": 2854
+        },
+        {
+          "iter": 3800,
+          "pool": 6935,
+          "budget": 3004,
+          "accepted": 3004
+        },
+        {
+          "iter": 3950,
+          "pool": 7225,
+          "budget": 3188,
+          "accepted": 3188
+        },
+        {
+          "iter": 4100,
+          "pool": 7389,
+          "budget": 3170,
+          "accepted": 3170
+        },
+        {
+          "iter": 4250,
+          "pool": 7504,
+          "budget": 3331,
+          "accepted": 3331
+        },
+        {
+          "iter": 4550,
+          "pool": 8308,
+          "budget": 3739,
+          "accepted": 3739
+        },
+        {
+          "iter": 4700,
+          "pool": 8300,
+          "budget": 3899,
+          "accepted": 3899
+        },
+        {
+          "iter": 5000,
+          "pool": 8722,
+          "budget": 4291,
+          "accepted": 4291
+        },
+        {
+          "iter": 5300,
+          "pool": 9581,
+          "budget": 4518,
+          "accepted": 4518
+        },
+        {
+          "iter": 5450,
+          "pool": 10200,
+          "budget": 4786,
+          "accepted": 4786
+        },
+        {
+          "iter": 5600,
+          "pool": 10152,
+          "budget": 4885,
+          "accepted": 4885
+        },
+        {
+          "iter": 5750,
+          "pool": 10451,
+          "budget": 4870,
+          "accepted": 4870
+        },
+        {
+          "iter": 5900,
+          "pool": 10682,
+          "budget": 5115,
+          "accepted": 5115
+        },
+        {
+          "iter": 6050,
+          "pool": 11619,
+          "budget": 5947,
+          "accepted": 5947
+        },
+        {
+          "iter": 6200,
+          "pool": 12063,
+          "budget": 5578,
+          "accepted": 5578
+        },
+        {
+          "iter": 6350,
+          "pool": 12688,
+          "budget": 5875,
+          "accepted": 5875
+        },
+        {
+          "iter": 6500,
+          "pool": 12995,
+          "budget": 6309,
+          "accepted": 6309
+        },
+        {
+          "iter": 6650,
+          "pool": 13716,
+          "budget": 6656,
+          "accepted": 6656
+        },
+        {
+          "iter": 6800,
+          "pool": 14059,
+          "budget": 6512,
+          "accepted": 6512
+        },
+        {
+          "iter": 6950,
+          "pool": 14955,
+          "budget": 7025,
+          "accepted": 7025
+        },
+        {
+          "iter": 7100,
+          "pool": 15321,
+          "budget": 7007,
+          "accepted": 7007
+        },
+        {
+          "iter": 7400,
+          "pool": 14648,
+          "budget": 7058,
+          "accepted": 7058
+        },
+        {
+          "iter": 7550,
+          "pool": 15435,
+          "budget": 7357,
+          "accepted": 7357
+        },
+        {
+          "iter": 7700,
+          "pool": 15862,
+          "budget": 7236,
+          "accepted": 7236
+        },
+        {
+          "iter": 7850,
+          "pool": 15539,
+          "budget": 7390,
+          "accepted": 7390
+        },
+        {
+          "iter": 8000,
+          "pool": 15457,
+          "budget": 7184,
+          "accepted": 7184
+        },
+        {
+          "iter": 8150,
+          "pool": 14147,
+          "budget": 6028,
+          "accepted": 6028
+        },
+        {
+          "iter": 8300,
+          "pool": 14353,
+          "budget": 6429,
+          "accepted": 6429
+        },
+        {
+          "iter": 8450,
+          "pool": 15342,
+          "budget": 7362,
+          "accepted": 7362
+        },
+        {
+          "iter": 8600,
+          "pool": 15960,
+          "budget": 7771,
+          "accepted": 7771
+        },
+        {
+          "iter": 8750,
+          "pool": 15729,
+          "budget": 7611,
+          "accepted": 7611
+        },
+        {
+          "iter": 8900,
+          "pool": 16124,
+          "budget": 8714,
+          "accepted": 8714
+        },
+        {
+          "iter": 9050,
+          "pool": 16518,
+          "budget": 7927,
+          "accepted": 7927
+        },
+        {
+          "iter": 9200,
+          "pool": 16180,
+          "budget": 7663,
+          "accepted": 7663
+        },
+        {
+          "iter": 9350,
+          "pool": 16916,
+          "budget": 7999,
+          "accepted": 7999
+        },
+        {
+          "iter": 9500,
+          "pool": 18348,
+          "budget": 8813,
+          "accepted": 8813
+        },
+        {
+          "iter": 9650,
+          "pool": 18104,
+          "budget": 8596,
+          "accepted": 8596
+        },
+        {
+          "iter": 9800,
+          "pool": 18100,
+          "budget": 8940,
+          "accepted": 8940
+        },
+        {
+          "iter": 9950,
+          "pool": 19134,
+          "budget": 9209,
+          "accepted": 9209
+        },
+        {
+          "iter": 10100,
+          "pool": 19102,
+          "budget": 8411,
+          "accepted": 8411
+        },
+        {
+          "iter": 10250,
+          "pool": 18325,
+          "budget": 9350,
+          "accepted": 9350
+        }
+      ]
+    },
+    "8.0": {
+      "run_dir": "/data/monogs-ours/results/paper3_bpw/bpw_on_person_tracking/datasets_bonn/bpw_on_person_tracking/seed_0/2026-10-28-21-37-02",
+      "status": "OK",
+      "ate_cm": 11.7594,
+      "kf_ate_cm": 11.923,
+      "num_gaussians": 72786.0,
+      "n_events": 66,
+      "sum_budget": 294858,
+      "first_budget": 2638,
+      "events": [
+        {
+          "iter": 1,
+          "pool": 4632,
+          "budget": 2638,
+          "accepted": 2638
+        },
+        {
+          "iter": 101,
+          "pool": 7598,
+          "budget": 2983,
+          "accepted": 2983
+        },
+        {
+          "iter": 201,
+          "pool": 7832,
+          "budget": 1489,
+          "accepted": 1489
+        },
+        {
+          "iter": 301,
+          "pool": 2110,
+          "budget": 619,
+          "accepted": 619
+        },
+        {
+          "iter": 401,
+          "pool": 1761,
+          "budget": 637,
+          "accepted": 637
+        },
+        {
+          "iter": 501,
+          "pool": 1867,
+          "budget": 632,
+          "accepted": 632
+        },
+        {
+          "iter": 601,
+          "pool": 2471,
+          "budget": 651,
+          "accepted": 651
+        },
+        {
+          "iter": 701,
+          "pool": 1676,
+          "budget": 551,
+          "accepted": 551
+        },
+        {
+          "iter": 801,
+          "pool": 1704,
+          "budget": 569,
+          "accepted": 569
+        },
+        {
+          "iter": 901,
+          "pool": 1754,
+          "budget": 562,
+          "accepted": 562
+        },
+        {
+          "iter": 1001,
+          "pool": 1805,
+          "budget": 600,
+          "accepted": 600
+        },
+        {
+          "iter": 1100,
+          "pool": 4561,
+          "budget": 2152,
+          "accepted": 2152
+        },
+        {
+          "iter": 1250,
+          "pool": 4273,
+          "budget": 1953,
+          "accepted": 1953
+        },
+        {
+          "iter": 1400,
+          "pool": 4613,
+          "budget": 2074,
+          "accepted": 2074
+        },
+        {
+          "iter": 1550,
+          "pool": 4610,
+          "budget": 1827,
+          "accepted": 1827
+        },
+        {
+          "iter": 1700,
+          "pool": 5082,
+          "budget": 1949,
+          "accepted": 1949
+        },
+        {
+          "iter": 1850,
+          "pool": 5472,
+          "budget": 2225,
+          "accepted": 2225
+        },
+        {
+          "iter": 2000,
+          "pool": 5699,
+          "budget": 2092,
+          "accepted": 2092
+        },
+        {
+          "iter": 2150,
+          "pool": 6038,
+          "budget": 2177,
+          "accepted": 2177
+        },
+        {
+          "iter": 2300,
+          "pool": 6182,
+          "budget": 2327,
+          "accepted": 2327
+        },
+        {
+          "iter": 2450,
+          "pool": 6053,
+          "budget": 2218,
+          "accepted": 2218
+        },
+        {
+          "iter": 2600,
+          "pool": 6134,
+          "budget": 2173,
+          "accepted": 2173
+        },
+        {
+          "iter": 2750,
+          "pool": 6312,
+          "budget": 2430,
+          "accepted": 2430
+        },
+        {
+          "iter": 3050,
+          "pool": 6529,
+          "budget": 2746,
+          "accepted": 2746
+        },
+        {
+          "iter": 3200,
+          "pool": 6649,
+          "budget": 3014,
+          "accepted": 3014
+        },
+        {
+          "iter": 3350,
+          "pool": 6644,
+          "budget": 2945,
+          "accepted": 2945
+        },
+        {
+          "iter": 3500,
+          "pool": 6105,
+          "budget": 2692,
+          "accepted": 2692
+        },
+        {
+          "iter": 3650,
+          "pool": 7036,
+          "budget": 3163,
+          "accepted": 3163
+        },
+        {
+          "iter": 3800,
+          "pool": 6792,
+          "budget": 2981,
+          "accepted": 2981
+        },
+        {
+          "iter": 3950,
+          "pool": 7304,
+          "budget": 3312,
+          "accepted": 3312
+        },
+        {
+          "iter": 4100,
+          "pool": 7270,
+          "budget": 3178,
+          "accepted": 3178
+        },
+        {
+          "iter": 4250,
+          "pool": 7759,
+          "budget": 3689,
+          "accepted": 3689
+        },
+        {
+          "iter": 4400,
+          "pool": 7697,
+          "budget": 3530,
+          "accepted": 3530
+        },
+        {
+          "iter": 4700,
+          "pool": 8618,
+          "budget": 4007,
+          "accepted": 4007
+        },
+        {
+          "iter": 5000,
+          "pool": 8642,
+          "budget": 3977,
+          "accepted": 3977
+        },
+        {
+          "iter": 5300,
+          "pool": 9629,
+          "budget": 4475,
+          "accepted": 4475
+        },
+        {
+          "iter": 5450,
+          "pool": 10351,
+          "budget": 5211,
+          "accepted": 5211
+        },
+        {
+          "iter": 5600,
+          "pool": 10086,
+          "budget": 4759,
+          "accepted": 4759
+        },
+        {
+          "iter": 5750,
+          "pool": 10171,
+          "budget": 4824,
+          "accepted": 4824
+        },
+        {
+          "iter": 5900,
+          "pool": 10763,
+          "budget": 5391,
+          "accepted": 5391
+        },
+        {
+          "iter": 6050,
+          "pool": 10843,
+          "budget": 4817,
+          "accepted": 4817
+        },
+        {
+          "iter": 6200,
+          "pool": 11583,
+          "budget": 5637,
+          "accepted": 5637
+        },
+        {
+          "iter": 6350,
+          "pool": 12239,
+          "budget": 6168,
+          "accepted": 6168
+        },
+        {
+          "iter": 6500,
+          "pool": 12231,
+          "budget": 5835,
+          "accepted": 5835
+        },
+        {
+          "iter": 6650,
+          "pool": 12690,
+          "budget": 6104,
+          "accepted": 6104
+        },
+        {
+          "iter": 7250,
+          "pool": 13803,
+          "budget": 6682,
+          "accepted": 6682
+        },
+        {
+          "iter": 7400,
+          "pool": 13650,
+          "budget": 6924,
+          "accepted": 6924
+        },
+        {
+          "iter": 7550,
+          "pool": 13738,
+          "budget": 6782,
+          "accepted": 6782
+        },
+        {
+          "iter": 7700,
+          "pool": 14358,
+          "budget": 6997,
+          "accepted": 6997
+        },
+        {
+          "iter": 7850,
+          "pool": 13835,
+          "budget": 6954,
+          "accepted": 6954
+        },
+        {
+          "iter": 8000,
+          "pool": 14514,
+          "budget": 7021,
+          "accepted": 7021
+        },
+        {
+          "iter": 8150,
+          "pool": 14834,
+          "budget": 6954,
+          "accepted": 6954
+        },
+        {
+          "iter": 8300,
+          "pool": 15178,
+          "budget": 6901,
+          "accepted": 6901
+        },
+        {
+          "iter": 8450,
+          "pool": 14534,
+          "budget": 6605,
+          "accepted": 6605
+        },
+        {
+          "iter": 8600,
+          "pool": 16147,
+          "budget": 7698,
+          "accepted": 7698
+        },
+        {
+          "iter": 8750,
+          "pool": 15984,
+          "budget": 7612,
+          "accepted": 7612
+        },
+        {
+          "iter": 8900,
+          "pool": 16754,
+          "budget": 7911,
+          "accepted": 7911
+        },
+        {
+          "iter": 9050,
+          "pool": 15987,
+          "budget": 8252,
+          "accepted": 8252
+        },
+        {
+          "iter": 9200,
+          "pool": 18219,
+          "budget": 8808,
+          "accepted": 8808
+        },
+        {
+          "iter": 9500,
+          "pool": 18723,
+          "budget": 8671,
+          "accepted": 8671
+        },
+        {
+          "iter": 9650,
+          "pool": 19379,
+          "budget": 9283,
+          "accepted": 9283
+        },
+        {
+          "iter": 9800,
+          "pool": 19520,
+          "budget": 8929,
+          "accepted": 8929
+        },
+        {
+          "iter": 9950,
+          "pool": 19452,
+          "budget": 9448,
+          "accepted": 9448
+        },
+        {
+          "iter": 10100,
+          "pool": 18663,
+          "budget": 8573,
+          "accepted": 8573
+        },
+        {
+          "iter": 10250,
+          "pool": 18940,
+          "budget": 9413,
+          "accepted": 9413
+        },
+        {
+          "iter": 10400,
+          "pool": 15625,
+          "budget": 8457,
+          "accepted": 8457
+        }
+      ]
+    },
+    "32.0": {
+      "run_dir": "/data/monogs-ours/results/paper3_bpw/sweep_p0_32_person_tracking/datasets_bonn/bpw_on_pt_p032/seed_0/2026-10-29-18-39-03",
+      "status": "OK",
+      "ate_cm": 10.7293,
+      "kf_ate_cm": 10.7623,
+      "num_gaussians": 60669.0,
+      "n_events": 66,
+      "sum_budget": 299377,
+      "first_budget": 2638,
+      "events": [
+        {
+          "iter": 1,
+          "pool": 4632,
+          "budget": 2638,
+          "accepted": 2638
+        },
+        {
+          "iter": 101,
+          "pool": 7592,
+          "budget": 3000,
+          "accepted": 3000
+        },
+        {
+          "iter": 201,
+          "pool": 7827,
+          "budget": 1518,
+          "accepted": 1518
+        },
+        {
+          "iter": 301,
+          "pool": 2133,
+          "budget": 642,
+          "accepted": 642
+        },
+        {
+          "iter": 401,
+          "pool": 1738,
+          "budget": 631,
+          "accepted": 631
+        },
+        {
+          "iter": 501,
+          "pool": 1889,
+          "budget": 605,
+          "accepted": 605
+        },
+        {
+          "iter": 601,
+          "pool": 2550,
+          "budget": 668,
+          "accepted": 668
+        },
+        {
+          "iter": 701,
+          "pool": 1710,
+          "budget": 561,
+          "accepted": 561
+        },
+        {
+          "iter": 801,
+          "pool": 1693,
+          "budget": 578,
+          "accepted": 578
+        },
+        {
+          "iter": 901,
+          "pool": 1736,
+          "budget": 584,
+          "accepted": 584
+        },
+        {
+          "iter": 1001,
+          "pool": 1859,
+          "budget": 606,
+          "accepted": 606
+        },
+        {
+          "iter": 1100,
+          "pool": 4579,
+          "budget": 2171,
+          "accepted": 2171
+        },
+        {
+          "iter": 1250,
+          "pool": 4274,
+          "budget": 1968,
+          "accepted": 1968
+        },
+        {
+          "iter": 1400,
+          "pool": 4594,
+          "budget": 2057,
+          "accepted": 2057
+        },
+        {
+          "iter": 1550,
+          "pool": 4574,
+          "budget": 1791,
+          "accepted": 1791
+        },
+        {
+          "iter": 1700,
+          "pool": 5604,
+          "budget": 2403,
+          "accepted": 2403
+        },
+        {
+          "iter": 1850,
+          "pool": 5609,
+          "budget": 2182,
+          "accepted": 2182
+        },
+        {
+          "iter": 2000,
+          "pool": 5459,
+          "budget": 2100,
+          "accepted": 2100
+        },
+        {
+          "iter": 2150,
+          "pool": 5528,
+          "budget": 1988,
+          "accepted": 1988
+        },
+        {
+          "iter": 2300,
+          "pool": 5722,
+          "budget": 2073,
+          "accepted": 2073
+        },
+        {
+          "iter": 2450,
+          "pool": 5743,
+          "budget": 2084,
+          "accepted": 2084
+        },
+        {
+          "iter": 2600,
+          "pool": 6428,
+          "budget": 2531,
+          "accepted": 2531
+        },
+        {
+          "iter": 2750,
+          "pool": 6022,
+          "budget": 2463,
+          "accepted": 2463
+        },
+        {
+          "iter": 2900,
+          "pool": 6042,
+          "budget": 2527,
+          "accepted": 2527
+        },
+        {
+          "iter": 3050,
+          "pool": 6209,
+          "budget": 2631,
+          "accepted": 2631
+        },
+        {
+          "iter": 3200,
+          "pool": 6570,
+          "budget": 2905,
+          "accepted": 2905
+        },
+        {
+          "iter": 3350,
+          "pool": 6674,
+          "budget": 2910,
+          "accepted": 2910
+        },
+        {
+          "iter": 3650,
+          "pool": 6853,
+          "budget": 2959,
+          "accepted": 2959
+        },
+        {
+          "iter": 3800,
+          "pool": 6860,
+          "budget": 3101,
+          "accepted": 3101
+        },
+        {
+          "iter": 3950,
+          "pool": 7262,
+          "budget": 3302,
+          "accepted": 3302
+        },
+        {
+          "iter": 4100,
+          "pool": 7761,
+          "budget": 3541,
+          "accepted": 3541
+        },
+        {
+          "iter": 4250,
+          "pool": 7917,
+          "budget": 3769,
+          "accepted": 3769
+        },
+        {
+          "iter": 4400,
+          "pool": 8237,
+          "budget": 3940,
+          "accepted": 3940
+        },
+        {
+          "iter": 4550,
+          "pool": 8241,
+          "budget": 3858,
+          "accepted": 3858
+        },
+        {
+          "iter": 4700,
+          "pool": 8728,
+          "budget": 3863,
+          "accepted": 3863
+        },
+        {
+          "iter": 4850,
+          "pool": 8753,
+          "budget": 3845,
+          "accepted": 3845
+        },
+        {
+          "iter": 5000,
+          "pool": 9059,
+          "budget": 4156,
+          "accepted": 4156
+        },
+        {
+          "iter": 5150,
+          "pool": 9293,
+          "budget": 4442,
+          "accepted": 4442
+        },
+        {
+          "iter": 5300,
+          "pool": 9801,
+          "budget": 4559,
+          "accepted": 4559
+        },
+        {
+          "iter": 5450,
+          "pool": 10397,
+          "budget": 4860,
+          "accepted": 4860
+        },
+        {
+          "iter": 5750,
+          "pool": 10868,
+          "budget": 5193,
+          "accepted": 5193
+        },
+        {
+          "iter": 5900,
+          "pool": 10772,
+          "budget": 5090,
+          "accepted": 5090
+        },
+        {
+          "iter": 6050,
+          "pool": 11900,
+          "budget": 5734,
+          "accepted": 5734
+        },
+        {
+          "iter": 6200,
+          "pool": 12844,
+          "budget": 6078,
+          "accepted": 6078
+        },
+        {
+          "iter": 6350,
+          "pool": 13583,
+          "budget": 6339,
+          "accepted": 6339
+        },
+        {
+          "iter": 6500,
+          "pool": 13919,
+          "budget": 6652,
+          "accepted": 6652
+        },
+        {
+          "iter": 6650,
+          "pool": 14640,
+          "budget": 7086,
+          "accepted": 7086
+        },
+        {
+          "iter": 6800,
+          "pool": 15187,
+          "budget": 7059,
+          "accepted": 7059
+        },
+        {
+          "iter": 6950,
+          "pool": 16309,
+          "budget": 7845,
+          "accepted": 7845
+        },
+        {
+          "iter": 7250,
+          "pool": 16440,
+          "budget": 7839,
+          "accepted": 7839
+        },
+        {
+          "iter": 7400,
+          "pool": 16747,
+          "budget": 8093,
+          "accepted": 8093
+        },
+        {
+          "iter": 7700,
+          "pool": 16968,
+          "budget": 7992,
+          "accepted": 7992
+        },
+        {
+          "iter": 7850,
+          "pool": 14569,
+          "budget": 7153,
+          "accepted": 7153
+        },
+        {
+          "iter": 8000,
+          "pool": 17130,
+          "budget": 8361,
+          "accepted": 8361
+        },
+        {
+          "iter": 8150,
+          "pool": 16585,
+          "budget": 7614,
+          "accepted": 7614
+        },
+        {
+          "iter": 8300,
+          "pool": 15218,
+          "budget": 7700,
+          "accepted": 7700
+        },
+        {
+          "iter": 8450,
+          "pool": 15093,
+          "budget": 7801,
+          "accepted": 7801
+        },
+        {
+          "iter": 8750,
+          "pool": 15397,
+          "budget": 8313,
+          "accepted": 8313
+        },
+        {
+          "iter": 8900,
+          "pool": 16114,
+          "budget": 8546,
+          "accepted": 8546
+        },
+        {
+          "iter": 9050,
+          "pool": 16197,
+          "budget": 8313,
+          "accepted": 8313
+        },
+        {
+          "iter": 9200,
+          "pool": 16955,
+          "budget": 8588,
+          "accepted": 8588
+        },
+        {
+          "iter": 9500,
+          "pool": 17983,
+          "budget": 9186,
+          "accepted": 9186
+        },
+        {
+          "iter": 9650,
+          "pool": 17857,
+          "budget": 9243,
+          "accepted": 9243
+        },
+        {
+          "iter": 9800,
+          "pool": 18343,
+          "budget": 9457,
+          "accepted": 9457
+        },
+        {
+          "iter": 9950,
+          "pool": 18847,
+          "budget": 9559,
+          "accepted": 9559
+        },
+        {
+          "iter": 10250,
+          "pool": 19375,
+          "budget": 9533,
+          "accepted": 9533
+        }
+      ]
+    },
+    "128.0": {
+      "run_dir": "/data/monogs-ours/results/paper3_bpw/sweep_p0_128_person_tracking/datasets_bonn/bpw_on_pt_p0128/seed_0/2026-10-29-19-24-13",
+      "status": "OK",
+      "ate_cm": 12.6104,
+      "kf_ate_cm": 12.7149,
+      "num_gaussians": 68451.0,
+      "n_events": 70,
+      "sum_budget": 323823,
+      "first_budget": 2638,
+      "events": [
+        {
+          "iter": 1,
+          "pool": 4632,
+          "budget": 2638,
+          "accepted": 2638
+        },
+        {
+          "iter": 101,
+          "pool": 7616,
+          "budget": 2995,
+          "accepted": 2995
+        },
+        {
+          "iter": 201,
+          "pool": 7853,
+          "budget": 1445,
+          "accepted": 1445
+        },
+        {
+          "iter": 301,
+          "pool": 2116,
+          "budget": 634,
+          "accepted": 634
+        },
+        {
+          "iter": 401,
+          "pool": 1809,
+          "budget": 636,
+          "accepted": 636
+        },
+        {
+          "iter": 501,
+          "pool": 1857,
+          "budget": 641,
+          "accepted": 641
+        },
+        {
+          "iter": 601,
+          "pool": 2433,
+          "budget": 670,
+          "accepted": 670
+        },
+        {
+          "iter": 701,
+          "pool": 1663,
+          "budget": 560,
+          "accepted": 560
+        },
+        {
+          "iter": 801,
+          "pool": 1638,
+          "budget": 537,
+          "accepted": 537
+        },
+        {
+          "iter": 901,
+          "pool": 1687,
+          "budget": 552,
+          "accepted": 552
+        },
+        {
+          "iter": 1001,
+          "pool": 1751,
+          "budget": 588,
+          "accepted": 588
+        },
+        {
+          "iter": 1100,
+          "pool": 4587,
+          "budget": 2158,
+          "accepted": 2158
+        },
+        {
+          "iter": 1250,
+          "pool": 4290,
+          "budget": 1873,
+          "accepted": 1873
+        },
+        {
+          "iter": 1400,
+          "pool": 4595,
+          "budget": 2064,
+          "accepted": 2064
+        },
+        {
+          "iter": 1550,
+          "pool": 4764,
+          "budget": 1931,
+          "accepted": 1931
+        },
+        {
+          "iter": 1700,
+          "pool": 5008,
+          "budget": 1911,
+          "accepted": 1911
+        },
+        {
+          "iter": 1850,
+          "pool": 5486,
+          "budget": 2273,
+          "accepted": 2273
+        },
+        {
+          "iter": 2000,
+          "pool": 5927,
+          "budget": 2268,
+          "accepted": 2268
+        },
+        {
+          "iter": 2150,
+          "pool": 5861,
+          "budget": 2019,
+          "accepted": 2019
+        },
+        {
+          "iter": 2450,
+          "pool": 6003,
+          "budget": 2094,
+          "accepted": 2094
+        },
+        {
+          "iter": 2600,
+          "pool": 6575,
+          "budget": 2649,
+          "accepted": 2649
+        },
+        {
+          "iter": 2750,
+          "pool": 6142,
+          "budget": 2384,
+          "accepted": 2384
+        },
+        {
+          "iter": 2900,
+          "pool": 6290,
+          "budget": 2638,
+          "accepted": 2638
+        },
+        {
+          "iter": 3050,
+          "pool": 6434,
+          "budget": 2722,
+          "accepted": 2722
+        },
+        {
+          "iter": 3200,
+          "pool": 6628,
+          "budget": 3024,
+          "accepted": 3024
+        },
+        {
+          "iter": 3350,
+          "pool": 6664,
+          "budget": 2924,
+          "accepted": 2924
+        },
+        {
+          "iter": 3500,
+          "pool": 6906,
+          "budget": 3033,
+          "accepted": 3033
+        },
+        {
+          "iter": 3650,
+          "pool": 6694,
+          "budget": 2897,
+          "accepted": 2897
+        },
+        {
+          "iter": 3800,
+          "pool": 6850,
+          "budget": 2988,
+          "accepted": 2988
+        },
+        {
+          "iter": 3950,
+          "pool": 7228,
+          "budget": 3256,
+          "accepted": 3256
+        },
+        {
+          "iter": 4100,
+          "pool": 7427,
+          "budget": 3360,
+          "accepted": 3360
+        },
+        {
+          "iter": 4250,
+          "pool": 7690,
+          "budget": 3440,
+          "accepted": 3440
+        },
+        {
+          "iter": 4400,
+          "pool": 8290,
+          "budget": 3841,
+          "accepted": 3841
+        },
+        {
+          "iter": 4550,
+          "pool": 8824,
+          "budget": 4103,
+          "accepted": 4103
+        },
+        {
+          "iter": 4700,
+          "pool": 8730,
+          "budget": 3980,
+          "accepted": 3980
+        },
+        {
+          "iter": 4850,
+          "pool": 8875,
+          "budget": 4073,
+          "accepted": 4073
+        },
+        {
+          "iter": 5000,
+          "pool": 8864,
+          "budget": 4087,
+          "accepted": 4087
+        },
+        {
+          "iter": 5150,
+          "pool": 9441,
+          "budget": 4388,
+          "accepted": 4388
+        },
+        {
+          "iter": 5300,
+          "pool": 10384,
+          "budget": 4837,
+          "accepted": 4837
+        },
+        {
+          "iter": 5600,
+          "pool": 10702,
+          "budget": 4969,
+          "accepted": 4969
+        },
+        {
+          "iter": 5750,
+          "pool": 11584,
+          "budget": 5835,
+          "accepted": 5835
+        },
+        {
+          "iter": 5900,
+          "pool": 10816,
+          "budget": 5051,
+          "accepted": 5051
+        },
+        {
+          "iter": 6050,
+          "pool": 11465,
+          "budget": 5188,
+          "accepted": 5188
+        },
+        {
+          "iter": 6200,
+          "pool": 11354,
+          "budget": 5467,
+          "accepted": 5467
+        },
+        {
+          "iter": 6350,
+          "pool": 12129,
+          "budget": 6040,
+          "accepted": 6040
+        },
+        {
+          "iter": 6650,
+          "pool": 12626,
+          "budget": 6223,
+          "accepted": 6223
+        },
+        {
+          "iter": 6800,
+          "pool": 13312,
+          "budget": 6763,
+          "accepted": 6763
+        },
+        {
+          "iter": 7100,
+          "pool": 14068,
+          "budget": 7043,
+          "accepted": 7043
+        },
+        {
+          "iter": 7250,
+          "pool": 13948,
+          "budget": 7020,
+          "accepted": 7020
+        },
+        {
+          "iter": 7400,
+          "pool": 14202,
+          "budget": 7183,
+          "accepted": 7183
+        },
+        {
+          "iter": 7550,
+          "pool": 14463,
+          "budget": 7257,
+          "accepted": 7257
+        },
+        {
+          "iter": 7700,
+          "pool": 15033,
+          "budget": 7686,
+          "accepted": 7686
+        },
+        {
+          "iter": 7850,
+          "pool": 14761,
+          "budget": 7669,
+          "accepted": 7669
+        },
+        {
+          "iter": 8000,
+          "pool": 14904,
+          "budget": 7242,
+          "accepted": 7242
+        },
+        {
+          "iter": 8150,
+          "pool": 14197,
+          "budget": 6601,
+          "accepted": 6601
+        },
+        {
+          "iter": 8300,
+          "pool": 14178,
+          "budget": 7012,
+          "accepted": 7012
+        },
+        {
+          "iter": 8450,
+          "pool": 13885,
+          "budget": 7377,
+          "accepted": 7377
+        },
+        {
+          "iter": 8600,
+          "pool": 14886,
+          "budget": 7617,
+          "accepted": 7617
+        },
+        {
+          "iter": 8750,
+          "pool": 15030,
+          "budget": 7572,
+          "accepted": 7572
+        },
+        {
+          "iter": 8900,
+          "pool": 15405,
+          "budget": 8304,
+          "accepted": 8304
+        },
+        {
+          "iter": 9050,
+          "pool": 15903,
+          "budget": 8262,
+          "accepted": 8262
+        },
+        {
+          "iter": 9200,
+          "pool": 15771,
+          "budget": 7996,
+          "accepted": 7996
+        },
+        {
+          "iter": 9350,
+          "pool": 16521,
+          "budget": 8113,
+          "accepted": 8113
+        },
+        {
+          "iter": 9500,
+          "pool": 16102,
+          "budget": 8395,
+          "accepted": 8395
+        },
+        {
+          "iter": 9650,
+          "pool": 17237,
+          "budget": 8755,
+          "accepted": 8755
+        },
+        {
+          "iter": 9800,
+          "pool": 18248,
+          "budget": 9184,
+          "accepted": 9184
+        },
+        {
+          "iter": 9950,
+          "pool": 18403,
+          "budget": 9199,
+          "accepted": 9199
+        },
+        {
+          "iter": 10100,
+          "pool": 17745,
+          "budget": 8522,
+          "accepted": 8522
+        },
+        {
+          "iter": 10250,
+          "pool": 18022,
+          "budget": 9183,
+          "accepted": 9183
+        },
+        {
+          "iter": 10400,
+          "pool": 18715,
+          "budget": 9984,
+          "accepted": 9984
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+# Phase 0 BPW — arm `on`（person_tracking）选点回放诊断：与 bpw_on_person_tracking.yaml
+# 逐位一致，唯一差异 = SelectiveDensification.trace_selection: true
+# （默认关的诊断日志，跑出 bpw_selection_trace.csv，不改变任何选择/训练行为）。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "persistence_budget"
+  p0: 8.0
+  tau_low_factor: 0.5
+  placebo: false
+  trace_selection: true
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/bpw_on_person_tracking_trace"
+  save_per_frame_ape: true

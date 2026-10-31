@@ -1,0 +1,10 @@
+=== FDose L1 freeze — person_tracking seeds=[0] ===
+  HEAD: e46804b96  branch=feat/bpw-densification
+  max_frames: 40 (0 = 全长)   n_plan: 17
+  log: /data/monogs-ours/paper3/results/evidence/fdose_l1_person_tracking_freeze_20261031-021905.log
+  freeze seed=0 <- results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-10-31-01-29-10/
+截断计划 19 -> 17 个事件；其后两臂注入 0（总剂量 = 前缀和）
+wrote /tmp/fdose_plantest/person_tracking_seed0.json (17 events, sum_k=23979, K range [515,2991], median 1424)
+  sha256(plan)=f6196665196ba858e754d1f498bac7ceada497b63f5fc851a74aba51df8fb6a8
+
+=== STAGE freeze DONE 2026-10-31 02:19:05 ===

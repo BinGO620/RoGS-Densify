@@ -1,0 +1,92 @@
+{
+  "experiment_id": "paper3_bpw",
+  "phase": "Phase 0",
+  "batch": "three_arms_balloon_2026-10-28",
+  "purpose": "随机流对齐（rng_sequence 三臂 pin \"balloon\"）后的三臂全长 439 帧重跑；验证首事件 k 相等在长跑中保持，产出逐事件 k 序列供 P0-A′ 判定",
+  "preregistration": "paper3/PREREGISTRATION.md §3.1（P0-A′ 逐事件口径，2026-10-28 修订）",
+  "mechanism_spec": "paper3/results/evidence/phase0_mechanism_spec_2026-10-27.md",
+  "invalid_batch_audit": "paper3/results/evidence/phase0_audit_2026-10-28_invalid_batch.md",
+
+  "dispatch": {
+    "host": "cb（本地 RTX 2060 6GB）",
+    "head_at_dispatch": "4c3374d7b",
+    "branch": "feat/bpw-densification",
+    "command": "bash scripts/paper3_bpw/run_three_arms_balloon.sh",
+    "runner_script": "scripts/paper3_bpw/run_three_arms_balloon.sh",
+    "concurrency": "串行（单卡 2060，三臂依次跑）",
+    "started_at": "2026-10-28T17:01:19+08:00",
+    "log": "paper3/results/evidence/three_arms_balloon_20261028-170118.log"
+  },
+
+  "sequence": "rgbd_bonn_balloon",
+  "dataset_path": "datasets/bonn/rgbd_bonn_balloon",
+  "frames_expected": 439,
+  "seed": 0,
+  "eval_flag": "--eval",
+  "extra_flags": [],
+
+  "arms": {
+    "off": {
+      "config": "configs/experiments/paper3_bpw/bpw_off_balloon.yaml",
+      "config_sha256": "d7550b7afc39685e6344e12a87ffef9abf2be9d085668e232e5b031f4af19ca1",
+      "role": "基线（现有默认致密化，SelectiveDensification.enabled=false ⇒ 走标量路径）",
+      "selective_densification": {"enabled": false}
+    },
+    "on": {
+      "config": "configs/experiments/paper3_bpw/bpw_on_balloon.yaml",
+      "config_sha256": "a5e4a74b5a6a6cfcc64af7b172f699dac9e10f6e82bf4c84b5c1c300e044fd0e",
+      "role": "主臂（BPW：预算匹配 + 持久性排序）",
+      "selective_densification": {
+        "enabled": true,
+        "signal": "persistence_budget",
+        "p0": 8.0,
+        "tau_low_factor": 0.5,
+        "placebo": false,
+        "log_every": 10
+      }
+    },
+    "negctl": {
+      "config": "configs/experiments/paper3_bpw/bpw_negctl_balloon.yaml",
+      "config_sha256": "a1f4119022bc27e34cfa881703e651e2a9d3f1f44ac5aadb4445f97016dea43a",
+      "role": "负对照（同预算同池，证据分确定性置换）",
+      "selective_densification": {
+        "enabled": true,
+        "signal": "persistence_budget",
+        "p0": 8.0,
+        "tau_low_factor": 0.5,
+        "placebo": true,
+        "placebo_seed": 7,
+        "log_every": 10
+      }
+    }
+  },
+
+  "shared_config": {
+    "inherit_from": "configs/rgbd/bonn/balloon.yaml",
+    "method_from": "configs/experiments/combined_prune/method.yaml",
+    "rng_sequence": "balloon",
+    "note_local_override": "rng_sequence 是三臂唯一新增的顶层键；三臂取值相同 ⇒ base_rng_key 与臂名无关（utils/causal_twin.py 优先读它，避免 slam.py:735-736 用 config basename 覆写 Dataset.sequence 造成的随机流分叉）"
+  },
+
+  "a_priori_locked_parameters": {
+    "p0": 8.0,
+    "tau_low_factor": 0.5,
+    "placebo_seed": 7,
+    "note": "三个值在跑前锁定，跑后不得调整（PREREGISTRATION §4、spec §3）"
+  },
+
+  "judge": {
+    "script": "scripts/paper3_bpw/judge_p0a.py",
+    "tests": "tests/paper3_bpw/test_judge_p0a.py",
+    "noise_floor_cm": 0.62,
+    "criterion": "P0-A′：① 首事件 k 三臂完全相等；② 逐事件 k 序列（on 与 negctl 按 iteration 对齐比较）；③ 最终高斯数为报告项，不参与 PASS/FAIL"
+  },
+
+  "caveats": [
+    "本清单在派发后补写，但内容全部来自派发前既定的工件（HEAD 见运行日志头部，config sha256 来自 dispatch 时的提交内容），未做任何事后修改",
+    "全帧渲染指标（mapping_raw.csv 的 mask_type=full 行）在 Bonn 批次上恒为 NaN——根因是 run 内 eval 的采样网格 interval=5 与关键帧网格重合（见 scripts/02_analysis/render_compare.py 文件头），不是本次改动引入；静态分区行（mask_type=static）正常",
+    "本地 2060 产物按 DISCIPLINE「算力归属」属 pilot 对拍范围；本批的目的是一次性判定 P0-A′ 的随机流对齐是否在长跑中保持，若需判决级数字须在远程 3090 复跑"
+  ],
+
+  "written_at": "2026-10-28T17:33:00+08:00"
+}

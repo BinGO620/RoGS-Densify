@@ -1,0 +1,20 @@
+# 预算-精度曲线臂：p0 与 tau_lo 保持先验锁定值，只按 budget_scale 缩减每事件新增名额。
+# 目的：检验「更少高斯、相当 ATE」这一效率主张（Phase 0 在同等预算下无 ATE 收益）。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "persistence_budget"
+  p0: 8.0
+  tau_low_factor: 0.5
+  budget_scale: 0.25
+  placebo: false
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/sweep_budget_0.25_person_tracking"
+  save_per_frame_ape: true

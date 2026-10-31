@@ -1,0 +1,129 @@
+MonoGS: saving results in 
+results/paper3_bpw/bpw_on_balloon/datasets_bonn/bpw_on_balloon/seed_0/2026-10-28
+-01-58-54
+MonoGS: logging console output to 
+results/paper3_bpw/bpw_on_balloon/datasets_bonn/bpw_on_balloon/seed_0/2026-10-28
+-01-58-54/console.log
+MonoGS: Semantic insertion gate frame 0: 50173 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Resetting the system
+MonoGS:  iter=1 pool=4219 budget=2276 accepted=2276 mean_p=1.00 fallback=1
+MonoGS:  iter=101 pool=6269 budget=2125 accepted=2125 mean_p=1.00 fallback=1
+MonoGS:  iter=201 pool=6764 budget=1238 accepted=1238 mean_p=1.00 fallback=1
+MonoGS:  iter=301 pool=1738 budget=529 accepted=529 mean_p=1.00 fallback=1
+MonoGS:  iter=401 pool=1531 budget=579 accepted=579 mean_p=1.00 fallback=1
+MonoGS:  iter=501 pool=1701 budget=644 accepted=644 mean_p=1.00 fallback=1
+MonoGS:  iter=601 pool=2289 budget=616 accepted=616 mean_p=1.00 fallback=1
+MonoGS:  iter=701 pool=1703 budget=598 accepted=598 mean_p=1.00 fallback=1
+MonoGS:  iter=801 pool=1723 budget=622 accepted=622 mean_p=1.00 fallback=1
+MonoGS:  iter=901 pool=1820 budget=652 accepted=652 mean_p=1.00 fallback=1
+MonoGS:  iter=1001 pool=1890 budget=668 accepted=668 mean_p=1.00 fallback=1
+MonoGS: Initialized map
+MonoGS: Semantic insertion gate frame 5: 49007 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Candidate insert KF 5: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001023, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=1100 pool=3496 budget=1579 accepted=1579 mean_p=41.51 fallback=0
+MonoGS: :map iter=1100 n=22304 mean_static_prob=0.895 frac_dyn(<0.3)=0.008
+MonoGS:  iter=1250 pool=3372 budget=1341 accepted=1341 mean_p=169.46 fallback=0
+MonoGS: :map iter=1250 n=15975 mean_static_prob=0.895 frac_dyn(<0.3)=0.015
+MonoGS: Semantic insertion gate frame 10: 46409 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Candidate insert KF 10: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=1400 pool=3543 budget=1324 accepted=1324 mean_p=239.64 fallback=0
+MonoGS: :map iter=1400 n=20578 mean_static_prob=0.855 frac_dyn(<0.3)=0.027
+MonoGS: Semantic insertion gate frame 15: 47126 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 8 lineage(s): removed 3 Gaussians
+MonoGS: Candidate insert KF 15: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=1550 pool=4188 budget=1742 accepted=1742 mean_p=303.75 fallback=0
+MonoGS: :map iter=1550 n=22505 mean_static_prob=0.837 frac_dyn(<0.3)=0.033
+MonoGS: Semantic insertion gate frame 20: 45443 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 27 lineage(s): removed 2 Gaussians
+MonoGS: Evaluating ATE at frame:  21
+Eval: RMSE ATE [m] 0.007477446264820971
+MonoGS: Candidate insert KF 20: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=1700 pool=4351 budget=1724 accepted=1724 mean_p=384.13 fallback=0
+MonoGS: :map iter=1700 n=23253 mean_static_prob=0.798 frac_dyn(<0.3)=0.057
+MonoGS: Semantic insertion gate frame 25: 44393 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 88 lineage(s): removed 0 Gaussians
+MonoGS: Candidate insert KF 25: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=1850 pool=4714 budget=1749 accepted=1749 mean_p=455.20 fallback=0
+MonoGS: :map iter=1850 n=24104 mean_static_prob=0.782 frac_dyn(<0.3)=0.058
+MonoGS: Semantic insertion gate frame 30: 44349 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 2953 lineage(s): removed 1087 Gaussians
+MonoGS: Candidate insert KF 30: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=2000 pool=4465 budget=1587 accepted=1587 mean_p=507.08 fallback=0
+MonoGS: :map iter=2000 n=24429 mean_static_prob=0.766 frac_dyn(<0.3)=0.071
+MonoGS: Resetting the opacity of non-visible Gaussians
+MonoGS: Semantic insertion gate frame 35: 41721 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 3154 lineage(s): removed 1187 Gaussians
+MonoGS: Candidate insert KF 35: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 40: 46337 person px zeroed (no dynamic 
+Gaussians)
+MonoGS:  iter=2150 pool=4351 budget=1552 accepted=1552 mean_p=582.75 fallback=0
+MonoGS: :map iter=2150 n=23981 mean_static_prob=0.768 frac_dyn(<0.3)=0.082
+MonoGS: Pruned 4156 lineage(s): removed 606 Gaussians
+MonoGS: Candidate insert KF 40: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 45: 46378 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Evaluating ATE at frame:  46
+Eval: RMSE ATE [m] 0.009159159164784198
+MonoGS: Pruned 3785 lineage(s): removed 675 Gaussians
+MonoGS: Candidate insert KF 45: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=2300 pool=4563 budget=1715 accepted=1715 mean_p=533.85 fallback=0
+MonoGS: :map iter=2300 n=26692 mean_static_prob=0.766 frac_dyn(<0.3)=0.067
+MonoGS: Semantic insertion gate frame 50: 46052 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 4358 lineage(s): removed 1248 Gaussians
+MonoGS: Candidate insert KF 50: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001041, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 55: 47077 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 4498 lineage(s): removed 919 Gaussians
+MonoGS: Candidate insert KF 55: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS:  iter=2450 pool=4431 budget=1631 accepted=1631 mean_p=543.04 fallback=0
+MonoGS: :map iter=2450 n=28970 mean_static_prob=0.783 frac_dyn(<0.3)=0.056
+Eval: RMSE ATE [m] 0.010536053164107755
+Eval: Online SLAM time 128.62545202998444
+Eval: Online SLAM FPS 0.46647066387773034
+Eval: per-frame APE: KF-RMSE=1.08cm (12 kf) vs nonKF-RMSE=0.97cm (48 nonkf) -> 
+results/paper3_bpw/bpw_on_balloon/datasets_bonn/bpw_on_balloon/seed_0/2026-10-28
+-01-58-54/per_frame_ape.csv
+MonoGS: Backend stopped and joined the main thread
+MonoGS: Done.

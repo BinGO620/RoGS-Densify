@@ -1,0 +1,31 @@
+{
+ "same_arm_pairs": [
+  {
+   "pair": [
+    "bpw_on_person_tracking",
+    "bpw_on_person_tracking_trace"
+   ],
+   "note": "同臂同 seed 重跑（trace 开关不改变行为）",
+   "events_a": 66,
+   "events_b": 64,
+   "common_events": 57,
+   "ref_sel_identical_events": 1,
+   "ref_sel_rel_diff_median": 0.05067715159458279,
+   "ref_sel_rel_diff_p90": 0.119960668633235,
+   "sum_ref_sel_a": 294858,
+   "sum_ref_sel_b": 271931,
+   "sum_ref_sel_rel_gap": 0.08431182910370645,
+   "final_gaussians_a": 72786,
+   "final_gaussians_b": 70694,
+   "final_gaussians_rel_gap": 0.029592327495968542
+  }
+ ],
+ "historical": [
+  {
+   "what": "同臂同 config 同 seed 重跑，终态高斯数相对差",
+   "value": 0.2678,
+   "frames": 439,
+   "source": "paper3/PREREGISTRATION.md §3.1（2026-10-28 P3-D2-006 甲案登记）"
+  }
+ ]
+}

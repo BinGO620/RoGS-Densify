@@ -1,0 +1,8 @@
+=== FDose L1 freeze — person_tracking seeds=[0] ===
+  HEAD: e46804b96  branch=feat/bpw-densification
+  max_frames: 0 (0 = 全长)   n_plan: 57
+  log: /data/monogs-ours/paper3/results/evidence/fdose_l1_person_tracking_freeze_20261031-021854.log
+  跳过 results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-10-31-01-29-10/（num_frames=40，需要 580）
+ERROR: seed=0 找不到 580 帧的 k0 run
+
+=== STAGE freeze DONE 2026-10-31 02:18:54 ===

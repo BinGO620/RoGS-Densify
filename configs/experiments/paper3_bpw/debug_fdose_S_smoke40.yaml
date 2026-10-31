@@ -1,0 +1,25 @@
+# FDose L1 — arm `S`（person_tracking）：机制臂（γ=1）：同样的 K_i，键 = mean_grad · sparsity（奖励空间稀疏处）。
+#
+# 预注册：paper3/results/evidence/prereg_fdose_2026-10-31.md（判据看数据前锁定）
+# 三臂只差两处：gamma 与 dose_plan_path。k0 自计划 ⇒ 它就是计划源；
+# G/S 消费同一份冻结计划（sha256 记在 plan 文件里），逐事件取恰好 K_i 个点。
+# 剂量因此**外生**：不依赖本臂自己长成什么样（CGB 的失效模式正相反）。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "frozen_dose"
+  gamma: 1.0
+  tau_low_factor: 0.5
+  sparsity_k: 6
+  dose_plan_path: "paper3/results/evidence/fdose_smoke_plan_2026-10-31.json"
+  trace_selection: true
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/fdose_S_smoke40"
+  save_per_frame_ape: true

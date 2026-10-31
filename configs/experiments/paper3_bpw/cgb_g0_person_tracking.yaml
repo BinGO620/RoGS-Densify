@@ -1,0 +1,25 @@
+# CGB L1 — arm `g0`（person_tracking）：等剂量控位对照（γ=0，纯梯度续填）。
+#
+# 预注册：paper3/results/evidence/prereg_cgb_2026-10-30.md（判据看数据前锁定）
+# 本臂**不是机制**，是控位对照：与 `cgb_g1_person_tracking.yaml` 加同样多的源点，
+# 但按 mean_grad 排序（即把参考阈值 τ_base 以 5% 的剂量继续放低的渐进版）。
+# 两臂唯一的差别 = 排序键 γ；`g1 − g0` 才是"放置"的效应。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "coverage_gap"
+  swap_frac: 0.05
+  gamma: 0.0             # 0.0 = 纯梯度续填（等剂量控位对照）
+  tau_low_factor: 0.5
+  sparsity_k: 6
+  trace_selection: true
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/cgb_g0_person_tracking"
+  save_per_frame_ape: true

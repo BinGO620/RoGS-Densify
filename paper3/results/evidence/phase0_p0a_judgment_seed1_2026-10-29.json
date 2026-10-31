@@ -1,0 +1,1532 @@
+{
+  "criterion": "P0-A' per-event dose (PREREGISTRATION.md §3.1, 2026-10-28)",
+  "arms": {
+    "off": {
+      "arm": "off",
+      "run": "results/paper3_bpw/bpw_off_person_tracking/datasets_bonn/bpw_off_person_tracking/seed_1/2026-10-29-12-17-59",
+      "num_frames": 580,
+      "status": "OK",
+      "ate_cm": 11.0743,
+      "num_gaussians": 57044,
+      "n_events": 0,
+      "events": []
+    },
+    "on": {
+      "arm": "on",
+      "run": "results/paper3_bpw/bpw_on_person_tracking/datasets_bonn/bpw_on_person_tracking/seed_1/2026-10-29-13-01-33",
+      "num_frames": 580,
+      "status": "OK",
+      "ate_cm": 11.5738,
+      "num_gaussians": 92304,
+      "n_events": 67,
+      "events": [
+        {
+          "iter": 1,
+          "pool": 4724,
+          "budget": 2746,
+          "accepted": 2746,
+          "mean_p": 1.0,
+          "fallback": 0
+        },
+        {
+          "iter": 101,
+          "pool": 7775,
+          "budget": 3068,
+          "accepted": 3068,
+          "mean_p": 100.0,
+          "fallback": 0
+        },
+        {
+          "iter": 201,
+          "pool": 7553,
+          "budget": 1210,
+          "accepted": 1210,
+          "mean_p": 100.0,
+          "fallback": 0
+        },
+        {
+          "iter": 301,
+          "pool": 1914,
+          "budget": 469,
+          "accepted": 469,
+          "mean_p": 99.72,
+          "fallback": 0
+        },
+        {
+          "iter": 401,
+          "pool": 1612,
+          "budget": 530,
+          "accepted": 530,
+          "mean_p": 99.6,
+          "fallback": 0
+        },
+        {
+          "iter": 501,
+          "pool": 1713,
+          "budget": 587,
+          "accepted": 587,
+          "mean_p": 99.61,
+          "fallback": 0
+        },
+        {
+          "iter": 601,
+          "pool": 2420,
+          "budget": 672,
+          "accepted": 672,
+          "mean_p": 99.55,
+          "fallback": 0
+        },
+        {
+          "iter": 701,
+          "pool": 1731,
+          "budget": 574,
+          "accepted": 574,
+          "mean_p": 99.49,
+          "fallback": 0
+        },
+        {
+          "iter": 801,
+          "pool": 1671,
+          "budget": 567,
+          "accepted": 567,
+          "mean_p": 99.51,
+          "fallback": 0
+        },
+        {
+          "iter": 901,
+          "pool": 1726,
+          "budget": 584,
+          "accepted": 584,
+          "mean_p": 99.52,
+          "fallback": 0
+        },
+        {
+          "iter": 1001,
+          "pool": 1854,
+          "budget": 624,
+          "accepted": 624,
+          "mean_p": 99.53,
+          "fallback": 0
+        },
+        {
+          "iter": 1100,
+          "pool": 4651,
+          "budget": 2173,
+          "accepted": 2173,
+          "mean_p": 71.13,
+          "fallback": 0
+        },
+        {
+          "iter": 1250,
+          "pool": 4355,
+          "budget": 2026,
+          "accepted": 2026,
+          "mean_p": 268.05,
+          "fallback": 0
+        },
+        {
+          "iter": 1400,
+          "pool": 4668,
+          "budget": 2157,
+          "accepted": 2157,
+          "mean_p": 269.51,
+          "fallback": 0
+        },
+        {
+          "iter": 1550,
+          "pool": 4648,
+          "budget": 1867,
+          "accepted": 1867,
+          "mean_p": 212.91,
+          "fallback": 0
+        },
+        {
+          "iter": 1850,
+          "pool": 5493,
+          "budget": 2329,
+          "accepted": 2329,
+          "mean_p": 428.43,
+          "fallback": 0
+        },
+        {
+          "iter": 2000,
+          "pool": 5474,
+          "budget": 2165,
+          "accepted": 2165,
+          "mean_p": 352.6,
+          "fallback": 0
+        },
+        {
+          "iter": 2150,
+          "pool": 5659,
+          "budget": 2017,
+          "accepted": 2017,
+          "mean_p": 329.91,
+          "fallback": 0
+        },
+        {
+          "iter": 2300,
+          "pool": 6108,
+          "budget": 2398,
+          "accepted": 2398,
+          "mean_p": 153.71,
+          "fallback": 0
+        },
+        {
+          "iter": 2450,
+          "pool": 5932,
+          "budget": 2192,
+          "accepted": 2192,
+          "mean_p": 327.18,
+          "fallback": 0
+        },
+        {
+          "iter": 2600,
+          "pool": 5901,
+          "budget": 2189,
+          "accepted": 2189,
+          "mean_p": 528.43,
+          "fallback": 0
+        },
+        {
+          "iter": 2750,
+          "pool": 6148,
+          "budget": 2473,
+          "accepted": 2473,
+          "mean_p": 235.2,
+          "fallback": 0
+        },
+        {
+          "iter": 2900,
+          "pool": 6114,
+          "budget": 2561,
+          "accepted": 2561,
+          "mean_p": 143.42,
+          "fallback": 0
+        },
+        {
+          "iter": 3050,
+          "pool": 6329,
+          "budget": 2716,
+          "accepted": 2716,
+          "mean_p": 139.53,
+          "fallback": 0
+        },
+        {
+          "iter": 3200,
+          "pool": 6744,
+          "budget": 2920,
+          "accepted": 2920,
+          "mean_p": 18.27,
+          "fallback": 0
+        },
+        {
+          "iter": 3350,
+          "pool": 6198,
+          "budget": 2595,
+          "accepted": 2595,
+          "mean_p": 540.78,
+          "fallback": 0
+        },
+        {
+          "iter": 3500,
+          "pool": 6636,
+          "budget": 2914,
+          "accepted": 2914,
+          "mean_p": 496.16,
+          "fallback": 0
+        },
+        {
+          "iter": 3650,
+          "pool": 6497,
+          "budget": 2777,
+          "accepted": 2777,
+          "mean_p": 438.76,
+          "fallback": 0
+        },
+        {
+          "iter": 3800,
+          "pool": 7004,
+          "budget": 2964,
+          "accepted": 2964,
+          "mean_p": 235.17,
+          "fallback": 0
+        },
+        {
+          "iter": 3950,
+          "pool": 7206,
+          "budget": 3179,
+          "accepted": 3179,
+          "mean_p": 116.23,
+          "fallback": 0
+        },
+        {
+          "iter": 4100,
+          "pool": 7370,
+          "budget": 3133,
+          "accepted": 3133,
+          "mean_p": 475.83,
+          "fallback": 0
+        },
+        {
+          "iter": 4250,
+          "pool": 7604,
+          "budget": 3799,
+          "accepted": 3799,
+          "mean_p": 7.31,
+          "fallback": 0
+        },
+        {
+          "iter": 4400,
+          "pool": 7879,
+          "budget": 3623,
+          "accepted": 3623,
+          "mean_p": 431.64,
+          "fallback": 0
+        },
+        {
+          "iter": 4550,
+          "pool": 8279,
+          "budget": 3876,
+          "accepted": 3876,
+          "mean_p": 36.1,
+          "fallback": 0
+        },
+        {
+          "iter": 4700,
+          "pool": 8422,
+          "budget": 3847,
+          "accepted": 3847,
+          "mean_p": 434.86,
+          "fallback": 0
+        },
+        {
+          "iter": 4850,
+          "pool": 8555,
+          "budget": 3865,
+          "accepted": 3865,
+          "mean_p": 396.09,
+          "fallback": 0
+        },
+        {
+          "iter": 5000,
+          "pool": 9150,
+          "budget": 4064,
+          "accepted": 4064,
+          "mean_p": 255.37,
+          "fallback": 0
+        },
+        {
+          "iter": 5150,
+          "pool": 9445,
+          "budget": 4342,
+          "accepted": 4342,
+          "mean_p": 92.23,
+          "fallback": 0
+        },
+        {
+          "iter": 5300,
+          "pool": 10163,
+          "budget": 4649,
+          "accepted": 4649,
+          "mean_p": 393.07,
+          "fallback": 0
+        },
+        {
+          "iter": 5450,
+          "pool": 10430,
+          "budget": 4888,
+          "accepted": 4888,
+          "mean_p": 213.97,
+          "fallback": 0
+        },
+        {
+          "iter": 5750,
+          "pool": 10866,
+          "budget": 4843,
+          "accepted": 4843,
+          "mean_p": 373.62,
+          "fallback": 0
+        },
+        {
+          "iter": 5900,
+          "pool": 10697,
+          "budget": 4902,
+          "accepted": 4902,
+          "mean_p": 126.87,
+          "fallback": 0
+        },
+        {
+          "iter": 6200,
+          "pool": 12230,
+          "budget": 5515,
+          "accepted": 5515,
+          "mean_p": 235.76,
+          "fallback": 0
+        },
+        {
+          "iter": 6350,
+          "pool": 12146,
+          "budget": 5798,
+          "accepted": 5798,
+          "mean_p": 108.15,
+          "fallback": 0
+        },
+        {
+          "iter": 6500,
+          "pool": 11834,
+          "budget": 5836,
+          "accepted": 5836,
+          "mean_p": 28.51,
+          "fallback": 0
+        },
+        {
+          "iter": 6650,
+          "pool": 12758,
+          "budget": 6208,
+          "accepted": 6208,
+          "mean_p": 252.42,
+          "fallback": 0
+        },
+        {
+          "iter": 6800,
+          "pool": 13099,
+          "budget": 6185,
+          "accepted": 6185,
+          "mean_p": 280.06,
+          "fallback": 0
+        },
+        {
+          "iter": 6950,
+          "pool": 13787,
+          "budget": 6383,
+          "accepted": 6383,
+          "mean_p": 279.38,
+          "fallback": 0
+        },
+        {
+          "iter": 7100,
+          "pool": 14047,
+          "budget": 6889,
+          "accepted": 6889,
+          "mean_p": 22.17,
+          "fallback": 0
+        },
+        {
+          "iter": 7250,
+          "pool": 14029,
+          "budget": 6814,
+          "accepted": 6814,
+          "mean_p": 46.18,
+          "fallback": 0
+        },
+        {
+          "iter": 7400,
+          "pool": 14382,
+          "budget": 7133,
+          "accepted": 7133,
+          "mean_p": 88.01,
+          "fallback": 0
+        },
+        {
+          "iter": 7550,
+          "pool": 14830,
+          "budget": 6892,
+          "accepted": 6892,
+          "mean_p": 155.82,
+          "fallback": 0
+        },
+        {
+          "iter": 7700,
+          "pool": 15668,
+          "budget": 7334,
+          "accepted": 7334,
+          "mean_p": 229.32,
+          "fallback": 0
+        },
+        {
+          "iter": 7850,
+          "pool": 13845,
+          "budget": 7007,
+          "accepted": 7007,
+          "mean_p": 27.54,
+          "fallback": 0
+        },
+        {
+          "iter": 8000,
+          "pool": 15545,
+          "budget": 7501,
+          "accepted": 7501,
+          "mean_p": 66.94,
+          "fallback": 0
+        },
+        {
+          "iter": 8150,
+          "pool": 14884,
+          "budget": 6736,
+          "accepted": 6736,
+          "mean_p": 53.06,
+          "fallback": 0
+        },
+        {
+          "iter": 8300,
+          "pool": 13773,
+          "budget": 6914,
+          "accepted": 6914,
+          "mean_p": 20.05,
+          "fallback": 0
+        },
+        {
+          "iter": 8450,
+          "pool": 14661,
+          "budget": 7050,
+          "accepted": 7050,
+          "mean_p": 203.86,
+          "fallback": 0
+        },
+        {
+          "iter": 8600,
+          "pool": 15211,
+          "budget": 7571,
+          "accepted": 7571,
+          "mean_p": 82.12,
+          "fallback": 0
+        },
+        {
+          "iter": 8750,
+          "pool": 14273,
+          "budget": 7741,
+          "accepted": 7741,
+          "mean_p": 14.41,
+          "fallback": 0
+        },
+        {
+          "iter": 8900,
+          "pool": 14853,
+          "budget": 7344,
+          "accepted": 7344,
+          "mean_p": 55.57,
+          "fallback": 0
+        },
+        {
+          "iter": 9200,
+          "pool": 16594,
+          "budget": 7916,
+          "accepted": 7916,
+          "mean_p": 233.04,
+          "fallback": 0
+        },
+        {
+          "iter": 9350,
+          "pool": 16432,
+          "budget": 7871,
+          "accepted": 7871,
+          "mean_p": 208.89,
+          "fallback": 0
+        },
+        {
+          "iter": 9500,
+          "pool": 17183,
+          "budget": 8228,
+          "accepted": 8228,
+          "mean_p": 155.28,
+          "fallback": 0
+        },
+        {
+          "iter": 9650,
+          "pool": 17342,
+          "budget": 8181,
+          "accepted": 8181,
+          "mean_p": 192.52,
+          "fallback": 0
+        },
+        {
+          "iter": 9800,
+          "pool": 17736,
+          "budget": 9148,
+          "accepted": 9148,
+          "mean_p": 52.02,
+          "fallback": 0
+        },
+        {
+          "iter": 10100,
+          "pool": 18556,
+          "budget": 9325,
+          "accepted": 9325,
+          "mean_p": 64.1,
+          "fallback": 0
+        }
+      ]
+    },
+    "negctl": {
+      "arm": "negctl",
+      "run": "results/paper3_bpw/bpw_negctl_person_tracking/datasets_bonn/bpw_negctl_person_tracking/seed_1/2026-10-29-13-46-33",
+      "num_frames": 580,
+      "status": "OK",
+      "ate_cm": 13.938,
+      "num_gaussians": 59197,
+      "n_events": 70,
+      "events": [
+        {
+          "iter": 1,
+          "pool": 4724,
+          "budget": 2746,
+          "accepted": 2746,
+          "mean_p": 1.0,
+          "fallback": 0
+        },
+        {
+          "iter": 101,
+          "pool": 7782,
+          "budget": 3067,
+          "accepted": 3067,
+          "mean_p": 100.0,
+          "fallback": 0
+        },
+        {
+          "iter": 201,
+          "pool": 7601,
+          "budget": 1284,
+          "accepted": 1284,
+          "mean_p": 100.0,
+          "fallback": 0
+        },
+        {
+          "iter": 301,
+          "pool": 1878,
+          "budget": 470,
+          "accepted": 470,
+          "mean_p": 99.73,
+          "fallback": 0
+        },
+        {
+          "iter": 401,
+          "pool": 1598,
+          "budget": 506,
+          "accepted": 506,
+          "mean_p": 99.63,
+          "fallback": 0
+        },
+        {
+          "iter": 501,
+          "pool": 1689,
+          "budget": 539,
+          "accepted": 539,
+          "mean_p": 99.62,
+          "fallback": 0
+        },
+        {
+          "iter": 601,
+          "pool": 2381,
+          "budget": 680,
+          "accepted": 680,
+          "mean_p": 99.57,
+          "fallback": 0
+        },
+        {
+          "iter": 701,
+          "pool": 1688,
+          "budget": 572,
+          "accepted": 572,
+          "mean_p": 99.55,
+          "fallback": 0
+        },
+        {
+          "iter": 801,
+          "pool": 1651,
+          "budget": 537,
+          "accepted": 537,
+          "mean_p": 99.56,
+          "fallback": 0
+        },
+        {
+          "iter": 901,
+          "pool": 1691,
+          "budget": 559,
+          "accepted": 559,
+          "mean_p": 99.56,
+          "fallback": 0
+        },
+        {
+          "iter": 1001,
+          "pool": 1752,
+          "budget": 599,
+          "accepted": 599,
+          "mean_p": 99.57,
+          "fallback": 0
+        },
+        {
+          "iter": 1100,
+          "pool": 4558,
+          "budget": 2112,
+          "accepted": 2112,
+          "mean_p": 71.14,
+          "fallback": 0
+        },
+        {
+          "iter": 1250,
+          "pool": 4397,
+          "budget": 1997,
+          "accepted": 1997,
+          "mean_p": 267.9,
+          "fallback": 0
+        },
+        {
+          "iter": 1400,
+          "pool": 4666,
+          "budget": 2086,
+          "accepted": 2086,
+          "mean_p": 269.6,
+          "fallback": 0
+        },
+        {
+          "iter": 1550,
+          "pool": 4761,
+          "budget": 1863,
+          "accepted": 1863,
+          "mean_p": 198.95,
+          "fallback": 0
+        },
+        {
+          "iter": 1700,
+          "pool": 5184,
+          "budget": 1981,
+          "accepted": 1981,
+          "mean_p": 392.58,
+          "fallback": 0
+        },
+        {
+          "iter": 2000,
+          "pool": 5610,
+          "budget": 2270,
+          "accepted": 2270,
+          "mean_p": 194.27,
+          "fallback": 0
+        },
+        {
+          "iter": 2150,
+          "pool": 5680,
+          "budget": 2219,
+          "accepted": 2219,
+          "mean_p": 255.37,
+          "fallback": 0
+        },
+        {
+          "iter": 2300,
+          "pool": 6107,
+          "budget": 2411,
+          "accepted": 2411,
+          "mean_p": 121.17,
+          "fallback": 0
+        },
+        {
+          "iter": 2450,
+          "pool": 5904,
+          "budget": 2112,
+          "accepted": 2112,
+          "mean_p": 359.31,
+          "fallback": 0
+        },
+        {
+          "iter": 2600,
+          "pool": 5884,
+          "budget": 2228,
+          "accepted": 2228,
+          "mean_p": 573.19,
+          "fallback": 0
+        },
+        {
+          "iter": 2750,
+          "pool": 6256,
+          "budget": 2489,
+          "accepted": 2489,
+          "mean_p": 222.65,
+          "fallback": 0
+        },
+        {
+          "iter": 2900,
+          "pool": 6171,
+          "budget": 2630,
+          "accepted": 2630,
+          "mean_p": 212.45,
+          "fallback": 0
+        },
+        {
+          "iter": 3050,
+          "pool": 6274,
+          "budget": 2666,
+          "accepted": 2666,
+          "mean_p": 193.63,
+          "fallback": 0
+        },
+        {
+          "iter": 3200,
+          "pool": 6096,
+          "budget": 2506,
+          "accepted": 2506,
+          "mean_p": 778.25,
+          "fallback": 0
+        },
+        {
+          "iter": 3350,
+          "pool": 6179,
+          "budget": 2547,
+          "accepted": 2547,
+          "mean_p": 579.92,
+          "fallback": 0
+        },
+        {
+          "iter": 3500,
+          "pool": 6227,
+          "budget": 2590,
+          "accepted": 2590,
+          "mean_p": 545.55,
+          "fallback": 0
+        },
+        {
+          "iter": 3650,
+          "pool": 7008,
+          "budget": 3096,
+          "accepted": 3096,
+          "mean_p": 52.21,
+          "fallback": 0
+        },
+        {
+          "iter": 3800,
+          "pool": 6813,
+          "budget": 2996,
+          "accepted": 2996,
+          "mean_p": 262.54,
+          "fallback": 0
+        },
+        {
+          "iter": 4100,
+          "pool": 7197,
+          "budget": 3109,
+          "accepted": 3109,
+          "mean_p": 585.14,
+          "fallback": 0
+        },
+        {
+          "iter": 4250,
+          "pool": 7580,
+          "budget": 3509,
+          "accepted": 3509,
+          "mean_p": 417.45,
+          "fallback": 0
+        },
+        {
+          "iter": 4400,
+          "pool": 7964,
+          "budget": 3735,
+          "accepted": 3735,
+          "mean_p": 383.97,
+          "fallback": 0
+        },
+        {
+          "iter": 4550,
+          "pool": 8213,
+          "budget": 3888,
+          "accepted": 3888,
+          "mean_p": 312.24,
+          "fallback": 0
+        },
+        {
+          "iter": 4700,
+          "pool": 8748,
+          "budget": 4149,
+          "accepted": 4149,
+          "mean_p": 143.46,
+          "fallback": 0
+        },
+        {
+          "iter": 4850,
+          "pool": 8013,
+          "budget": 3794,
+          "accepted": 3794,
+          "mean_p": 14.33,
+          "fallback": 0
+        },
+        {
+          "iter": 5000,
+          "pool": 8616,
+          "budget": 3895,
+          "accepted": 3895,
+          "mean_p": 339.75,
+          "fallback": 0
+        },
+        {
+          "iter": 5150,
+          "pool": 9419,
+          "budget": 4289,
+          "accepted": 4289,
+          "mean_p": 247.07,
+          "fallback": 0
+        },
+        {
+          "iter": 5300,
+          "pool": 10203,
+          "budget": 4794,
+          "accepted": 4794,
+          "mean_p": 183.58,
+          "fallback": 0
+        },
+        {
+          "iter": 5450,
+          "pool": 10310,
+          "budget": 4993,
+          "accepted": 4993,
+          "mean_p": 55.73,
+          "fallback": 0
+        },
+        {
+          "iter": 5600,
+          "pool": 10311,
+          "budget": 4798,
+          "accepted": 4798,
+          "mean_p": 364.36,
+          "fallback": 0
+        },
+        {
+          "iter": 5750,
+          "pool": 10688,
+          "budget": 5023,
+          "accepted": 5023,
+          "mean_p": 210.87,
+          "fallback": 0
+        },
+        {
+          "iter": 5900,
+          "pool": 10990,
+          "budget": 5195,
+          "accepted": 5195,
+          "mean_p": 61.38,
+          "fallback": 0
+        },
+        {
+          "iter": 6050,
+          "pool": 11625,
+          "budget": 5257,
+          "accepted": 5257,
+          "mean_p": 309.51,
+          "fallback": 0
+        },
+        {
+          "iter": 6200,
+          "pool": 11825,
+          "budget": 5670,
+          "accepted": 5670,
+          "mean_p": 186.48,
+          "fallback": 0
+        },
+        {
+          "iter": 6350,
+          "pool": 11769,
+          "budget": 5649,
+          "accepted": 5649,
+          "mean_p": 129.54,
+          "fallback": 0
+        },
+        {
+          "iter": 6500,
+          "pool": 12135,
+          "budget": 5971,
+          "accepted": 5971,
+          "mean_p": 75.53,
+          "fallback": 0
+        },
+        {
+          "iter": 6650,
+          "pool": 13540,
+          "budget": 6946,
+          "accepted": 6946,
+          "mean_p": 53.39,
+          "fallback": 0
+        },
+        {
+          "iter": 6800,
+          "pool": 13063,
+          "budget": 6591,
+          "accepted": 6591,
+          "mean_p": 70.36,
+          "fallback": 0
+        },
+        {
+          "iter": 6950,
+          "pool": 13979,
+          "budget": 6812,
+          "accepted": 6812,
+          "mean_p": 134.6,
+          "fallback": 0
+        },
+        {
+          "iter": 7100,
+          "pool": 14450,
+          "budget": 6850,
+          "accepted": 6850,
+          "mean_p": 181.17,
+          "fallback": 0
+        },
+        {
+          "iter": 7250,
+          "pool": 14742,
+          "budget": 7079,
+          "accepted": 7079,
+          "mean_p": 240.28,
+          "fallback": 0
+        },
+        {
+          "iter": 7400,
+          "pool": 15013,
+          "budget": 7260,
+          "accepted": 7260,
+          "mean_p": 275.03,
+          "fallback": 0
+        },
+        {
+          "iter": 7550,
+          "pool": 15191,
+          "budget": 7316,
+          "accepted": 7316,
+          "mean_p": 84.2,
+          "fallback": 0
+        },
+        {
+          "iter": 7700,
+          "pool": 15297,
+          "budget": 7463,
+          "accepted": 7463,
+          "mean_p": 156.84,
+          "fallback": 0
+        },
+        {
+          "iter": 7850,
+          "pool": 15490,
+          "budget": 7391,
+          "accepted": 7391,
+          "mean_p": 238.3,
+          "fallback": 0
+        },
+        {
+          "iter": 8000,
+          "pool": 15026,
+          "budget": 7213,
+          "accepted": 7213,
+          "mean_p": 65.19,
+          "fallback": 0
+        },
+        {
+          "iter": 8150,
+          "pool": 15453,
+          "budget": 7325,
+          "accepted": 7325,
+          "mean_p": 48.44,
+          "fallback": 0
+        },
+        {
+          "iter": 8300,
+          "pool": 15012,
+          "budget": 7798,
+          "accepted": 7798,
+          "mean_p": 32.78,
+          "fallback": 0
+        },
+        {
+          "iter": 8450,
+          "pool": 14461,
+          "budget": 7044,
+          "accepted": 7044,
+          "mean_p": 226.32,
+          "fallback": 0
+        },
+        {
+          "iter": 8600,
+          "pool": 14661,
+          "budget": 7131,
+          "accepted": 7131,
+          "mean_p": 181.24,
+          "fallback": 0
+        },
+        {
+          "iter": 8750,
+          "pool": 15374,
+          "budget": 7578,
+          "accepted": 7578,
+          "mean_p": 155.72,
+          "fallback": 0
+        },
+        {
+          "iter": 8900,
+          "pool": 15579,
+          "budget": 7937,
+          "accepted": 7937,
+          "mean_p": 34.36,
+          "fallback": 0
+        },
+        {
+          "iter": 9050,
+          "pool": 15901,
+          "budget": 7893,
+          "accepted": 7893,
+          "mean_p": 113.78,
+          "fallback": 0
+        },
+        {
+          "iter": 9200,
+          "pool": 16146,
+          "budget": 7775,
+          "accepted": 7775,
+          "mean_p": 183.08,
+          "fallback": 0
+        },
+        {
+          "iter": 9350,
+          "pool": 16348,
+          "budget": 7850,
+          "accepted": 7850,
+          "mean_p": 234.41,
+          "fallback": 0
+        },
+        {
+          "iter": 9500,
+          "pool": 16891,
+          "budget": 8302,
+          "accepted": 8302,
+          "mean_p": 88.19,
+          "fallback": 0
+        },
+        {
+          "iter": 9650,
+          "pool": 16999,
+          "budget": 8381,
+          "accepted": 8381,
+          "mean_p": 143.37,
+          "fallback": 0
+        },
+        {
+          "iter": 9800,
+          "pool": 14780,
+          "budget": 8025,
+          "accepted": 8025,
+          "mean_p": 36.0,
+          "fallback": 0
+        },
+        {
+          "iter": 9950,
+          "pool": 17849,
+          "budget": 8751,
+          "accepted": 8751,
+          "mean_p": 150.4,
+          "fallback": 0
+        },
+        {
+          "iter": 10400,
+          "pool": 14910,
+          "budget": 7815,
+          "accepted": 7815,
+          "mean_p": 66.37,
+          "fallback": 0
+        }
+      ]
+    }
+  },
+  "first_event_budget_equal": true,
+  "per_event_comparison_on_vs_negctl": {
+    "shared_iters": 64,
+    "only_in_first": [
+      1850,
+      3950,
+      10100
+    ],
+    "only_in_second": [
+      1700,
+      5600,
+      6050,
+      9050,
+      9950,
+      10400
+    ],
+    "n_budget_mismatch": 63,
+    "mismatch_rows": [
+      {
+        "iter": 101,
+        "budget_on": 3068,
+        "budget_negctl": 3067,
+        "delta": -1
+      },
+      {
+        "iter": 201,
+        "budget_on": 1210,
+        "budget_negctl": 1284,
+        "delta": 74
+      },
+      {
+        "iter": 301,
+        "budget_on": 469,
+        "budget_negctl": 470,
+        "delta": 1
+      },
+      {
+        "iter": 401,
+        "budget_on": 530,
+        "budget_negctl": 506,
+        "delta": -24
+      },
+      {
+        "iter": 501,
+        "budget_on": 587,
+        "budget_negctl": 539,
+        "delta": -48
+      },
+      {
+        "iter": 601,
+        "budget_on": 672,
+        "budget_negctl": 680,
+        "delta": 8
+      },
+      {
+        "iter": 701,
+        "budget_on": 574,
+        "budget_negctl": 572,
+        "delta": -2
+      },
+      {
+        "iter": 801,
+        "budget_on": 567,
+        "budget_negctl": 537,
+        "delta": -30
+      },
+      {
+        "iter": 901,
+        "budget_on": 584,
+        "budget_negctl": 559,
+        "delta": -25
+      },
+      {
+        "iter": 1001,
+        "budget_on": 624,
+        "budget_negctl": 599,
+        "delta": -25
+      },
+      {
+        "iter": 1100,
+        "budget_on": 2173,
+        "budget_negctl": 2112,
+        "delta": -61
+      },
+      {
+        "iter": 1250,
+        "budget_on": 2026,
+        "budget_negctl": 1997,
+        "delta": -29
+      },
+      {
+        "iter": 1400,
+        "budget_on": 2157,
+        "budget_negctl": 2086,
+        "delta": -71
+      },
+      {
+        "iter": 1550,
+        "budget_on": 1867,
+        "budget_negctl": 1863,
+        "delta": -4
+      },
+      {
+        "iter": 2000,
+        "budget_on": 2165,
+        "budget_negctl": 2270,
+        "delta": 105
+      },
+      {
+        "iter": 2150,
+        "budget_on": 2017,
+        "budget_negctl": 2219,
+        "delta": 202
+      },
+      {
+        "iter": 2300,
+        "budget_on": 2398,
+        "budget_negctl": 2411,
+        "delta": 13
+      },
+      {
+        "iter": 2450,
+        "budget_on": 2192,
+        "budget_negctl": 2112,
+        "delta": -80
+      },
+      {
+        "iter": 2600,
+        "budget_on": 2189,
+        "budget_negctl": 2228,
+        "delta": 39
+      },
+      {
+        "iter": 2750,
+        "budget_on": 2473,
+        "budget_negctl": 2489,
+        "delta": 16
+      },
+      {
+        "iter": 2900,
+        "budget_on": 2561,
+        "budget_negctl": 2630,
+        "delta": 69
+      },
+      {
+        "iter": 3050,
+        "budget_on": 2716,
+        "budget_negctl": 2666,
+        "delta": -50
+      },
+      {
+        "iter": 3200,
+        "budget_on": 2920,
+        "budget_negctl": 2506,
+        "delta": -414
+      },
+      {
+        "iter": 3350,
+        "budget_on": 2595,
+        "budget_negctl": 2547,
+        "delta": -48
+      },
+      {
+        "iter": 3500,
+        "budget_on": 2914,
+        "budget_negctl": 2590,
+        "delta": -324
+      },
+      {
+        "iter": 3650,
+        "budget_on": 2777,
+        "budget_negctl": 3096,
+        "delta": 319
+      },
+      {
+        "iter": 3800,
+        "budget_on": 2964,
+        "budget_negctl": 2996,
+        "delta": 32
+      },
+      {
+        "iter": 4100,
+        "budget_on": 3133,
+        "budget_negctl": 3109,
+        "delta": -24
+      },
+      {
+        "iter": 4250,
+        "budget_on": 3799,
+        "budget_negctl": 3509,
+        "delta": -290
+      },
+      {
+        "iter": 4400,
+        "budget_on": 3623,
+        "budget_negctl": 3735,
+        "delta": 112
+      },
+      {
+        "iter": 4550,
+        "budget_on": 3876,
+        "budget_negctl": 3888,
+        "delta": 12
+      },
+      {
+        "iter": 4700,
+        "budget_on": 3847,
+        "budget_negctl": 4149,
+        "delta": 302
+      },
+      {
+        "iter": 4850,
+        "budget_on": 3865,
+        "budget_negctl": 3794,
+        "delta": -71
+      },
+      {
+        "iter": 5000,
+        "budget_on": 4064,
+        "budget_negctl": 3895,
+        "delta": -169
+      },
+      {
+        "iter": 5150,
+        "budget_on": 4342,
+        "budget_negctl": 4289,
+        "delta": -53
+      },
+      {
+        "iter": 5300,
+        "budget_on": 4649,
+        "budget_negctl": 4794,
+        "delta": 145
+      },
+      {
+        "iter": 5450,
+        "budget_on": 4888,
+        "budget_negctl": 4993,
+        "delta": 105
+      },
+      {
+        "iter": 5750,
+        "budget_on": 4843,
+        "budget_negctl": 5023,
+        "delta": 180
+      },
+      {
+        "iter": 5900,
+        "budget_on": 4902,
+        "budget_negctl": 5195,
+        "delta": 293
+      },
+      {
+        "iter": 6200,
+        "budget_on": 5515,
+        "budget_negctl": 5670,
+        "delta": 155
+      },
+      {
+        "iter": 6350,
+        "budget_on": 5798,
+        "budget_negctl": 5649,
+        "delta": -149
+      },
+      {
+        "iter": 6500,
+        "budget_on": 5836,
+        "budget_negctl": 5971,
+        "delta": 135
+      },
+      {
+        "iter": 6650,
+        "budget_on": 6208,
+        "budget_negctl": 6946,
+        "delta": 738
+      },
+      {
+        "iter": 6800,
+        "budget_on": 6185,
+        "budget_negctl": 6591,
+        "delta": 406
+      },
+      {
+        "iter": 6950,
+        "budget_on": 6383,
+        "budget_negctl": 6812,
+        "delta": 429
+      },
+      {
+        "iter": 7100,
+        "budget_on": 6889,
+        "budget_negctl": 6850,
+        "delta": -39
+      },
+      {
+        "iter": 7250,
+        "budget_on": 6814,
+        "budget_negctl": 7079,
+        "delta": 265
+      },
+      {
+        "iter": 7400,
+        "budget_on": 7133,
+        "budget_negctl": 7260,
+        "delta": 127
+      },
+      {
+        "iter": 7550,
+        "budget_on": 6892,
+        "budget_negctl": 7316,
+        "delta": 424
+      },
+      {
+        "iter": 7700,
+        "budget_on": 7334,
+        "budget_negctl": 7463,
+        "delta": 129
+      },
+      {
+        "iter": 7850,
+        "budget_on": 7007,
+        "budget_negctl": 7391,
+        "delta": 384
+      },
+      {
+        "iter": 8000,
+        "budget_on": 7501,
+        "budget_negctl": 7213,
+        "delta": -288
+      },
+      {
+        "iter": 8150,
+        "budget_on": 6736,
+        "budget_negctl": 7325,
+        "delta": 589
+      },
+      {
+        "iter": 8300,
+        "budget_on": 6914,
+        "budget_negctl": 7798,
+        "delta": 884
+      },
+      {
+        "iter": 8450,
+        "budget_on": 7050,
+        "budget_negctl": 7044,
+        "delta": -6
+      },
+      {
+        "iter": 8600,
+        "budget_on": 7571,
+        "budget_negctl": 7131,
+        "delta": -440
+      },
+      {
+        "iter": 8750,
+        "budget_on": 7741,
+        "budget_negctl": 7578,
+        "delta": -163
+      },
+      {
+        "iter": 8900,
+        "budget_on": 7344,
+        "budget_negctl": 7937,
+        "delta": 593
+      },
+      {
+        "iter": 9200,
+        "budget_on": 7916,
+        "budget_negctl": 7775,
+        "delta": -141
+      },
+      {
+        "iter": 9350,
+        "budget_on": 7871,
+        "budget_negctl": 7850,
+        "delta": -21
+      },
+      {
+        "iter": 9500,
+        "budget_on": 8228,
+        "budget_negctl": 8302,
+        "delta": 74
+      },
+      {
+        "iter": 9650,
+        "budget_on": 8181,
+        "budget_negctl": 8381,
+        "delta": 200
+      },
+      {
+        "iter": 9800,
+        "budget_on": 9148,
+        "budget_negctl": 8025,
+        "delta": -1123
+      }
+    ]
+  },
+  "device_floor": null
+}

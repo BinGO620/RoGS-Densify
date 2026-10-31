@@ -1,0 +1,30 @@
+# CGB L1 — arm `g1`（person_tracking）：覆盖缺口预算致密化（γ=1，稀疏加权）。
+#
+# 预注册：paper3/results/evidence/prereg_cgb_2026-10-30.md（判据看数据前锁定）
+# 与 `cgb_g0_person_tracking.yaml` 只差 SelectiveDensification.gamma：
+#   γ=1 → 额外点按 g·s^1 排（奖励空间稀疏处）
+#   γ=0 → 额外点按 g 排（纯梯度续填，等剂量控位对照）
+# 两臂的额外源点数逐事件严格相等（同一 floor(swap_frac·|ref_sel|)）。
+#
+# 与 bpw_off_person_tracking.yaml 的差别只有 SelectiveDensification 块（单变量）。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+# 两臂必须互为因果孪生：初始点云与随机 KF 顺序必须一致。
+# slam.py 会用 config 文件名（含臂名）覆写 Dataset.sequence，因此 RNG tag 走顶层键。
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "coverage_gap"
+  swap_frac: 0.05        # 每事件 + floor(0.05 · |ref_sel|) 个源点（两臂相同）
+  gamma: 1.0             # 1.0 = 稀疏加权（本臂）；0.0 = 等剂量控位对照
+  tau_low_factor: 0.5
+  sparsity_k: 6
+  trace_selection: true  # 默认关的诊断日志；本臂开着以便做机制门 R1
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/cgb_g1_person_tracking"
+  save_per_frame_ape: true

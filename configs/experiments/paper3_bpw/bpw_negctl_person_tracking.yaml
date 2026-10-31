@@ -1,0 +1,28 @@
+# Phase 0 BPW — arm `negctl`（person_tracking）：负对照。
+#
+# 与 bpw_on_person_tracking.yaml 的唯一差别是 placebo: true —— 证据分 e_i 被确定性
+# 置换后再排序。预算（|P0|）、候选池（tau_low）、选择机制代码路径全部相同。
+# 因此 on vs negctl 的差值只能归因于「持久性排序信号的信息量」，
+# 不能归因于「预算匹配」本身。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+# 三臂必须互为因果孪生：初始点云与随机 KF 顺序必须一致。
+# slam.py:736 会用 config 文件名（含臂名）覆写 Dataset.sequence，
+# 因此 RNG tag 走顶层键，值在三臂中完全相同、与臂名无关。
+# 见 paper3/results/evidence/phase0_audit_2026-10-28_invalid_batch.md
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: true
+  signal: "persistence_budget"
+  p0: 8.0
+  tau_low_factor: 0.5
+  placebo: true
+  placebo_seed: 7
+  log_every: 10
+
+Results:
+  save_dir: "results/paper3_bpw/bpw_negctl_person_tracking"
+  save_per_frame_ape: true

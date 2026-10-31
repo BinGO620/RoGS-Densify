@@ -1,0 +1,16 @@
+# 对照臂（off）选点回放：与 bpw_off_person_tracking.yaml 逐位一致。
+# off 不跑选择器（enabled:false），本配置只把 trace_selection 打开——
+# 无副作用（bpw_active=false ⇒ 不进选择器），用于确认 off 不产生 trace 文件。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: false
+  trace_selection: true
+
+Results:
+  save_dir: "results/paper3_bpw/bpw_off_person_tracking_trace"
+  save_per_frame_ape: true
