@@ -49,7 +49,6 @@ from utils.reliability_signal import (
 )
 from utils.flow_raft import frozen_flow_index, load_frozen_flow
 from utils.slam_utils import get_loss_tracking, get_median_depth
-from utils.swba import SWBA, swba_enabled
 from utils.tri_reliability import (
     TriReliabilityRecorder,
     compute_tri_reliability,
@@ -409,10 +408,6 @@ class FrontEnd(mp.Process):
             )
         if static_evidence_enabled(self.config):
             self.static_evidence_recorder = StaticEvidenceRecorder(self.save_dir)
-        # Route B sliding-window photometric BA (default-off): correct the recent
-        # KF poses inside the tracking loop while the error is still local. See
-        # utils/swba.py and the on_new_keyframe call in run().
-        self.swba = SWBA(self.config) if swba_enabled(self.config) else None
 
     def add_new_keyframe(
         self, cur_frame_idx, image=None, depth=None, opacity=None, init=False
@@ -2925,44 +2920,6 @@ class FrontEnd(mp.Process):
                         # map and the later prune deletes nothing).
                         pending_candidate_inserts = decision.candidate_inserts
                         depth_map = decision.immediate_depth_map
-                    # Route B SWBA (default-off): correct the recent KF poses
-                    # NOW, while the tracking error is still local, so (a) the
-                    # backend receives the corrected poses for this keyframe's
-                    # message below, and (b) the next frame's tracking() warm-
-                    # starts from the corrected tail. Skips silently until the
-                    # window has enough cached KF geometry.
-                    if self.swba is not None:
-                        # R26 health gate: SWBA's window photometric edges are
-                        # contaminated by dynamics (no mask) — on healthy frames
-                        # the "correction" is noise injection (fulltable: crowd2
-                        # +2.0cm). Run SWBA only when the frame's mean static
-                        # confidence is BELOW swba_max_static_conf, i.e. the
-                        # tracker is actually struggling. 1.1 = always run.
-                        sc = getattr(self, "_last_static_conf", None)
-                        max_sc = float(
-                            self.config.get("SWBA", {}).get(
-                                "swba_max_static_conf", 1.1
-                            )
-                        )
-                        if sc is not None:
-                            Log(
-                                f"SWBA gate kf={cur_frame_idx}: "
-                                f"static_conf={sc:.3f} (max {max_sc:.2f})"
-                            )
-                        if sc is not None and sc > max_sc:
-                            Log(
-                                f"SWBA kf={cur_frame_idx}: [rel-gate skip] "
-                                f"static_conf={sc:.3f} > {max_sc:.2f}"
-                            )
-                        else:
-                            try:
-                                self.swba.on_new_keyframe(
-                                    self.cameras,
-                                    self.kf_indices,
-                                    last_keyframe_idx,
-                                )
-                            except Exception as exc:
-                                Log(f"SWBA kf={cur_frame_idx} failed: {exc}")
                     self.request_keyframe(
                         cur_frame_idx, viewpoint, self.current_window, depth_map
                     )

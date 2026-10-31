@@ -139,7 +139,6 @@ from utils.semantic_mask import (
     mask_mapping_enabled,
     write_semantic_timing_summary,
 )
-from utils.dba_lite import dba_lite_diagnostic_enabled, run_dba_diagnostic
 from utils import alpha_lifecycle
 from utils import occupancy_memory
 from utils import obsdebt
@@ -201,11 +200,6 @@ class BackEnd(mp.Process):
         self.mapping_time_s = 0.0
         self.mapping_calls = 0
         self.mapping_iterations = 0
-        # DynPort（默认关；D2-027）：惰性建，未启用时恒为 None ⇒ push_to_frontend/
-        # _dynport_step 零副作用，主线逐位不变。
-        self._dynport = None
-        self._dynport_csv = None
-        self._dynport_frames = 0
         self.color_refinement_time_s = 0.0
         self.color_refinement_iterations = 26000
         # Arm-activity ledger. R2-P02-E2 shipped an inert treatment arm all the way
@@ -1593,14 +1587,6 @@ class BackEnd(mp.Process):
     def color_refinement(self):
         Log("Starting color refinement")
 
-        # P2a (doc 14): masked-edge conditioning diagnostic over the KF graph BEFORE
-        # any refinement touches poses/Gaussians. Read-only; gated (DBALite.diagnostic).
-        if dba_lite_diagnostic_enabled(self.config):
-            try:
-                run_dba_diagnostic(self.viewpoints, self.config)
-            except Exception as e:
-                Log(f"DBA-lite diagnostic failed: {e}")
-
         # Numerical safety: drop non-finite (Inf/NaN) Gaussians before refining so the
         # after_opt render eval + final_after_opt PLY (the paper's rendering/geometry
         # source) are clean. Inf-scale Gaussians rasterize to NaN and poison PSNR.
@@ -1783,17 +1769,12 @@ class BackEnd(mp.Process):
         self.mapping_probe.flush(save_dir)
         self.tri_reliability_recorder.flush_summary()
         write_semantic_timing_summary(save_dir, "backend")
-        # 注：DynPort 因果仪器的 dynamic_rows 掩码在 slam.py 保存 PLY 处落盘（须与实际保存的
-        # 模型逐行一致；后端此处副本会在 color_refinement 的 prune_nonfinite 前，行数脱钩）。
         os.makedirs(save_dir, exist_ok=True)
         stats = {
             "mapping_time_s": self.mapping_time_s,
             "mapping_calls": self.mapping_calls,
             "mapping_iterations": self.mapping_iterations,
             "color_refinement_time_s": self.color_refinement_time_s,
-            # DynPort 计时落点（J4②；只圈机制本体，I/O 在计时外）。关闭时为 0。
-            "dynport_time_s": float(getattr(self, "_dynport_time_s", 0.0)),
-            "dynport_frames": int(getattr(self, "_dynport_frames", 0)),
             # arm-activity ledger (see __init__): a treatment arm that reports
             # zero here did not run its treatment, whatever its metrics say.
             "alpha_lifecycle_steps": self.alpha_lifecycle_steps,
@@ -1834,176 +1815,8 @@ class BackEnd(mp.Process):
             tag = "sync_backend"
 
         payload = clone_obj(self.gaussians)
-        # DynPort 跟踪隔离（D2-027；prereg §1）：动态基元插在共享模型里，若整图同步到前端，
-        # tracking 渲染会看到它们 ⇒ 污染位姿（2026-10-06 pilot：ATE 0.0141→0.0379）。
-        # **不剪 payload**（剪了会与 occ_aware_visibility 尺寸脱钩 ⇒ is_keyframe 崩）；
-        # 改为把**推给前端副本**里动态行的不透明度打到 0（**行数不变** ⇒ occ 掩码尺寸安全，
-        # 且零不透明度基元对渲染无贡献 ⇒ 前端 tracking 结构性看不到动态层）。关闭时零改动。
-        if self._dynport is not None:
-            active = self._dynport.core.active_lineages()
-            if active:
-                g = payload
-                g.ensure_lineage_state()
-                want = torch.as_tensor(np.asarray(active, dtype=np.int64), dtype=torch.int32)
-                sel = (g.lineage_id.unsqueeze(0) == want.unsqueeze(1)).any(dim=0)
-                if bool(sel.any()):
-                    with torch.no_grad():
-                        g._opacity.data[sel.to(g._opacity.device)] = -30.0   # sigmoid(-30)≈0
         msg = [tag, payload, self.occ_aware_visibility, keyframes]
         self.frontend_queue.put(msg)
-
-    def _dynport_setup(self):
-        """惰性初始化（关闭时永不调用）：manager + 计数落盘路径。"""
-        if getattr(self, "_dynport", None) is not None:
-            return
-        from utils.dyn_port_online import DynPortManager
-        from utils.dyn_port_buffer import dynport_cfg
-
-        cfg = dynport_cfg(self.config)
-        self._dynport = DynPortManager(self.gaussians, self.config, device=self.device)
-        # 让静态管线豁免动态层（DynaGSLAM「分储合渲分优」的"分优"）：densify_and_prune /
-        # reset_opacity_nonvisible 不再裁剪 lineage ≥ base 的基元（生命周期归 DynPort 管）。
-        self.gaussians.dyn_lineage_base = int(cfg["lineage_base"])
-        save_dir = str(self.config.get("Results", {}).get("save_dir", "results"))
-        self._dynport_csv = os.path.join(save_dir, "dynport_counters.csv")
-        self._dynport_frames = 0
-        self._dynport_time_s = 0.0                 # J4② 计时落点（只圈机制本体，不含 I/O）
-        self._dynport_phase_csv = os.path.join(save_dir, "dynport_timing.csv")
-        # 因果快照（默认关；修 final-map 仪器偏置，见 utils/dynport_causal_log.py）
-        from utils.dynport_causal_log import DynPortCausalWriter
-        self._dynport_causal = DynPortCausalWriter(self.config)
-
-    def _dynport_step(self, cur_frame_idx, viewpoint):
-        """每 KF：动态管理一步（默认关 ⇒ 立即返回，零副作用）。"""
-        from utils.dyn_port_buffer import dynport_enabled, write_counters_csv
-        if not dynport_enabled(self.config):
-            return
-        if self.gaussians is None:
-            return
-        self._dynport_setup()
-        from utils.semantic_mask import get_or_compute_dynamic_mask
-        mask = get_or_compute_dynamic_mask(self.config, viewpoint)
-        if mask is None:
-            if self._dynport_frames == 0:
-                Log("DynPort: dynamic mask is None (SemanticMask disabled?) — step skipped")
-            return
-        if hasattr(mask, "detach"):
-            mask = mask.detach().cpu().numpy()
-        import time as _t
-        _t0 = _t.perf_counter()
-        rec = self._dynport.step(int(cur_frame_idx), viewpoint, mask)
-        self._dynport_time_s += (_t.perf_counter() - _t0)   # J4②：只圈机制本体（I/O 在计时外）
-        # occ_aware_visibility 与基元数同步：DynPort 既增（Case2）又删（Cond1/Cond2/cap），
-        # 会重排模型数组 ⇒ 用 orig_map 把每 KF 的可见性掩码重排到新长度。尺寸必须恒等基元数，
-        # 否则前端 is_keyframe 的 logical_or 脱钩崩溃（2026-10-06 冒烟实测 22113 vs 39595）。
-        if rec is not None and "_occ_sync" in rec:
-            orig_map, old_count = rec["_occ_sync"]
-            self._dynport_sync_occ(orig_map, old_count)
-        self._dynport_frames += 1
-        # 逐 KF 生效证据（DISCIPLINE #9：静默组件必须有可观测读数）——计数 + 缓冲规模。
-        if rec is not None:
-            Log(f"DynPort KF {int(cur_frame_idx)}: inserted={rec.get('inserted', 0)} "
-                f"case1_hits={rec.get('case1_hits', 0)} n_buf={rec.get('n_buf', 0)} "
-                f"n_model={int(self.gaussians.get_xyz.shape[0])} "
-                f"cond1={rec.get('cond1_deleted', 0)} cond2={rec.get('cond2_deleted', 0)} "
-                f"cap_hits={rec.get('cap_hits', 0)}")
-        # DynaGSLAM §5.2 步 4「再用当前 RGBD 优化」——对本帧动态层做局部拟合（"分优"）。
-        # 缺此步 ⇒ 动态基元停在初始化不透明度、不可见 ⇒ D≈E（2026-10-06 pilot J1=-0.068 实证）。
-        # 复用既有 `_transient_fit`（梯度隔离 + 锁定 lr，探针 P2 原样）；默认 fit_iters>0 才跑。
-        if rec is not None and int(self._dynport.cfg.get("fit_iters", 0)) > 0:
-            self._dynport_fit(cur_frame_idx, viewpoint)
-        # 因果快照（默认关）：落盘"t 时刻动态层状态 + 该帧估计位姿"（修 final-map 仪器偏置）
-        if rec is not None and self._dynport_causal.enabled:
-            from utils.dynport_causal_log import to_np as _tnp
-            R = _tnp(viewpoint.R); T = _tnp(viewpoint.T)
-            c2w = np.eye(4); c2w[:3, :3] = np.asarray(R, dtype=np.float64)
-            c2w[:3, 3] = np.asarray(T, dtype=np.float64)
-            self._dynport_causal.log_frame(
-                cur_frame_idx, np.linalg.inv(c2w), self.gaussians,
-                self._dynport.core.active_lineages())
-        if rec is not None and self._dynport_frames % 5 == 0:
-            write_counters_csv(self._dynport.core, self._dynport_csv)
-
-    def _dynport_fit(self, cur_frame_idx, viewpoint):
-        """对本帧**活跃动态层整体**做 `fit_iters` 步联合局部拟合（DynaGSLAM §5.2 步 4"再用当前
-        RGBD 优化"；"分优"——静态集梯度清零，动态集独占更新）。
-
-        复用既有 `_transient_fit` 的损失/lr/隔离（探针 P2 原样）。**联合**（非逐 lineage）：
-        一次渲染拟合全部动态基元，避免 n_lineage × iters 次渲染（成本炸裂）。计时圈进
-        `_dynport_time_s`（J4②：机制本体开销，I/O 在计时外）。
-        """
-        import time as _t
-        g = self.gaussians
-        depth = getattr(viewpoint, "depth", None)
-        rgb = getattr(viewpoint, "original_image", None)
-        if depth is None or rgb is None:
-            return
-        from utils.semantic_mask import get_or_compute_dynamic_mask
-        mask = get_or_compute_dynamic_mask(self.config, viewpoint)
-        if mask is None:
-            return
-        active = self._dynport.core.active_lineages()
-        if not active:
-            return
-        g.ensure_lineage_state()
-        want = torch.as_tensor(np.asarray(active, dtype=np.int64), dtype=torch.int32)
-        sel = (g.lineage_id.unsqueeze(0) == want.unsqueeze(1)).any(dim=0)
-        n_sel = int(sel.sum().item())
-        if n_sel == 0:
-            return
-        to_np = lambda x: x.detach().cpu().numpy() if hasattr(x, "detach") else np.asarray(x)
-        image = torch.as_tensor(to_np(rgb), device=g.get_xyz.device)
-        depth_gt = torch.as_tensor(to_np(depth), device=g.get_xyz.device)
-        mask_np = to_np(mask)
-        mask_np = mask_np[0] if mask_np.ndim == 3 else mask_np
-        mask_t = torch.as_tensor(np.asarray(mask_np, dtype=bool), device=g.get_xyz.device)
-        fit_cam = _TransientFitCam(float(viewpoint.fx), float(viewpoint.fy), float(viewpoint.cx),
-                                   float(viewpoint.cy), viewpoint.R, viewpoint.T,
-                                   image.shape[2], image.shape[1], device=g.get_xyz.device)
-        m_rgb = (image > 0) & mask_t.unsqueeze(0)
-        m_d = (torch.isfinite(depth_gt) & (depth_gt > 0)) & mask_t
-        iters = int(self._dynport.cfg["fit_iters"])
-        opa0 = float(torch.sigmoid(g._opacity.detach()[sel]).mean())
-        opt, groups = transient_fit_build_optimizer(g)
-        t0 = _t.perf_counter()
-        losses = []
-        for it in range(iters):
-            pkg = render(fit_cam, g, self.pipeline_params, self.background)
-            r = torch.clamp(pkg["render"], 0.0, 1.0)
-            loss = torch.abs(r[m_rgb] - image[m_rgb]).mean() if bool(m_rgb.any()) else r.sum() * 0.0
-            if bool(m_d.any()):
-                loss = loss + 0.1 * torch.abs(pkg["depth"].squeeze()[m_d] - depth_gt[m_d]).mean()
-            if not torch.isfinite(loss):
-                break
-            opt.zero_grad(set_to_none=True)
-            loss.backward()
-            transient_fit_mask_grads(groups, sel)     # 静态集 detach（梯度清零）
-            opt.step()
-            losses.append(float(loss.detach()))
-        self._dynport_time_s += (_t.perf_counter() - t0)
-        if losses:
-            Log(f"DynPort fit KF {int(cur_frame_idx)}: n={n_sel} iters={len(losses)} "
-                f"loss {losses[0]:.4f}->{losses[-1]:.4f} opa {opa0:.3f}->"
-                f"{float(torch.sigmoid(g._opacity.detach()[sel]).mean()):.3f}")
-
-    def _dynport_sync_occ(self, orig_map, old_count):
-        """按 `orig_map`（当前下标 → 步初下标，-1 = 本步新增）重排所有 occ 掩码。
-
-        与 `_occ_visibility_grow`/`_drop` 同款：只处理**长度 == old_count（步初基元数）**的掩码
-        （其余是别的时点录的，长度本就不同，存疑不动）。new[i] = old[orig_map[i]]（-1 ⇒ False）。
-        """
-        orig_map = np.asarray(orig_map)
-        valid_pos = np.nonzero(orig_map >= 0)[0]
-        for idx in list(self.occ_aware_visibility.keys()):
-            m = self.occ_aware_visibility[idx]
-            if old_count <= 0 or m.shape[0] != old_count:
-                continue
-            new = torch.zeros(orig_map.shape[0], dtype=m.dtype, device=m.device)
-            if valid_pos.size:
-                src = torch.as_tensor(orig_map[valid_pos], dtype=torch.long, device=m.device)
-                dst = torch.as_tensor(valid_pos, dtype=torch.long, device=m.device)
-                new[dst] = m[src]
-            self.occ_aware_visibility[idx] = new
 
     def _release_cuda_state_for_shutdown(self):
         """Drop tensors imported from the frontend before this process exits."""
@@ -2208,9 +2021,6 @@ class BackEnd(mp.Process):
                             kf_view,
                             kf_view.depth if kf_view.depth is not None else depth_map,
                         )
-                    # DynPort（默认关；D2-027）：动态 GS 管理（Case1 复用+均值替换 / Case2 新建
-                    # / Cond1 可观测删除 / Cond2 寿命删除）。关闭时本调用立即返回，主线逐位不变。
-                    self._dynport_step(cur_frame_idx, self.viewpoints[cur_frame_idx])
                     self.push_to_frontend("keyframe")
 
                 elif data[0] == "insert_candidates_cam":

@@ -38,13 +38,6 @@ from utils.gpu_memory_monitor import ProcessTreeGpuMemoryMonitor
 from utils.multiprocessing_utils import FakeQueue, release_cuda_ipc_cache
 from utils.slam_backend import BackEnd
 from utils.slam_frontend import FrontEnd
-from utils.loop_closure import loop_closure_enabled, run_loop_closure
-from utils.dba_lite import (
-    dba_lite_enabled,
-    dba_lite_oracle_enabled,
-    run_dba_oracle,
-    run_dba_v0,
-)
 
 
 BACKEND_TIMING_TIMEOUT_SECONDS = 60.0
@@ -418,46 +411,6 @@ class SLAM:
         # poses into frontend.cameras BEFORE save_final_tracking_raw so the reported
         # ATE reflects them. Gauge-fixes KF0; held-out validation edges guard vs
         # train-edge overfit. Default-off (DBALite.enabled).
-        # DBA-lite GT-oracle falsifier (default-off, read-only): does the masked
-        # geometric objective even prefer GT poses? Runs on the online poses BEFORE
-        # any v0 modification. Decides whether a learning-free geometric BA can help.
-        if dba_lite_oracle_enabled(self.config):
-            try:
-                run_dba_oracle(
-                    self.frontend.cameras,
-                    self.frontend.kf_indices,
-                    self.dataset,
-                    self.config,
-                )
-            except Exception as exc:
-                Log(f"DBA-lite oracle failed: {exc}")
-
-        if dba_lite_enabled(self.config):
-            try:
-                run_dba_v0(
-                    self.frontend.cameras,
-                    self.frontend.kf_indices,
-                    self.dataset,
-                    self.config,
-                )
-            except Exception as exc:
-                Log(f"DBA-lite v0 failed: {exc}")
-
-        # R15 (default-off): lightweight loop closure — masked-thumb retrieval
-        # + frozen-photometric-edge verification + pose-graph optimization,
-        # no pretrained models. Runs offline at sequence end, same write-back
-        # contract as DBA-lite above.
-        if loop_closure_enabled(self.config):
-            try:
-                run_loop_closure(
-                    self.frontend.cameras,
-                    self.frontend.kf_indices,
-                    self.dataset,
-                    self.config,
-                )
-            except Exception as exc:
-                Log(f"LoopClosure failed: {exc}")
-
         if self.config["Results"].get("save_final_tracking", True):
             save_final_tracking_raw(
                 self.frontend.cameras,
@@ -468,16 +421,6 @@ class SLAM:
             )
         if self.config["Results"].get("save_final_gaussians", True):
             save_gaussians(self.gaussians, self.save_dir, "final", final=True)
-            # DynPort 因果仪器收尾：在**保存 PLY 的同一个模型**上落盘动态行掩码
-            # （默认关 ⇒ 零副作用；后端 save_timing_stats 的副本会与 prune_nonfinite 后的
-            # PLY 行数脱钩，故在此按实际保存的 self.gaussians 计算）。
-            try:
-                from utils.dynport_causal_log import DynPortCausalWriter
-                _w = DynPortCausalWriter(self.config)
-                if _w.enabled:
-                    _w.save_static_mask(self.gaussians)
-            except Exception as _exc:
-                Log(f"DynPort causal mask at save failed: {type(_exc).__name__}: {_exc}")
         if self.config["Results"].get("save_final_mapping", False):
             eval_final_mapping_raw(
                 self.frontend.cameras,
