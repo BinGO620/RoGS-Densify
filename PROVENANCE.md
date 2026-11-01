@@ -92,6 +92,17 @@ dyn_port_buffer, dyn_port_online, dyn_port_offline, dynport_causal_log}.py`
    health_check、其余实验族的 configs/scripts/tests/results、papers/、biyelunwen/）
    一律不带。
 
+## 数字验证矩阵（论文3 无已发表表，验证 = 门禁 + 等价性）
+
+| 项 | 方式 | 状态 |
+|---|---|---|
+| 机制选点逻辑 | tests/densification 40 个 CPU 单测（BPW/CGB/FDose 三形态） | 全绿 |
+| 判据机 | tests/paper3_bpw 65 个门禁（judge/check/plan 契约） | 全绿 |
+| FDose 40 帧冒烟 | 三臂全通，判据与 `fdose_gate_smoke_2026-10-31.json` 同源（预注册证据随仓） | 通过 |
+| 裁剪等价性 | 冒烟 A/B vs monogs-ours@31b0f0367 纯净源（见下） | 通过 |
+| 580 帧全量 | 未跑（D2-011 待用户答复 + G4 核销，见 PREREGISTRATION） | — |
+| 配置同源 | 27 个 yaml 与 monogs-ours@31b0f0367 逐字节一致（parity check 2026-11-01） | ✓ |
+
 ## 验证记录
 
 | 项 | 结果 |
