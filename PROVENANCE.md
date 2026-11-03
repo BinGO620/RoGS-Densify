@@ -45,6 +45,12 @@
 （slam.py 61 行 / backend 190 行 / frontend 43 行）被覆盖——与 2026-11-01 RoGS-Map 事故同根因。
 手术后复跑：`deleted=9`、复活模块 0、三处主干残留全 0。
 
+**过程件不入快照仓（2026-11-03）**：FDose 的 `results/paper3_bpw/**/fdose_*_selection_trace.csv`
+（23 件 / 906M）**不再入库**。判据链不依赖它：A4 起每 seed 的 F3a′/share/池基线已固化为
+gate JSON，判决只消费 gate 工件；judge 的 R6/R7 是报告项，缺 trace 会显式 `missing_trace`。
+**可追溯**：monogs-ours 同名路径保留全量（唯一事实源），需重算时从源仓取。
+（2026-11-03 验证：untrack 后 judge 在快照仓内仍 rc=0 并逐字复现 INCONCLUSIVE。）
+
 **维护约定**：monogs-ours 的主干三文件若有真实改动，必须按表 2 重放手术生成新 overlay
 后再回灌；否则 overlay 会冲掉新改动。
 
