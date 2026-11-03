@@ -39,4 +39,4 @@ results/**/plot/trj_[0-9]*.json
 results/**/plot/stats_[0-9]*.json
 
 # 2026-11-03: FDose 逐事件 trace 为过程 dump（906M），不入快照仓；源仓 monogs-ours 保留全量
-results/paper3_bpw/**/fdose_*_selection_trace.csv
+*selection_trace.csv
