@@ -133,3 +133,15 @@ dyn_port_buffer, dyn_port_online, dyn_port_offline, dynport_causal_log}.py`
 | submodule pin | `diff-gaussian-rasterization@43e21bff`、`simple-knn@44f764299`（与 monogs-ours 历史及 upstream MonoGS 一致） |
 | 2060 冒烟 A/B（40 帧，bpw_off，seed 0） | 裁剪仓 vs monogs-ours@31b0f0367 纯净参照：ATE RMSE 1.1688 vs 1.1718 cm（Δ=0.003cm ≈ 0.26%，CUDA 非确定性量级，低于同配置跨批噪声 0.18–0.62cm）；stats_final/per_frame_ape/tracking_raw 全字段一致（仅时间戳与噪声级小数差）。**减法未改变管线行为** |
 | **2026-11-03 回灌 @ `1b9e3fff7`** | parity 全部同源（25/25 configs）· pytest **121 passed** · 40 帧冒烟 bpw_off ~/. 裁剪仓 **1.1818 cm** vs 纯净源参照 1.1718 cm（Δ=0.010 cm ≈ 0.85%，低于跨批噪声带 0.18–0.62 cm）⇒ 等价性通过 · closure_check 报 `gui`/`utils` 两项为**工具误报**（纯净源同报，包名解析问题）· submodule pin 保持 `43e21bff`/`44f76429` · 新带入 FDose n=6 判决工件与 seeds 3/4/5 run 产物 |
+
+## 归档原则（2026-11-04 登记；用户指令，适用于每一个仓库）
+
+- **工作区永远只留最新**：过时的版本/草稿/历史快照一律移入本仓 `archive/`（就近归档，
+  命名 `{语义}_{YYYY-MM-DD}`），不散落工作区顶层。
+- **归档 ≠ 删除**：归档件是证据键，账本指针不追改；每处归档配 `README.md` 并在仓内
+  索引登记。
+- **本仓独立性**：实验一律回 monogs-ours 做，本仓只收"已判据确认"的成果快照
+  （四步同步见 monogs-ours `/data/master-thesis/WORKFLOW.md`）；本仓自持门禁与
+  PROVENANCE，不依赖 monogs-ours 工作区即可复验。
+- **里程碑触发同步**：只在判决落地/投稿等里程碑做 manifest 重灌 + gate 全跑 +
+  PROVENANCE 登记；平时不同步（避免快照漂移）。
