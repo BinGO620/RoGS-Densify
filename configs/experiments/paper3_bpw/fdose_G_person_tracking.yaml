@@ -18,6 +18,9 @@ SelectiveDensification:
   sparsity_k: 6
   dose_plan_path: "results/paper3_bpw/dose_plan/person_tracking_seed0.json"
   trace_selection: true
+  # A4 永久（2026-11-02，P3-D2-014 批准）：F3a′ 同池反事实硬门与 R6 真池口径的数据源
+  # （池成员 = sel ∪ pool_only；~56MB/臂）。纯日志开关，不影响选择行为（A4 §2.5）。
+  trace_pool: true
   log_every: 10
 
 Results:

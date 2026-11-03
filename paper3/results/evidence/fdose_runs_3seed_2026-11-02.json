@@ -1,0 +1,30 @@
+{
+ "0": {
+  "k0": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-11-01-17-11-11",
+  "G": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_0/2026-11-01-21-36-22",
+  "S": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_0/2026-11-01-22-19-32",
+  "gate_json": "paper3/results/evidence/fdose_gate_seed0_a4_2026-11-02.json",
+  "selected_role": "diagnostic_rerun",
+  "selection_reason": "P3-D2-013 甲案：诊断重跑只开 trace_pool:true（纯日志开关，F1 逐位等价 Σsel=211320，L2 ATE 漂移 G −5.7%/S +15.3% <20% 带内）；首跑 trace 无 pool_only 行，按 A4 §2.5 F3a′ 不可判。首跑/重跑均保留、不得静默替换。",
+  "first_run": {
+   "k0": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-11-01-17-11-11",
+   "G": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_0/2026-11-01-17-56-10",
+   "S": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_0/2026-11-01-18-40-48"
+  },
+  "first_run_gate_json": "paper3/results/evidence/fdose_gate_seed0_firstrun_a4_2026-11-02.json"
+ },
+ "1": {
+  "k0": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_1/2026-11-02-12-09-51",
+  "G": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_1/2026-11-02-13-41-22",
+  "S": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_1/2026-11-02-14-23-11",
+  "gate_json": "paper3/results/evidence/fdose_gate_seed1_a4_2026-11-02.json",
+  "selected_role": "confirmation"
+ },
+ "2": {
+  "k0": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_2/2026-11-02-12-53-59",
+  "G": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_2/2026-11-02-15-05-15",
+  "S": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_2/2026-11-02-15-46-49",
+  "gate_json": "paper3/results/evidence/fdose_gate_seed2_a4_2026-11-02.json",
+  "selected_role": "confirmation"
+ }
+}

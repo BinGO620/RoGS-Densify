@@ -4,9 +4,12 @@
 对应 `paper3/results/evidence/prereg_fdose_2026-10-31.md` §4.1。判的是**装置**，
 不是效果。任一子门不成立 ⇒ 冻结读数、修装置、不得解释机制。
 
-  F1 剂量恒等：每个事件 |sel| == K_i 逐事件严格相等（分站点再报一次：F1_init / F1_map）
+  F1 剂量恒等：每个事件 |sel| == K_i 逐事件严格相等（分站点 F1_init / F1_map 同为硬门，M8）
   F2 计划忠实：两臂实际 K 序列与 dose_plan.json 逐事件逐位相等（含顺序与长度）
-  F3a γ 活性（硬门）：臂内稀疏度剖面分开（S/G 比均值 ≥1.15 且 ≥60% 事件 >1.10）
+  F3a′ γ 键活性（硬门，A4）：机制臂 S 的**同池反事实**键对比
+      `mean_s(top-K by g·s^γ) / mean_s(top-K by g)`（池 = sel ∪ pool_only）≥1.15 均值
+      且 ≥60% 事件 >1.10；**trace 无池行 ⇒ FAIL(pool_missing)**（需 trace_pool: true）
+  F3a 跨臂稀疏度比（**报告项**，A4 §2.2）：与池基线 C/A 并陈（跨臂 = 同池 × 池基线）
   F3b 索引 Jaccard：**报告项**（两臂索引空间不可比，只反映地图分叉）
   F4 池约束：选中点全部 mean_grad >= τ_lo（两臂各自）
   F5 组件生效：两臂 Σsel == 计划 ΣK 且 > 0；给 --k0 时另报 k0 的 Σsel
@@ -121,12 +124,97 @@ def _check_arm(ev, meta, plan_k, label):
     }
 
 
-def sparsity_profile(ev_g, ev_s):
-    """F3a：逐事件比较两臂**各自**选中集的平均稀疏度（不跨索引空间）。
+def _topk_by(rows, key, k):
+    """stable top-k：键降序，平局按 gauss_idx 升序（与 `select_topk_stable` 同语义）。"""
+    return sorted(rows, key=lambda t: (-key(t), t["idx"]))[:k]
 
+
+def f3a_prime(ev, n_plan):
+    """F3a′（Amendment A4 硬门）：**同池反事实键对比**——γ 键在本臂自身池上的放置效应。
+
+    逐事件：`mean_s(top-K by g·s^γ) / mean_s(top-K by g)`，池 = 该事件 `sel ∪ pool_only`，
+    K = |sel|。为什么要换掉跨臂口径（A4 §1）：580 帧 seed0 的 2×2 分解显示 γ 键效应
+    全程零衰减（均值 1.314、96% 事件 ≥1.15），而两臂池 γ=0 基线漂移 C/A 0.925→0.712
+    单调崩塌，`跨臂 observed = 同池 achievable × 池基线` —— 跨臂统计量量的是混杂抵消。
+
+    `pool_missing`：trace 无 `pool_only` 行（`trace_pool: false`）⇒ 本子门 **FAIL**
+    （呈报的 `--require-pool` 条款折进硬门：正式批判读的 trace 必须带池行）。
+    `insufficient_events`：有效事件 < max(3, ⌈N_plan/2⌉) ⇒ FAIL（反退化守卫）。
+    """
+    n_pool_only = sum(len(ev[e]["pool_only"]) for e in ev)
+    if n_pool_only == 0:
+        return {"reason": "pool_missing", "ok": False, "n_events": 0,
+                "f3a_prime_mean": None, "f3a_prime_share_above": None, "rows": [],
+                "detail": "trace 无 pool_only 行 —— 该 run 未开 trace_pool（A4 §2.5），"
+                          "F3a′ 不可判"}
+    rows = []
+    for e in sorted(ev):
+        sel = ev[e]["sel"]
+        if not sel:                      # 越界事件（k_plan == 0）跳过
+            continue
+        pool = sel + ev[e]["pool_only"]
+        k = len(sel)
+        a0 = sum(p["s"] for p in _topk_by(pool, lambda t: t["g"], k)) / k
+        a1 = sum(p["s"] for p in _topk_by(pool, lambda t: t["g"] * t["s"], k)) / k
+        if a0 <= 0:
+            continue
+        rows.append({"event": e, "mean_s_gamma0": a0, "mean_s_gamma1": a1,
+                     "ratio": a1 / a0, "k": k, "n_pool": len(pool)})
+    # 反退化守卫（A4 §2.1）。**上界 min(n_plan, ·) 是落地修正（2026-11-02）**：
+    # 原式 max(3, ⌈N_plan/2⌉) 对 N_plan<6 会要求「事件数 > 计划事件数」，永不可满足
+    # （n_plan=2 ⇒ need=3）。加上界后：真实 run（N_plan=57/17）逐位不变（29/9），
+    # 小计划则要求**全部**事件有效（n_plan=2 ⇒ need=2，更严不更松）。
+    need = min(n_plan, max(3, (n_plan + 1) // 2))
+    if len(rows) < need:
+        return {"reason": "insufficient_events", "ok": False, "n_events": len(rows),
+                "f3a_prime_mean": None, "f3a_prime_share_above": None, "rows": rows,
+                "detail": "有效事件 %d < %d（反退化守卫）" % (len(rows), need)}
+    ratios = [r["ratio"] for r in rows]
+    mean = sum(ratios) / len(ratios)
+    share = sum(1 for v in ratios if v > F3A_RATIO_EVENT_MIN) / len(ratios)
+    return {"reason": "", "ok": (mean >= F3A_RATIO_MEAN_MIN and share >= F3A_EVENT_SHARE_MIN),
+            "n_events": len(ratios),
+            "f3a_prime_mean": mean, "f3a_prime_share_above": share,
+            "ratio_median": sorted(ratios)[len(ratios) // 2],
+            "ratio_min": min(ratios), "ratio_max": max(ratios),
+            "n_pool_only_rows": n_pool_only, "rows": rows, "detail": ""}
+
+
+def pool_baseline(ev_g, ev_s):
+    """A4 §2.2/§2.4：池基线 C/A = S 臂反事实 γ=0 基线 ÷ G 臂实测 γ=0 基线（逐事件，报告项）。
+
+    C = mean_s(top-K_S by g on pool_S)（S 臂若用 γ=0 键会选到什么），A = G 臂实测选中
+    mean_s（G 键就是 g）。`跨臂 observed = 同池 achievable × C/A` —— 这个比值就是
+    prereg §0「候选集仍各自长」残余混杂的量化，必须与跨臂读数并陈。
+    """
+    rows = []
+    for e in sorted(set(ev_g) & set(ev_s)):
+        sel_g, sel_s = ev_g[e]["sel"], ev_s[e]["sel"]
+        if not sel_g or not sel_s:
+            continue
+        a = sum(p["s"] for p in sel_g) / len(sel_g)
+        pool_s = sel_s + ev_s[e]["pool_only"]
+        k_s = len(sel_s)
+        c = sum(p["s"] for p in _topk_by(pool_s, lambda t: t["g"], k_s)) / k_s
+        if a <= 0:
+            continue
+        rows.append({"event": e, "baseline_g_G": a, "baseline_g_S": c, "ratio": c / a})
+    ratios = [r["ratio"] for r in rows]
+    if not ratios:
+        return {"n_events": 0, "ratio_median": None, "ratio_min": None,
+                "ratio_max": None, "rows": []}
+    q = sorted(ratios)
+    return {"n_events": len(ratios), "ratio_median": q[len(q) // 2],
+            "ratio_min": q[0], "ratio_max": q[-1], "rows": rows}
+
+
+def sparsity_profile(ev_g, ev_s):
+    """F3a 旧口径（A4 §2.2 起降为**报告项**）：逐事件比较两臂**各自**选中集的平均稀疏度。
+
+    保留原因：它是「两臂实际差多少」的直接读数，与 `pool_baseline` 并陈才能看出
+    「键效应 × 混杂」的分解（A4 §1 的恒等式）。**不再参与 PASS/FAIL**。
     为什么不用跨臂 Jaccard：两臂各自在线长地图 ⇒ `gauss_idx` 从事件 1 起就不可比
-    （冒烟实测同索引位置重合率 0.000），Jaccard 恒 ~0.15，与 γ 是否生效无关
-    （Amendment A1 §1）。稀疏度剖面是臂内量，可判。
+    （冒烟实测同索引位置重合率 0.000），Jaccard 恒 ~0.15，与 γ 是否生效无关（A1 §1）。
     """
     rows = []
     for e in sorted(set(ev_g) & set(ev_s)):
@@ -164,24 +252,30 @@ def f1_by_site(ev, meta, plan_k, n_init):
     """M8：把 F1 的剂量恒等按**站点**分列报（prereg §2 站点表要求的 `F1_init`/`F1_map`）。
 
     两个 densify 站点共用同一个事件序数且 clone/split 界不同（1.80 m / 0.06 m），
-    所以「F1 全绿」必须能回答「init 段与 map 段各自是否也全绿」—— 合并计数会把
-    某一整段失效藏在另一段的正常里（`per_site_dose` 报的是剂量占比，不是误差归属）。
+    所以「F1 全绿」必须能回答「init 段与 map 段各自是否也全绿」。按**计划事件**逐个
+    核对（不是按 trace 里出现过的事件）：段内每个计划事件都必须出现且 |sel| == K_i
+    —— 合并计数 `_check_arm` 只看 trace 里出现过的行，整段缺失对它不可见（只会从
+    F2/F5 的总量信号间接变红、且不指认段落）；分站点视图把「缺事件」也记成该段
+    的错。越界事件（ord ≥ N_plan）不属于任何站点段，由 F2 管。
     """
     out = {}
-    for site, lo, hi in (("init", 0, n_init), ("map", n_init, None)):
+    n_plan = len(plan_k)
+    for name, lo, hi in (("F1_init", 0, min(n_init, n_plan)),
+                         ("F1_map", min(n_init, n_plan), n_plan)):
         wrong = []
-        n_ev = 0
-        for e in sorted(k for k in meta if isinstance(k, int)):
-            if e < lo or (hi is not None and e >= hi):
-                continue
-            n_ev += 1
-            want = plan_k[e] if e < len(plan_k) else 0
-            got = len(ev[e]["sel"])
-            if got != want or meta[e]["k_plan"] != want:
-                wrong.append({"event": e, "n_sel": got, "plan_k": want,
-                              "trace_k_plan": meta[e]["k_plan"]})
-        out[site] = {"n_events": n_ev, "ok": not wrong, "events_with_wrong_k": wrong}
-    out["ok"] = out["init"]["ok"] and out["map"]["ok"]
+        for e in range(lo, hi):
+            want = plan_k[e]
+            missing = e not in ev
+            got = 0 if missing else len(ev[e]["sel"])
+            tk = None if missing else meta[e]["k_plan"]
+            if got != want or (tk is not None and tk != want):
+                item = {"event": e, "n_sel": got, "plan_k": want, "trace_k_plan": tk}
+                if missing:
+                    item["missing"] = True
+                wrong.append(item)
+        out[name] = {"n_events": hi - lo, "ok": not wrong,
+                     "events_with_wrong_k": wrong}
+    out["ok"] = out["F1_init"]["ok"] and out["F1_map"]["ok"]
     return out
 
 
@@ -271,9 +365,9 @@ def _md(res, src):
         A("- `%s`: `%s`" % (k, v))
     A("")
     plan = res["plan"]
-    A("**计划**：%d 事件，ΣK = %d，K ∈ [%d, %d]，中位 %d；sha256 = `%s`\n"
+    A("**计划**：%d 事件，ΣK = %d，K ∈ [%d, %d]，中位 %d；n_init = %d（来源 %s）；sha256 = `%s`\n"
       % (plan["n_events"], plan["sum_k"], plan["k_min"], plan["k_max"],
-         plan["k_median"], plan["sha256"]))
+         plan["k_median"], res["n_init"], res["n_init_source"], plan["sha256"]))
     A("| 子门 | G 臂 | S 臂 | 判 |")
     A("|---|---|---|---|")
     g, s = res["arms"]["G"], res["arms"]["S"]
@@ -285,27 +379,59 @@ def _md(res, src):
     A("| F2 计划忠实 | 越界事件 %d（规格=注入 0） | 计划 N_plan %d | %s |"
       % (g["n_overflow_events"] + s["n_overflow_events"],
          res["f2_plan_events"], "✅" if f2 else "❌"))
-    prof = res["f3a_sparsity"]
+    prof = res["f3a_cross_arm"]
     f3a = (prof["ratio_mean"] >= F3A_RATIO_MEAN_MIN
            and prof["share_above"] >= F3A_EVENT_SHARE_MIN)
+    fp = res["f3a_prime"]
     # 表内两个「mean(s)」必须是**臂级均值**（先前误取 events[0] 的值，标签写 mean(s)）。
     mean_s_g = (sum(r["s_G"] for r in prof["rows"]) / len(prof["rows"])
                 if prof["rows"] else float("nan"))
     mean_s_s = (sum(r["s_S"] for r in prof["rows"]) / len(prof["rows"])
                 if prof["rows"] else float("nan"))
-    A("| F3a γ 活性（硬门） | 臂均 mean(s) %.3f | 臂均 mean(s) %.3f | %s（S/G 比 均值 **%.2f×**、"
-      "中位 %.2f、范围 [%.2f, %.2f]、> %.2f 的事件 %.0f%%，共 %d 事件；"
-      "点数加权口径见 JSON `ratio_pooled`） |"
-      % (mean_s_g, mean_s_s, "✅" if f3a else "❌",
-         prof["ratio_mean"], prof["ratio_median"], prof["ratio_min"],
+    # F3a′（A4 §2.1 硬门）：机制臂 S 的同池反事实键对比
+    if fp["reason"] == "pool_missing":
+        f3a_prime_cell = "❌ **pool_missing**（trace 无池行 ⇒ 未开 trace_pool，A4 §2.5）"
+    elif fp["reason"] == "insufficient_events":
+        f3a_prime_cell = "❌ %s" % fp["detail"]
+    else:
+        f3a_prime_cell = ("%s（同池反事实键对比 均值 **%.3f×**、中位 %.3f、范围 [%.3f, %.3f]、"
+                          "> %.2f 的事件 %.0f%%，共 %d 事件）"
+                          % ("✅" if fp["ok"] else "❌", fp["f3a_prime_mean"],
+                             fp["ratio_median"], fp["ratio_min"], fp["ratio_max"],
+                             F3A_RATIO_EVENT_MIN, 100 * fp["f3a_prime_share_above"],
+                             fp["n_events"]))
+    A("| **F3a′ γ 键活性（硬门，A4）** | — | 池内 top-K by `g·s` vs by `g` | %s |"
+      % f3a_prime_cell)
+    A("| F3a 跨臂稀疏度比（**报告项**，A4 §2.2） | 臂均 mean(s) %.3f | 臂均 mean(s) %.3f | "
+      "S/G 均值 %.2f×、中位 %.2f、范围 [%.2f, %.2f]、> %.2f 事件 %.0f%%（共 %d 事件）；"
+      "**须与池基线并陈**——`跨臂 = 同池 achievable × 池基线`（A4 §1 恒等式） |"
+      % (mean_s_g, mean_s_s, prof["ratio_mean"], prof["ratio_median"], prof["ratio_min"],
          prof["ratio_max"], F3A_RATIO_EVENT_MIN, 100 * prof["share_above"],
          prof["n_events"]))
+    pb = res["pool_baseline_ratio"]
+    if pb["n_events"]:
+        A("| 池基线 C/A（**报告项**，A4 §2.4 = R6 真池口径核心） | — | — | 中位 **%.3f×**、"
+          "范围 [%.3f, %.3f]（%d 事件；C = S 臂反事实 γ=0 基线、A = G 臂实测基线；"
+          "晚段崩塌即跨臂读数失判的原因） |"
+          % (pb["ratio_median"], pb["ratio_min"], pb["ratio_max"], pb["n_events"]))
+    else:
+        A("| 池基线 C/A（**报告项**） | — | — | 不可算（缺池行） |")
     jac = res["f3b_index_jaccard"]
     A("| F3b 索引 Jaccard（**报告项**） | — | — | 均值 %.3f，中位 %.3f，最大 %.3f（两臂索引"
       "空间不可比，此值反映地图分叉，并入 R6 报告） |"
       % (jac["mean"], jac["median"], jac["max"]))
     A("")
-    A("## F3a 逐事件稀疏度比（前 8 / 后 4）\n")
+    A("## F3a′ 逐事件同池键对比（前 8 / 后 4）\n")
+    A("| 事件 | mean(s) γ=0 键 | mean(s) γ=1 键 | 比 | K | \\|pool\\| |")
+    A("|---:|---:|---:|---:|---:|---:|")
+    frows = fp.get("rows", [])
+    fpick = frows[:8] + (frows[-4:] if len(frows) > 8 else [])
+    for r in fpick:
+        A("| %d | %.3f | %.3f | %.3f× | %d | %d |"
+          % (r["event"], r["mean_s_gamma0"], r["mean_s_gamma1"], r["ratio"],
+             r["k"], r["n_pool"]))
+    A("")
+    A("## F3a 跨臂逐事件稀疏度比（前 8 / 后 4，报告项）\n")
     A("| 事件 | mean(s) G | mean(s) S | 比 |")
     A("|---:|---:|---:|---:|")
     prows = prof["rows"]
@@ -321,16 +447,31 @@ def _md(res, src):
       % (f5["sum_sel_G"], f5["sum_sel_S"], "✅" if f5["ok"] else "❌",
          plan["sum_k"], f5["note"]))
     A("")
+    if res.get("f5_k0_report"):
+        k0r = res["f5_k0_report"]
+        A("**k0 报告项**（Amendment A3：F5② 降为报告 —— k0 自计划臂跑满全事件，"
+          "计划 = k0 前缀冻结，`Σsel_k0 ≥ ΣK_plan` 结构上必然）：Σsel_k0 = %d vs "
+          "ΣK_plan = %d（%s）；plan_overflow=1 标记 %d 个（应恒 0，%s）；"
+          "越界 flag 判错 %d 条（G/S 语义，对 k0 不判）。"
+          % (k0r["sum_sel_k0"], k0r["sum_plan"],
+             "✅" if k0r["ge_plan_ok"] else "❌ 工件错误：计划与 k0 trace 不配套",
+             k0r["n_overflow_flags"],
+             "✅" if k0r["no_overflow_flag_ok"] else "❌ 臂配置错误",
+             k0r["overflow_flag_wrong_inert"]))
+        A("")
     fs = res["f1_by_site"]
-    A("**F1 分站点**（M8：两个 densify 站点共用一个事件序数、clone/split 界不同）：")
+    n_init_eff = min(res["per_site"]["G"]["n_init_events"], plan["n_events"])
+    A("**F1 分站点**（M8：两个 densify 站点共用一个事件序数、clone/split 界不同；"
+      "按计划事件逐个核对，整段缺失也算该段的错）：")
     A("")
-    A("| 臂 | init 段（ord < %d） | map 段 |" % res["per_site"]["G"]["n_init_events"])
+    A("| 臂 | F1_init（ord < %d） | F1_map（ord %d..%d） |"
+      % (n_init_eff, n_init_eff, plan["n_events"]))
     A("|---|---|---|")
     for label in ("G", "S"):
         r = fs[label]
         A("| %s | %d 事件，错 %d | %d 事件，错 %d |"
-          % (label, r["init"]["n_events"], len(r["init"]["events_with_wrong_k"]),
-             r["map"]["n_events"], len(r["map"]["events_with_wrong_k"])))
+          % (label, r["F1_init"]["n_events"], len(r["F1_init"]["events_with_wrong_k"]),
+             r["F1_map"]["n_events"], len(r["F1_map"]["events_with_wrong_k"])))
     A("")
     dn = res["done"]
     A("**done 锚点**（M6；%s）：G `%s`；S `%s`"
@@ -378,7 +519,8 @@ def _md(res, src):
     A("> ⚠ F1 是**计划侧**恒等式，对「两臂候选集是否相同」完全盲（prereg §4.1 注）；")
     A("> gross 原语不是 F1 的子门，它是 A2 要求并陈的第二口径（源点数相等 ≠ 净高斯数相等）。")
     A("")
-    A("**结论**：%s" % ("机制门全过（装置干净）" if all([f1, f2, f3a, f4, f5["ok"]])
+    A("**结论**：%s" % ("机制门全过（装置干净）" if all([f1, res["f1_site_ok"], f2,
+                                                      res["f3a_prime_ok"], f4, f5["ok"]])
                         else "机制门未全过 ⇒ 装置失效，冻结读数、先修装置（不得解释机制）"))
     return "\n".join(L)
 
@@ -389,8 +531,10 @@ def main(argv=None):
     ap.add_argument("--g", required=True, help="γ=0 臂 trace")
     ap.add_argument("--s", required=True, help="γ=1 臂 trace")
     ap.add_argument("--k0", default=None, help="参考剂量臂 trace（可缺省）")
-    ap.add_argument("--n-init", type=int, default=11,
-                    help="前多少个事件来自 initialize_map 站点（默认 11；冒烟实测 0..10）。"
+    ap.add_argument("--n-init", type=int, default=None,
+                    help="前多少个事件来自 initialize_map 站点。A4 契约：**默认从计划 JSON"
+                         " 的 n_init 字段读**；仅在计划没有该字段（旧版计划）时才用它，"
+                         "且与计划值同给时必须一致（不一致 = 报错，计划是契约，不许静默覆盖）。"
                          "两个站点的 scene_extent 不同 ⇒ clone/split 界不同（prereg §2）。")
     ap.add_argument("--require-done", action="store_true",
                     help="要求两臂 run 目录各有 `finished_rc0=yes` 的 .done 锚点（M6）。"
@@ -404,6 +548,23 @@ def main(argv=None):
     plan_raw = Path(args.plan).read_bytes()
     plan = json.loads(plan_raw)
     plan_k = [int(v) for v in plan["k"]]
+
+    # A4 契约：n_init 单一事实源 = 计划 JSON。--n-init 只用于旧版计划（无该字段），
+    # 且与计划值同给时必须一致 —— 静默分歧会让 F1_init/F1_map 的段落、gross 的
+    # clone/split 界与计划各说各话（正是 M8 要防的两套口径）。
+    plan_n_init = plan.get("n_init")
+    if args.n_init is None:
+        if plan_n_init is None:
+            ap.error("计划 JSON 无 n_init 字段（A4 契约）：用 make_dose_plan.py --n-init "
+                     "重新生成计划，或本次 --n-init 显式给值")
+        n_init, n_init_source = int(plan_n_init), "plan"
+    else:
+        if plan_n_init is not None and int(plan_n_init) != args.n_init:
+            ap.error("--n-init=%d 与计划 n_init=%d 不一致（A4 契约：计划是唯一事实源）；"
+                     "如计划有误请用 make_dose_plan.py 重新冻结" % (args.n_init, plan_n_init))
+        n_init, n_init_source = args.n_init, "cli"
+    if not 0 <= n_init <= len(plan_k):
+        ap.error("n_init=%d 越界（可用 0..%d）" % (n_init, len(plan_k)))
 
     evG, metaG = read_trace(Path(args.g))
     evS, metaS = read_trace(Path(args.s))
@@ -420,7 +581,9 @@ def main(argv=None):
         "max": float(max(jacs)) if jacs else float("nan"),
         "rows": jac_rows,
     }
-    f3a = sparsity_profile(evG, evS)
+    f3a = sparsity_profile(evG, evS)          # A4 §2.2：降为报告项（跨臂）
+    f3a_p = f3a_prime(evS, len(plan_k))       # A4 §2.1：硬门（同池反事实，机制臂 S）
+    pool_base = pool_baseline(evG, evS)       # A4 §2.4：池基线 C/A（报告项）
 
     covered = min(len(evG), len(evS))
     # 越界事件本身是**规格要求的**（注入 0），不构成失败；失败的是标记/剂量不符：
@@ -438,11 +601,25 @@ def main(argv=None):
     # 这里判「总和层面」以及「非零」，让一个全程零注入的臂无法靠空集过 F1）。
     f5_ok = (sum_sel_G == sum_plan) and (sum_sel_S == sum_plan) and sum_plan > 0
     note = "两臂 Σsel 均等于计划 ΣK" if f5_ok else "Σsel 与计划 ΣK 不等或为零 ⇒ 组件可能未生效"
+    f5_k0 = None
     if args.k0:
         evK, metaK = read_trace(Path(args.k0))
         arms["k0"] = _check_arm(evK, metaK, plan_k, "k0")
         sum_sel_k0 = sum(len(evK[e]["sel"]) for e in evK)
         note += "；k0 Σsel %d" % sum_sel_k0
+        # Amendment A3：F5② 降为报告项 —— k0 是自计划臂（运行期无计划、跑满全部事件），
+        # 计划只是 k0 前缀的冻结 ⇒ Σsel_k0 ≥ ΣK_plan 结构上必然成立（相等 ⟺ k0 恰好
+        # N_plan 个事件）；若 < 说明计划冻结源与 k0 trace 不配套 = 工件错误。k0 的
+        # trace 不应含 plan_overflow=1（无计划可越界，出现 = 臂配置错误）；
+        # overflow_flag_wrong 按 G/S 语义（越界须 flag=1）对 k0 不适用，原样保留、不判。
+        f5_k0 = {
+            "sum_sel_k0": sum_sel_k0,
+            "sum_plan": sum_plan,
+            "ge_plan_ok": sum_sel_k0 >= sum_plan,
+            "no_overflow_flag_ok": not arms["k0"]["log_overflow_events"],
+            "n_overflow_flags": len(arms["k0"]["log_overflow_events"]),
+            "overflow_flag_wrong_inert": len(arms["k0"]["overflow_flag_wrong"]),
+        }
 
     res = {
         "generated_by": "scripts/paper3_bpw/check_fdose_gate.py",
@@ -452,6 +629,7 @@ def main(argv=None):
                  "required": bool(args.require_done)},
         "plan": {
             "n_events": len(plan_k),
+            "n_init": plan_n_init,
             "sum_k": sum_plan,
             "k_min": int(min(plan_k)),
             "k_max": int(max(plan_k)),
@@ -464,27 +642,38 @@ def main(argv=None):
         "f2_plan_events": len(plan_k),
         "f2_plan_faithful": f2,
         "f2_overflow_flag_violations": flag_violations,
-        "f3a_sparsity": f3a,
+        "f3a_prime": f3a_p,
+        "f3a_cross_arm": f3a,
+        "pool_baseline_ratio": pool_base,
         "f3b_index_jaccard": f3b,
         "f5_activity": {"sum_sel_G": sum_sel_G, "sum_sel_S": sum_sel_S,
                         "sum_plan": sum_plan, "ok": f5_ok, "note": note},
-        "per_site": {"G": per_site_dose(evG, args.n_init),
-                     "S": per_site_dose(evS, args.n_init)},
-        "f1_by_site": {"G": f1_by_site(evG, metaG, plan_k, args.n_init),
-                       "S": f1_by_site(evS, metaS, plan_k, args.n_init)},
-        "gross_primitives": {"G": gross_primitives(evG, args.n_init),
-                             "S": gross_primitives(evS, args.n_init)},
+        "f5_k0_report": f5_k0,
+        "per_site": {"G": per_site_dose(evG, n_init),
+                     "S": per_site_dose(evS, n_init)},
+        "f1_by_site": {"G": f1_by_site(evG, metaG, plan_k, n_init),
+                       "S": f1_by_site(evS, metaS, plan_k, n_init)},
+        "gross_primitives": {"G": gross_primitives(evG, n_init),
+                             "S": gross_primitives(evS, n_init)},
+        "n_init": n_init,
+        "n_init_source": n_init_source,
     }
-    f3a_pass = (f3a["ratio_mean"] >= F3A_RATIO_MEAN_MIN
-                and f3a["share_above"] >= F3A_EVENT_SHARE_MIN)
+    # A4 §2.1：F3a′（同池反事实）是硬门；旧跨臂 F3a 只在报告里出现，不再判。
+    f3a_pass = bool(f3a_p["ok"])
+    res["f3a_prime_ok"] = f3a_pass
     # M6：加 `--require-done` 时，任一臂缺锚点或 finished_rc0 != yes ⇒ 装置判废。
     # 默认不加（合成夹具与冒烟没有 .done），但状态一律写进 JSON，便于判决书引用。
     done_ok = (not args.require_done) or all(
         res["done"][a]["found"] and res["done"][a]["finished_rc0"] for a in ("G", "S"))
     res["done_ok"] = done_ok
+    # M8：prereg §2 声明的 F1_init/F1_map 是判据，不是旁观数据 —— 某一整段失效
+    # （含整段事件缺失，合并计数看不见）必须让门变红。
+    f1_site_ok = all(res["f1_by_site"][a]["ok"] for a in ("G", "S"))
+    res["f1_site_ok"] = f1_site_ok
     res["verdict"] = "PASS" if all([
         not arms["G"]["events_with_wrong_k"],
         not arms["S"]["events_with_wrong_k"],
+        f1_site_ok,
         f2, f3a_pass,
         arms["G"]["below_pool_total"] == 0, arms["S"]["below_pool_total"] == 0, f5_ok,
         done_ok,

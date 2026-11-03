@@ -34,6 +34,10 @@ SEQ=${SEQ:-person_tracking}
 SEEDS=${SEEDS:-"0 1 2"}
 MAX_FRAMES=${MAX_FRAMES:-0}
 N_PLAN=${N_PLAN:-57}
+# A4 契约（2026-11-01）：make_dose_plan 必填 --n-init（站点切分冻进计划，判据机从计划读）。
+# person_tracking 实测 init 站点 11 事件（init_itr_num=1050 / init_gaussian_update=100）；
+# 换序列必须核对该序列 config 的这两个参数后显式传 N_INIT。
+N_INIT=${N_INIT:-11}
 STAGE=${1:-}
 TAG=fdose
 PLAN_DIR=$REPO/results/paper3_bpw/dose_plan
@@ -48,7 +52,7 @@ LOG="$REPO/paper3/results/evidence/${TAG}_l1_${SEQ}_${STAGE}_${STAMP}.log"
 {
   echo "=== FDose L1 $STAGE — $SEQ seeds=[$SEEDS] ==="
   echo "  HEAD: $(git rev-parse --short HEAD)  branch=$(git branch --show-current)"
-  echo "  max_frames: $MAX_FRAMES (0 = 全长)   n_plan: $N_PLAN"
+  echo "  max_frames: $MAX_FRAMES (0 = 全长)   n_plan: $N_PLAN   n_init: $N_INIT (A4 契约)"
   echo "  log: $LOG"
 } | tee "$LOG"
 
@@ -72,22 +76,34 @@ gen_cfg() {  # $1=arm $2=seed $3=plan_path(可空)
 }
 
 run_arm() {  # $1=cfg $2=label $3=seed $4=arm
-  local cfg=$1 label=$2 seed=$3 arm=$4 start end rc run newdir
+  local cfg=$1 label=$2 seed=$3 arm=$4 start end rc run
   echo "" | tee -a "$LOG"
   echo "=== [$(date +%H:%M:%S)] $label  cfg=$cfg ===" | tee -a "$LOG"
   start=$(date +%s)
+  # 定位 run 目录用「跑前记录目录集合、跑后取新增者」（A6；prereg §9 明禁
+  # `ls -dt | head -1` 的 mtime 隐式取目录 —— 同 seed 重跑时 .done 可能落到
+  # 与判据机读取的 trace 不同的目录）。slam.py 每 run 新建时间戳目录 ⇒ 恰一个新增。
+  local base="results/paper3_bpw/fdose_${arm}_${SEQ}/datasets_bonn/"*/seed_"${seed}"
+  local before after n_new
+  before=$(ls -d ${base}/*/ 2>/dev/null | sort)
   "$PY" slam.py --config "$cfg" --eval --seed "$seed" "${EXTRA[@]}" 2>&1 | tee -a "$LOG"
   rc=${PIPESTATUS[0]}
   end=$(date +%s)
   echo "=== [$(date +%H:%M:%S)] $label done rc=$rc elapsed=$((end-start))s ===" | tee -a "$LOG"
   # done 锚点（M6）：项目判决纪律只认「done 里 finished rc=0 之后 consolelog 的末行 eval」。
   # 没有锚点时，`|| true` 吞掉失败后 STAGE DONE 照样出现，只能靠人看日志。
-  run=$(ls -dt "results/paper3_bpw/fdose_${arm}_${SEQ}/datasets_bonn/"*/seed_"${seed}"/*/ 2>/dev/null | head -1)
-  if [ -n "$run" ]; then
+  after=$(ls -d ${base}/*/ 2>/dev/null | sort)
+  n_new=$(comm -13 <(printf '%s\n' "$before") <(printf '%s\n' "$after") | grep -c .)
+  run=$(comm -13 <(printf '%s\n' "$before") <(printf '%s\n' "$after") | head -1)
+  if [ "$n_new" -eq 1 ] && [ -n "$run" ]; then
     printf 'arm=%s\nseed=%s\nrc=%s\nelapsed_s=%s\nmax_frames=%s\nlog=%s\nfinished_rc0=%s\n' \
       "$arm" "$seed" "$rc" "$((end-start))" "$MAX_FRAMES" "$LOG" \
       "$([ "$rc" -eq 0 ] && echo yes || echo no)" > "${run}fdose_${arm}_seed${seed}.done"
     echo "  done 锚点: ${run}fdose_${arm}_seed${seed}.done" | tee -a "$LOG"
+  elif [ "$n_new" -gt 1 ]; then
+    echo "ERROR: $label 产生了 $n_new 个新 run 目录，不写 .done（歧义 ⇒ 判据机会拒绝）" | tee -a "$LOG"
+  else
+    echo "WARN: $label 没有新 run 目录（写进了旧目录？），不写 .done —— 请人工核对" | tee -a "$LOG"
   fi
   return $rc
 }
@@ -124,7 +140,7 @@ EOF
       [ -f "$trace" ] || { echo "ERROR: seed=$s 缺 k0 trace ($trace)" | tee -a "$LOG"; continue; }
       echo "  freeze seed=$s <- $run" | tee -a "$LOG"
       "$PY" scripts/paper3_bpw/make_dose_plan.py --trace "$trace" \
-        --out "$PLAN_DIR/${SEQ}_seed${s}.json" --n-plan "$N_PLAN" \
+        --out "$PLAN_DIR/${SEQ}_seed${s}.json" --n-plan "$N_PLAN" --n-init "$N_INIT" \
         --sequence "$SEQ" --seed "$s" 2>&1 | tee -a "$LOG"
     done
     ;;

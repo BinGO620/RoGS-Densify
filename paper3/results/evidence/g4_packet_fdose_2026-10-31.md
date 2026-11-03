@@ -90,3 +90,32 @@ F2 的 `covered` 子句收紧（K11/K11b）/ 时长高估 2.5× 更正 / health_
 `Accept` ⇒ 580 帧可派发（仍须 D2-011 用户点头）；
 `Accept-with-conditions` ⇒ 按条件清单自行处置后即可执行（不必再开一轮）；
 `Reject` ⇒ 指出**哪些整改未核销**，主 Agent 先补实。
+
+---
+
+## 6. 补充（2026-11-01，整改轮执行后、G4 派发时）
+
+**状态变化**：① `P3-D2-011` 已答复 = **按默认**（2026-11-01，estimand 变更获批；前置
+= 本轮整改 + G4 过关才起 580 帧）；② 本包 §1 的整改声称已在本会话**落地**（非口头），
+提交串 `a17dbb2a3..3786b766c`（9 个最小单元提交，含账本登记）；③ 额外核销对象 =
+`fdose_preflight_audit_2026-10-31.md` §7 的 7 条差额（M8 在上表里「声称落地」但 10-31
+审计证明仍半实 —— **本轮请以盘上事实为准，不以任何「声称」为准**）。
+
+### 6.1 本轮整改逐条落点（核销对象 + 证据锚）
+
+| audit §7 | 整改 | 证据锚 |
+|---|---|---|
+| A2 Amendment A3 | prereg §4.1 F5② k0 子句更正为报告项 | `prereg_fdose_amendment_a3_2026-11-01.md` + prereg 原文处带日期指针 + `check_fdose_gate.py` 的 `f5_k0_report` 字段 + `KEY_REGISTRY` `F5_activity` 扩键 |
+| A3 = M8 真落地 | `f1_by_site` 字面键 `F1_init`/`F1_map`、按**计划事件**核对（整段缺失也算该段错）、分站点 ok 并入 verdict | `check_fdose_gate.py::f1_by_site` + verdict 的 `f1_site_ok` + K10c 双场景测试 |
+| A4 n_init 契约 | `make_dose_plan.py` 必填 `--n-init` 并冻进计划 JSON；gate 默认从计划读（无字段报错 / 与计划矛盾报错 / 越界报错）；runner freeze 补 `--n-init` | `make_dose_plan.py` + `check_fdose_gate.py` main 的 A4 块 + `run_fdose_l1.sh`（`N_INIT` 环境变量）+ A4 契约测试 5 场景 |
+| A5 R6/R7 | `judge_fdose.py` 产 R6（池相对差中位+IQR+Jaccard）/ R7（iter 错位中位+p90+极值+事件数差）；报告项不入 verdict；缺 trace 显式 `missing_trace`；R7 触发句进 caveats | `judge_fdose.py::r6_pool_drift / r7_ordinal_time_shift` + A5 测试 + `KEY_REGISTRY` `R6R7_residuals` |
+| A6 judge | `--expect-frames` 帧数绝对闸（默认 580，单 seed + per-seed 双闸）；`--runs` schema 校验（缺键/坏键/seed 不含 --seed ⇒ rc=2）；删 `expect_frames` 死参数 | `judge_fdose.py` + A6 两测试 |
+| A6 runner | `run_arm` 弃 `ls -dt \| head -1` ⇒ 跑前记录目录集合、跑后取新增者（0 或 >1 新增不写 `.done`） | `run_fdose_l1.sh::run_arm` |
+| A7 冒烟重跑 | 另存新证据，8 项核心数字与 10-31 逐位一致 + 新字段有值 | `fdose_gate_smoke_2026-11-01.{md,json}`（对照 `fdose_gate_smoke_2026-10-31.json`） |
+
+### 6.2 程序化门期望值更新（覆盖 §2 表）
+
+- pytest `tests/densification tests/paper3_bpw`：**101 passed**（基线 96 + 本轮新增 5）
+- `prereg_criterion_keys.py`：MISSING_TOTAL = 0（FDose 族现为 **8 条**：F1/F2/F3a/F3b/F4/F5/R_outcome/R6R7）
+- `sweep_citation_claims.py`（带 `-I`）：rc=0，UNMARKED = 0
+- `gate1_class_sweep.py`（带 `-I`）：rc=0

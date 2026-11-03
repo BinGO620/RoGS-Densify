@@ -1,0 +1,639 @@
+{
+ "prereg": [
+  "paper3/results/evidence/prereg_fdose_2026-10-31.md §5/§6"
+ ],
+ "sequence": "person_tracking",
+ "seed": 0,
+ "floor_cm": 3.8301936065142494,
+ "arms": {
+  "k0": {
+   "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-11-01-17-11-11",
+   "ate_cm": 11.3884,
+   "num_gaussians": 47478.0,
+   "refined_gaussians": 47478.0,
+   "num_frames": 580.0
+  },
+  "G": {
+   "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_0/2026-11-01-21-36-22",
+   "ate_cm": 11.4452,
+   "num_gaussians": 39783.0,
+   "refined_gaussians": 39783.0,
+   "num_frames": 580.0
+  },
+  "S": {
+   "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_0/2026-11-01-22-19-32",
+   "ate_cm": 12.7753,
+   "num_gaussians": 65929.0,
+   "refined_gaussians": 70929.0,
+   "num_frames": 580.0
+  }
+ },
+ "deltas_cm": {
+  "S_minus_G": 1.3300999999999998,
+  "G_minus_k0": 0.05679999999999907,
+  "S_minus_k0": 1.386899999999999
+ },
+ "seed_deltas_cm": [
+  1.3300999999999998,
+  0.7331000000000003,
+  0.42900000000000027,
+  0.2225999999999999,
+  -1.1561000000000003,
+  0.6134000000000004
+ ],
+ "per_seed_arms": {
+  "0": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-11-01-17-11-11",
+    "ate_cm": 11.3884,
+    "num_gaussians": 47478.0,
+    "refined_gaussians": 47478.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_0/2026-11-01-21-36-22",
+    "ate_cm": 11.4452,
+    "num_gaussians": 39783.0,
+    "refined_gaussians": 39783.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_0/2026-11-01-22-19-32",
+    "ate_cm": 12.7753,
+    "num_gaussians": 65929.0,
+    "refined_gaussians": 70929.0,
+    "num_frames": 580.0
+   }
+  },
+  "1": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_1/2026-11-02-12-09-51",
+    "ate_cm": 10.2394,
+    "num_gaussians": 89891.0,
+    "refined_gaussians": 89891.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_1/2026-11-02-13-41-22",
+    "ate_cm": 10.28,
+    "num_gaussians": 39849.0,
+    "refined_gaussians": 39849.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_1/2026-11-02-14-23-11",
+    "ate_cm": 11.0131,
+    "num_gaussians": 39380.0,
+    "refined_gaussians": 27316.0,
+    "num_frames": 580.0
+   }
+  },
+  "2": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_2/2026-11-02-12-53-59",
+    "ate_cm": 11.7769,
+    "num_gaussians": 76807.0,
+    "refined_gaussians": 76807.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_2/2026-11-02-15-05-15",
+    "ate_cm": 10.6967,
+    "num_gaussians": 35508.0,
+    "refined_gaussians": 35508.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_2/2026-11-02-15-46-49",
+    "ate_cm": 11.1257,
+    "num_gaussians": 35641.0,
+    "refined_gaussians": 35641.0,
+    "num_frames": 580.0
+   }
+  },
+  "3": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_3/2026-11-03-00-24-21",
+    "ate_cm": 10.3857,
+    "num_gaussians": 61674.0,
+    "refined_gaussians": 61674.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_3/2026-11-03-02-39-19",
+    "ate_cm": 11.1703,
+    "num_gaussians": 23845.0,
+    "refined_gaussians": 23845.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_3/2026-11-03-03-21-05",
+    "ate_cm": 11.3929,
+    "num_gaussians": 20128.0,
+    "refined_gaussians": 20128.0,
+    "num_frames": 580.0
+   }
+  },
+  "4": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_4/2026-11-03-01-08-39",
+    "ate_cm": 12.2584,
+    "num_gaussians": 85762.0,
+    "refined_gaussians": 85762.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_4/2026-11-03-04-06-53",
+    "ate_cm": 11.2757,
+    "num_gaussians": 33370.0,
+    "refined_gaussians": 33370.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_4/2026-11-03-04-48-49",
+    "ate_cm": 10.1196,
+    "num_gaussians": 41009.0,
+    "refined_gaussians": 28051.0,
+    "num_frames": 580.0
+   }
+  },
+  "5": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_5/2026-11-03-01-52-22",
+    "ate_cm": 9.6659,
+    "num_gaussians": 78621.0,
+    "refined_gaussians": 78621.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_5/2026-11-03-05-30-43",
+    "ate_cm": 11.4438,
+    "num_gaussians": 55382.0,
+    "refined_gaussians": 55382.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_5/2026-11-03-06-14-06",
+    "ate_cm": 12.0572,
+    "num_gaussians": 37379.0,
+    "refined_gaussians": 37379.0,
+    "num_frames": 580.0
+   }
+  }
+ },
+ "per_seed_gate": {
+  "0": {
+   "gate_path": "paper3/results/evidence/fdose_gate_seed0_a4_2026-11-02.json",
+   "gate_verdict": "PASS",
+   "plan_sha256": "56839a1352a55ef28114fd8caf1bdde85e45f7ffffd6a9ea2504205d16b9917a",
+   "f3a_prime_mean": 1.3143903674186364,
+   "f3a_prime_share_above": 0.9824561403508771,
+   "f3a_prime_events": 57,
+   "f3a_prime_reason": "",
+   "f3a_cross_arm_mean": 1.125324948748111,
+   "pool_baseline_median": 0.8737780712893576
+  },
+  "1": {
+   "gate_path": "paper3/results/evidence/fdose_gate_seed1_a4_2026-11-02.json",
+   "gate_verdict": "PASS",
+   "plan_sha256": "608a185b2be081fd56284b55078dd8a5708c696fe35e364e621d51bc79af5404",
+   "f3a_prime_mean": 1.3264962533496032,
+   "f3a_prime_share_above": 1.0,
+   "f3a_prime_events": 57,
+   "f3a_prime_reason": "",
+   "f3a_cross_arm_mean": 1.1276204090125304,
+   "pool_baseline_median": 0.8610032032406043
+  },
+  "2": {
+   "gate_path": "paper3/results/evidence/fdose_gate_seed2_a4_2026-11-02.json",
+   "gate_verdict": "PASS",
+   "plan_sha256": "5f4d41095cf1aa03dbc75f1949e56198baea77813773df365c7a7aef3ad9dd48",
+   "f3a_prime_mean": 1.3074241877368653,
+   "f3a_prime_share_above": 0.9824561403508771,
+   "f3a_prime_events": 57,
+   "f3a_prime_reason": "",
+   "f3a_cross_arm_mean": 1.1118102326655717,
+   "pool_baseline_median": 0.8837343729405673
+  },
+  "3": {
+   "gate_path": "paper3/results/evidence/fdose_gate_seed3_a4_2026-11-03.json",
+   "gate_verdict": "PASS",
+   "plan_sha256": "1a51e298e1cdfa37df247ab6d171013b88d1b49ac3f51162dbd8a097d6a2b6db",
+   "f3a_prime_mean": 1.3219370333079603,
+   "f3a_prime_share_above": 1.0,
+   "f3a_prime_events": 57,
+   "f3a_prime_reason": "",
+   "f3a_cross_arm_mean": 1.1299697976326768,
+   "pool_baseline_median": 0.8756602749616702
+  },
+  "4": {
+   "gate_path": "paper3/results/evidence/fdose_gate_seed4_a4_2026-11-03.json",
+   "gate_verdict": "PASS",
+   "plan_sha256": "987c7962406d5780439aa99bc07d3a867c7a384dd988be02b3b491a6df7ea37d",
+   "f3a_prime_mean": 1.3098693440882938,
+   "f3a_prime_share_above": 0.9824561403508771,
+   "f3a_prime_events": 57,
+   "f3a_prime_reason": "",
+   "f3a_cross_arm_mean": 1.1024201380157934,
+   "pool_baseline_median": 0.8616124612071292
+  },
+  "5": {
+   "gate_path": "paper3/results/evidence/fdose_gate_seed5_a4_2026-11-03.json",
+   "gate_verdict": "PASS",
+   "plan_sha256": "0f36056a2cfa0d6d7869c6c01fccfead0ba4523a8e62ea0dd9a10d33232a613f",
+   "f3a_prime_mean": 1.305722188921655,
+   "f3a_prime_share_above": 0.9824561403508771,
+   "f3a_prime_events": 57,
+   "f3a_prime_reason": "",
+   "f3a_cross_arm_mean": 1.154797096713397,
+   "pool_baseline_median": 0.8970972914404193
+  }
+ },
+ "per_seed_meta": {
+  "0": {
+   "gate_json": "paper3/results/evidence/fdose_gate_seed0_a4_2026-11-02.json",
+   "selected_role": "diagnostic_rerun",
+   "selection_reason": "P3-D2-013 甲案：诊断重跑只开 trace_pool:true（纯日志开关，F1 逐位等价 Σsel=211320，L2 ATE 漂移 G −5.7%/S +15.3% <20% 带内）；首跑 trace 无 pool_only 行，按 A4 §2.5 F3a′ 不可判。首跑/重跑均保留、不得静默替换。",
+   "first_run": {
+    "k0": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-11-01-17-11-11",
+    "G": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_0/2026-11-01-17-56-10",
+    "S": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_0/2026-11-01-18-40-48"
+   },
+   "first_run_gate_json": "paper3/results/evidence/fdose_gate_seed0_firstrun_a4_2026-11-02.json"
+  },
+  "1": {
+   "gate_json": "paper3/results/evidence/fdose_gate_seed1_a4_2026-11-02.json",
+   "selected_role": "confirmation"
+  },
+  "2": {
+   "gate_json": "paper3/results/evidence/fdose_gate_seed2_a4_2026-11-02.json",
+   "selected_role": "confirmation"
+  },
+  "3": {
+   "gate_json": "paper3/results/evidence/fdose_gate_seed3_a4_2026-11-03.json",
+   "selected_role": "confirmation"
+  },
+  "4": {
+   "gate_json": "paper3/results/evidence/fdose_gate_seed4_a4_2026-11-03.json",
+   "selected_role": "confirmation"
+  },
+  "5": {
+   "gate_json": "paper3/results/evidence/fdose_gate_seed5_a4_2026-11-03.json",
+   "selected_role": "confirmation"
+  }
+ },
+ "a4_provenance": {
+  "amendment": "P3-D2-014",
+  "amendment_file": "paper3/results/evidence/prereg_fdose_amendment_a4_2026-11-02.md",
+  "approved": "2026-11-02",
+  "landing_commits": {
+   "amendment": "3dd1fa093",
+   "implementation": "54c33e07e",
+   "validation": "62371430f"
+  },
+  "post_data_instrument_correction": true,
+  "thresholds": {
+   "mean_min": 1.15,
+   "event_ratio_min": 1.1,
+   "event_share_min": 0.6
+  },
+  "thresholds_changed": false,
+  "ATE_not_used_to_choose_threshold": true,
+  "anchor_seed": 0,
+  "confirmation_seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "seeds_in_judgment": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "first_run_vs_diagnostic_rerun": {
+  "selected_role": "diagnostic_rerun",
+  "selection_reason": "P3-D2-013 甲案：诊断重跑只开 trace_pool:true（纯日志开关，F1 逐位等价 Σsel=211320，L2 ATE 漂移 G −5.7%/S +15.3% <20% 带内）；首跑 trace 无 pool_only 行，按 A4 §2.5 F3a′ 不可判。首跑/重跑均保留、不得静默替换。",
+  "first_run": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-11-01-17-11-11",
+    "ate_cm": 11.3884,
+    "num_gaussians": 47478.0,
+    "refined_gaussians": 47478.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_0/2026-11-01-17-56-10",
+    "ate_cm": 12.1314,
+    "num_gaussians": 70170.0,
+    "refined_gaussians": 70170.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_0/2026-11-01-18-40-48",
+    "ate_cm": 11.0829,
+    "num_gaussians": 40565.0,
+    "refined_gaussians": 40565.0,
+    "num_frames": 580.0
+   }
+  },
+  "first_run_deltas_cm": {
+   "S_minus_G": -1.0484999999999989,
+   "G_minus_k0": 0.7429999999999986,
+   "S_minus_k0": -0.3055000000000003
+  },
+  "rerun": {
+   "k0": {
+    "run_dir": "results/paper3_bpw/fdose_k0_person_tracking/datasets_bonn/fdose_k0_person_tracking/seed_0/2026-11-01-17-11-11",
+    "ate_cm": 11.3884,
+    "num_gaussians": 47478.0,
+    "refined_gaussians": 47478.0,
+    "num_frames": 580.0
+   },
+   "G": {
+    "run_dir": "results/paper3_bpw/fdose_G_person_tracking/datasets_bonn/fdose_G_person_tracking/seed_0/2026-11-01-21-36-22",
+    "ate_cm": 11.4452,
+    "num_gaussians": 39783.0,
+    "refined_gaussians": 39783.0,
+    "num_frames": 580.0
+   },
+   "S": {
+    "run_dir": "results/paper3_bpw/fdose_S_person_tracking/datasets_bonn/fdose_S_person_tracking/seed_0/2026-11-01-22-19-32",
+    "ate_cm": 12.7753,
+    "num_gaussians": 65929.0,
+    "refined_gaussians": 70929.0,
+    "num_frames": 580.0
+   }
+  },
+  "rerun_deltas_cm": {
+   "S_minus_G": 1.3300999999999998
+  },
+  "direction_flip_cm": {
+   "from": -1.0484999999999989,
+   "to": 1.3300999999999998,
+   "flipped": true
+  },
+  "l2_ate_drift_pct": {
+   "G": -5.656395799330658,
+   "S": 15.270371473170373
+  }
+ },
+ "mde": {
+  "sd_used": 1.491,
+  "sd_sources": {
+   "A_paired_on_off": {
+    "sd": 1.491,
+    "n_seed": 3,
+    "diffs_cm": [
+     0.2219,
+     0.4995,
+     2.9327
+    ],
+    "src": "bpw_on vs bpw_off, person_tracking, 3 seeds"
+   },
+   "B_same_config_null": {
+    "sd": 0.951,
+    "n_seed": 1,
+    "diff_cm": 0.9514,
+    "src": "off vs off_trace, same config/seed, 580 frames"
+   }
+  },
+  "n_seed": 6,
+  "mde_cm": 1.5649630749808447
+ },
+ "R6_pool_drift": {
+  "n_common_events": 65,
+  "pool_rel_diff_median": 0.016129032258064516,
+  "pool_rel_diff_iqr": [
+   -0.02601970517372236,
+   0.08128474485815379
+  ],
+  "pool_rel_diff_min": -0.19870895312938536,
+  "pool_rel_diff_max": 0.2739885289102465,
+  "pool_jaccard_mean": 0.19586489476767993,
+  "pool_jaccard_median": 0.17024994302210741,
+  "pool_jaccard_iqr": [
+   0.14123340516690597,
+   0.19060281707794147
+  ],
+  "caveat": "池 Jaccard 跨索引空间不可比，量化的是地图分叉（prereg §0）"
+ },
+ "R7_ordinal_time_shift": {
+  "n_common_events": 65,
+  "n_events_G": 65,
+  "n_events_S": 65,
+  "n_events_diff": 0,
+  "iter_diff_median": -150,
+  "abs_iter_diff_p90": 300,
+  "abs_iter_diff_min": 0,
+  "abs_iter_diff_max": 300,
+  "event_gap_median_ref": 150.0,
+  "warn_dose_by_count_not_time": true
+ },
+ "R6R7_status": "ok",
+ "R6R7_missing_detail": null,
+ "per_seed_R6R7": {
+  "0": {
+   "R6_pool_drift": {
+    "n_common_events": 65,
+    "pool_rel_diff_median": 0.016129032258064516,
+    "pool_rel_diff_iqr": [
+     -0.02601970517372236,
+     0.08128474485815379
+    ],
+    "pool_rel_diff_min": -0.19870895312938536,
+    "pool_rel_diff_max": 0.2739885289102465,
+    "pool_jaccard_mean": 0.19586489476767993,
+    "pool_jaccard_median": 0.17024994302210741,
+    "pool_jaccard_iqr": [
+     0.14123340516690597,
+     0.19060281707794147
+    ],
+    "caveat": "池 Jaccard 跨索引空间不可比，量化的是地图分叉（prereg §0）"
+   },
+   "R7_ordinal_time_shift": {
+    "n_common_events": 65,
+    "n_events_G": 65,
+    "n_events_S": 65,
+    "n_events_diff": 0,
+    "iter_diff_median": -150,
+    "abs_iter_diff_p90": 300,
+    "abs_iter_diff_min": 0,
+    "abs_iter_diff_max": 300,
+    "event_gap_median_ref": 150.0,
+    "warn_dose_by_count_not_time": true
+   }
+  },
+  "1": {
+   "R6_pool_drift": {
+    "n_common_events": 66,
+    "pool_rel_diff_median": -0.004901573123356814,
+    "pool_rel_diff_iqr": [
+     -0.03439635010755103,
+     0.024831543826590422
+    ],
+    "pool_rel_diff_min": -0.4488517745302714,
+    "pool_rel_diff_max": 0.16279380341880342,
+    "pool_jaccard_mean": 0.21310447811919506,
+    "pool_jaccard_median": 0.1805596567302512,
+    "pool_jaccard_iqr": [
+     0.15959485057885087,
+     0.20431388527498187
+    ],
+    "caveat": "池 Jaccard 跨索引空间不可比，量化的是地图分叉（prereg §0）"
+   },
+   "R7_ordinal_time_shift": {
+    "n_common_events": 66,
+    "n_events_G": 66,
+    "n_events_S": 68,
+    "n_events_diff": 2,
+    "iter_diff_median": -300.0,
+    "abs_iter_diff_p90": 300,
+    "abs_iter_diff_min": 0,
+    "abs_iter_diff_max": 300,
+    "event_gap_median_ref": 150,
+    "warn_dose_by_count_not_time": true
+   }
+  },
+  "2": {
+   "R6_pool_drift": {
+    "n_common_events": 66,
+    "pool_rel_diff_median": -0.023736319218599384,
+    "pool_rel_diff_iqr": [
+     -0.07877342754114926,
+     0.018257967449888224
+    ],
+    "pool_rel_diff_min": -0.2876691148047932,
+    "pool_rel_diff_max": 0.353971119133574,
+    "pool_jaccard_mean": 0.20817486813451977,
+    "pool_jaccard_median": 0.1727627946687516,
+    "pool_jaccard_iqr": [
+     0.15392448363771427,
+     0.2068005939414589
+    ],
+    "caveat": "池 Jaccard 跨索引空间不可比，量化的是地图分叉（prereg §0）"
+   },
+   "R7_ordinal_time_shift": {
+    "n_common_events": 66,
+    "n_events_G": 66,
+    "n_events_S": 68,
+    "n_events_diff": 2,
+    "iter_diff_median": -300.0,
+    "abs_iter_diff_p90": 600,
+    "abs_iter_diff_min": 0,
+    "abs_iter_diff_max": 600,
+    "event_gap_median_ref": 150,
+    "warn_dose_by_count_not_time": true
+   }
+  },
+  "3": {
+   "R6_pool_drift": {
+    "n_common_events": 68,
+    "pool_rel_diff_median": 0.011579899990391315,
+    "pool_rel_diff_iqr": [
+     -0.02259352269803775,
+     0.04290736878230784
+    ],
+    "pool_rel_diff_min": -0.5584238098853542,
+    "pool_rel_diff_max": 0.8712064208678204,
+    "pool_jaccard_mean": 0.2068379208499474,
+    "pool_jaccard_median": 0.17482971993466814,
+    "pool_jaccard_iqr": [
+     0.1557050049648247,
+     0.2028087560425627
+    ],
+    "caveat": "池 Jaccard 跨索引空间不可比，量化的是地图分叉（prereg §0）"
+   },
+   "R7_ordinal_time_shift": {
+    "n_common_events": 68,
+    "n_events_G": 68,
+    "n_events_S": 81,
+    "n_events_diff": 13,
+    "iter_diff_median": 0.0,
+    "abs_iter_diff_p90": 300,
+    "abs_iter_diff_min": 0,
+    "abs_iter_diff_max": 300,
+    "event_gap_median_ref": 150,
+    "warn_dose_by_count_not_time": true
+   }
+  },
+  "4": {
+   "R6_pool_drift": {
+    "n_common_events": 64,
+    "pool_rel_diff_median": -0.004002555813519328,
+    "pool_rel_diff_iqr": [
+     -0.04896753927754166,
+     0.027370278059639874
+    ],
+    "pool_rel_diff_min": -0.14417407192093679,
+    "pool_rel_diff_max": 0.13908157602663707,
+    "pool_jaccard_mean": 0.20448028065189428,
+    "pool_jaccard_median": 0.17318351991192835,
+    "pool_jaccard_iqr": [
+     0.1516758252012984,
+     0.19263814430282739
+    ],
+    "caveat": "池 Jaccard 跨索引空间不可比，量化的是地图分叉（prereg §0）"
+   },
+   "R7_ordinal_time_shift": {
+    "n_common_events": 64,
+    "n_events_G": 64,
+    "n_events_S": 67,
+    "n_events_diff": 3,
+    "iter_diff_median": -600.0,
+    "abs_iter_diff_p90": 900,
+    "abs_iter_diff_min": 0,
+    "abs_iter_diff_max": 900,
+    "event_gap_median_ref": 150,
+    "warn_dose_by_count_not_time": true
+   }
+  },
+  "5": {
+   "R6_pool_drift": {
+    "n_common_events": 65,
+    "pool_rel_diff_median": -0.009239260859131269,
+    "pool_rel_diff_iqr": [
+     -0.040368353389448115,
+     0.030539398184952264
+    ],
+    "pool_rel_diff_min": -0.3533586637034913,
+    "pool_rel_diff_max": 0.3482720844537397,
+    "pool_jaccard_mean": 0.191658450291524,
+    "pool_jaccard_median": 0.16164874551971326,
+    "pool_jaccard_iqr": [
+     0.1412350898177589,
+     0.1814764662471751
+    ],
+    "caveat": "池 Jaccard 跨索引空间不可比，量化的是地图分叉（prereg §0）"
+   },
+   "R7_ordinal_time_shift": {
+    "n_common_events": 65,
+    "n_events_G": 65,
+    "n_events_S": 65,
+    "n_events_diff": 0,
+    "iter_diff_median": 0,
+    "abs_iter_diff_p90": 300,
+    "abs_iter_diff_min": 0,
+    "abs_iter_diff_max": 300,
+    "event_gap_median_ref": 150.0,
+    "warn_dose_by_count_not_time": true
+   }
+  }
+ },
+ "rule_applied": 5,
+ "verdict": "INCONCLUSIVE — 不可判，记「已排除方向」（§6 规则 5）",
+ "caveats": [
+  "本地产物（非远程 3090 正式批）⇒ 按 G-算力条标「非权威」，不得进论文表；本判决为 provisional（远程不可达的具体原因以当日现场为准，本文件不做硬编码断言）。",
+  "F1 是计划侧恒等式，不证明两臂候选集相同（prereg §0/§4.1）。",
+  "`G−k0`/`S−k0` 是报告项：两臂与 k0 的注入形态不同，不参与 PASS/FAIL（§6 规则 6）。",
+  "n=6 按 §6 规则判定出口，**不构成方向或效果结论**（prereg §5：n=1 一律不可判；n=3 方向一致性只决定 EXTEND）——本轮 seed 数 = 6，规则 5 出口见判定行。",
+  "A4 是 **post-data 仪器修正**（写于 seed0 全长数据后、seeds 1/2 前）：形态由仪器可判性决定，阈值 1.15/1.10/60% 沿用 Amendment A1 未放宽，ATE 未用于选门；seed0 首跑/重跑方向翻转已如实并陈（n=1 抖动，任何方向不得作结论）。",
+  "负结果、评测协议与「不退化」均**不得**作论文贡献或 headline（DISCIPLINE「论文叙事纪律」；prereg §8）。",
+  "剂量按数量相等，不按地图时刻相等（prereg §4.2 R7 触发：0, 1, 2, 3, 4, 5, anchor(seed 0)）——两臂同序数事件的地图时刻不同步。"
+ ]
+}

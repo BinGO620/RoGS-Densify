@@ -1,0 +1,22 @@
+{
+    "tracking": {
+        "calls": 0,
+        "time_ms": 0.0,
+        "valid_pixels": 0,
+        "mean_reliability": null,
+        "low_reliability_ratio": null,
+        "saved_visualizations": 0
+    },
+    "total": {
+        "reliability_calls": 0,
+        "reliability_time_ms": 0.0
+    },
+    "mapping": {
+        "calls": 0,
+        "time_ms": 0.0,
+        "valid_pixels": 0,
+        "mean_reliability": null,
+        "low_reliability_ratio": null,
+        "saved_visualizations": 0
+    }
+}

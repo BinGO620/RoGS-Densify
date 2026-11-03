@@ -86,8 +86,17 @@ def main(argv=None):
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--n-plan", type=int, default=None,
                     help="截断到前 N 个事件（缺省=全部）。越界事件注入 0。")
+    ap.add_argument("--n-init", type=int, default=None,
+                    help="前多少个事件属于 initialize_map 站点（A4 契约：必须显式给出并"
+                         "写进计划；判据机默认从计划读。580 帧 person_tracking 实测 11，"
+                         "由 init_itr_num/init_gaussian_update 决定，见 NEXT_SESSION 陷阱表）。")
     args = ap.parse_args(argv)
 
+    if args.n_init is None:
+        raise ValueError(
+            "--n-init 必填（A4 契约 2026-11-01）：站点切分是装置参数，必须显式声明并"
+            "冻进计划 —— 判据机的 F1_init/F1_map、gross 界都从它推，不允许静默默认"
+        )
     trace = Path(args.trace)
     k, rows = read_plan(trace)
     n_events_in_trace = len(k)
@@ -95,6 +104,11 @@ def main(argv=None):
     if not 1 <= n_plan <= len(k):
         raise ValueError(
             "n_plan=%d 越界（可用 1..%d）——截断只能变短，不能凭空变长" % (n_plan, len(k))
+        )
+    if not 0 <= args.n_init <= n_plan:
+        raise ValueError(
+            "n_init=%d 越界（可用 0..%d）：init 站点事件数必须落在计划长度内"
+            % (args.n_init, n_plan)
         )
     if n_plan < len(k):
         print("截断计划 %d -> %d 个事件；其后两臂注入 0（总剂量 = 前缀和）"
@@ -111,6 +125,7 @@ def main(argv=None):
             "n_events_in_trace": n_events_in_trace,
         },
         "n_plan": n_plan,
+        "n_init": int(args.n_init),
         "overflow_dose": 0,
         "sequence": args.sequence,
         "seed": args.seed,
@@ -126,8 +141,8 @@ def main(argv=None):
     out.write_text(json.dumps(plan, indent=1, ensure_ascii=False), encoding="utf-8")
     body = out.read_bytes()
     print(
-        "wrote %s (%d events, sum_k=%d, K range [%d,%d], median %d)\n  sha256(plan)=%s"
-        % (out, len(k), sum(k), min(k), max(k), plan["k_median"],
+        "wrote %s (%d events, sum_k=%d, K range [%d,%d], median %d, n_init=%d)\n  sha256(plan)=%s"
+        % (out, len(k), sum(k), min(k), max(k), plan["k_median"], plan["n_init"],
            hashlib.sha256(body).hexdigest())
     )
 

@@ -1,0 +1,7 @@
+arm=S
+seed=3
+rc=0
+elapsed_s=2749
+max_frames=0
+log=/data/monogs-ours/paper3/results/evidence/fdose_l1_person_tracking_stage2_20261103-023910.log
+finished_rc0=yes

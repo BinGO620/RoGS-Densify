@@ -1,0 +1,15 @@
+{
+  "calls": 0,
+  "time_ms": 0,
+  "frames": 0,
+  "rgb_fallback_calls": 0,
+  "depth_fallback_calls": 0,
+  "opacity_support_ratio_mean": null,
+  "opacity_support_ratio_min": null,
+  "rgb_support_ratio_mean": null,
+  "rgb_support_ratio_min": null,
+  "depth_support_ratio_mean": null,
+  "depth_support_ratio_min": null,
+  "rgb_fallback_ratio": null,
+  "depth_fallback_ratio": null
+}
