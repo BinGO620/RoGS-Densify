@@ -28,8 +28,8 @@
 # 相对路径全失效而静默不启）。
 set -u
 
-REPO=/data/monogs-ours
-PY=/data/conda_envs/monogs-ours/bin/python
+REPO=${MONOGS_REPO:-/data/monogs-ours}
+PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
 SEQ=${SEQ:-person_tracking}
 SEEDS=${SEEDS:-"0 1 2"}
 MAX_FRAMES=${MAX_FRAMES:-0}

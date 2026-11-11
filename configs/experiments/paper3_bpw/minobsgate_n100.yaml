@@ -1,0 +1,12 @@
+# MinObsGate N=100 修正臂（prereg_minobsgate_n100_2026-11-06）
+# 依据 E2 trace 实测：denom 饱和在 100，N=8 只影响 0.94% 的高斯（干预太弱）
+inherit_from: "configs/experiments/paper3_bpw/minobsgate_off.yaml"
+
+SelectiveDensification:
+  enabled: true
+  signal: "obs_gate"
+  min_observations: 100
+  grad_thr_default: 0.0002
+
+Results:
+  save_dir: "results/paper3_bpw/minobsgate_n100"

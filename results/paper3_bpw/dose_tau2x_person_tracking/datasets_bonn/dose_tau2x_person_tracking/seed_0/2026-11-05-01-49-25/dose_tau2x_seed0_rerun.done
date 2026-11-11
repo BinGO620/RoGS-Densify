@@ -1,0 +1,7 @@
+tag=tau2x_rerun
+cfg=configs/experiments/paper3_bpw/dose_tau2x_person_tracking.yaml
+rc=0
+elapsed_s=1478
+head=1ee5b05f5
+console=/home/jiangwenheng/device_floor_3090/tau2x_rerun.consolelog
+finished_rc0=yes

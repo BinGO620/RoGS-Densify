@@ -1,0 +1,14 @@
+arm=instr_off_crowd
+stage=instrument
+run=1
+seed=0
+rc=0
+elapsed_s=4562
+max_frames=0
+hashseed=0
+cublas=:4096:8
+head=a1975d1ff
+deterministic=on
+single_thread=on
+det_backward=on
+finished_rc0=yes

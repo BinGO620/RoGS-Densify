@@ -1,0 +1,58 @@
+[18:12:25] === 剂量前沿 async 迁移批 开始（async 部署口径）===
+[18:12:25] HEAD=5661c1cc7
+0, 22773 MiB
+1, 22744 MiB
+
+
+[18:12:25] [gpu0] maskstat_off_person_tracking seed=0 开始
+[18:12:25] [gpu1] async_off_crowd seed=0 开始
+[18:36:39] [gpu0] maskstat_off_person_tracking seed=0 done rc=0 elapsed=1454s
+
+[18:36:39] [gpu0] maskstat_off_person_tracking seed=1 开始
+[18:46:02] [gpu1] async_off_crowd seed=0 done rc=0 elapsed=2017s
+
+[18:46:02] [gpu1] async_off_crowd seed=1 开始
+[18:58:07] [gpu0] maskstat_off_person_tracking seed=1 done rc=0 elapsed=1288s
+
+[18:58:07] [gpu0] maskstat_off_person_tracking seed=2 开始
+[19:15:42] [gpu1] async_off_crowd seed=1 done rc=0 elapsed=1780s
+
+[19:15:42] [gpu1] dose_tau4x_crowd seed=0 开始
+[19:20:48] [gpu0] maskstat_off_person_tracking seed=2 done rc=0 elapsed=1361s
+
+[19:20:48] [gpu0] dose_tau4x_person_tracking seed=0 开始
+[19:44:41] [gpu0] dose_tau4x_person_tracking seed=0 done rc=0 elapsed=1433s
+
+[19:44:41] [gpu0] dose_tau4x_person_tracking seed=1 开始
+[19:46:18] [gpu1] dose_tau4x_crowd seed=0 done rc=0 elapsed=1836s
+
+[19:46:18] [gpu1] dose_tau4x_crowd seed=1 开始
+[20:07:39] [gpu0] dose_tau4x_person_tracking seed=1 done rc=0 elapsed=1378s
+
+[20:07:39] [gpu0] dose_tau4x_person_tracking seed=2 开始
+[20:18:51] [gpu1] dose_tau4x_crowd seed=1 done rc=0 elapsed=1953s
+
+[20:18:52] [gpu1] async_off_moving_nonobstructing_box seed=0 开始
+[20:28:46] [gpu0] dose_tau4x_person_tracking seed=2 done rc=0 elapsed=1267s
+
+[20:28:46] [gpu0] dose_zero_person_tracking seed=0 开始
+[20:45:48] [gpu1] async_off_moving_nonobstructing_box seed=0 done rc=0 elapsed=1616s
+
+[20:45:48] [gpu1] async_off_moving_nonobstructing_box seed=1 开始
+[20:51:00] [gpu0] dose_zero_person_tracking seed=0 done rc=0 elapsed=1334s
+
+[20:51:00] [gpu0] dose_zero_person_tracking seed=1 开始
+[21:14:10] [gpu1] async_off_moving_nonobstructing_box seed=1 done rc=0 elapsed=1702s
+
+[21:14:10] [gpu1] dose_tau4x_moving_nonobstructing_box seed=0 开始
+[21:14:20] [gpu0] dose_zero_person_tracking seed=1 done rc=0 elapsed=1400s
+
+[21:14:20] [gpu0] dose_zero_person_tracking seed=2 开始
+[21:38:03] [gpu0] dose_zero_person_tracking seed=2 done rc=0 elapsed=1423s
+[21:38:03] [gpu0] 链完成
+[21:43:08] [gpu1] dose_tau4x_moving_nonobstructing_box seed=0 done rc=0 elapsed=1738s
+
+[21:43:08] [gpu1] dose_tau4x_moving_nonobstructing_box seed=1 开始
+[22:07:47] [gpu1] dose_tau4x_moving_nonobstructing_box seed=1 done rc=0 elapsed=1479s
+[22:07:47] [gpu1] 链完成
+[22:07:47] === async 迁移批 结束: gpu0 rc=0  gpu1 rc=0 ===

@@ -1,0 +1,160 @@
+{
+  "prereg": "paper3/results/evidence/prereg_adaptive_itr_schedule_2026-11-08.md",
+  "amendments": [
+    "paper3/results/evidence/prereg_adaptive_itr_amendment_a1_2026-11-09.md",
+    "paper3/results/evidence/prereg_adaptive_itr_amendment_a2_2026-11-09.md",
+    "paper3/results/evidence/prereg_adaptive_itr_amendment_a3_2026-11-10.md"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "claim_floor_cm": 0.5,
+  "tradeoff_gates": {
+    "psnr_db": 0.5,
+    "depth_l1_cm": 1.0
+  },
+  "per_seed": {
+    "0": {
+      "B": {
+        "run": "2026-11-09-21-03-01",
+        "dir": "results/paper3_bpw/itrsweep50_maskstat_off/datasets_bonn/itrsweep50_maskstat_off/seed_0/2026-11-09-21-03-01",
+        "ate_cm": 10.6579,
+        "gaussians": 62164,
+        "mapping_iterations": 6915,
+        "mapping_calls": 231,
+        "iterations_source": "backend_timing",
+        "frames": 580,
+        "backend_early_calls": 0,
+        "backend_late_calls": 0,
+        "backend_mapping_iterations": 6915,
+        "iterations_consistent": true,
+        "static_psnr_db": 29.1173,
+        "static_depth_l1_cm": 20.8068
+      },
+      "C": {
+        "run": "2026-11-09-19-17-31",
+        "dir": "results/paper3_bpw/adaptive_itr_person_tracking/datasets_bonn/adaptive_itr_person_tracking/seed_0/2026-11-09-19-17-31",
+        "ate_cm": 9.8258,
+        "gaussians": 57370,
+        "mapping_iterations": 6775,
+        "mapping_calls": 231,
+        "iterations_source": "backend_timing",
+        "frames": 580,
+        "backend_early_calls": 7,
+        "backend_late_calls": 108,
+        "backend_mapping_iterations": 6775,
+        "iterations_consistent": true,
+        "static_psnr_db": 29.0054,
+        "static_depth_l1_cm": 18.0308,
+        "schedule_params": {
+          "itr_early": 30,
+          "itr_late": 50,
+          "kf_threshold": 8
+        }
+      },
+      "delta_ate_cm": -0.8321,
+      "saving_iterations": 140
+    },
+    "1": {
+      "B": {
+        "run": "2026-11-10-03-02-36",
+        "dir": "results/paper3_bpw/itrsweep50_maskstat_off/datasets_bonn/itrsweep50_maskstat_off/seed_1/2026-11-10-03-02-36",
+        "ate_cm": 9.6074,
+        "gaussians": 61969,
+        "mapping_iterations": 6915,
+        "mapping_calls": 231,
+        "iterations_source": "backend_timing",
+        "frames": 580,
+        "backend_early_calls": 0,
+        "backend_late_calls": 0,
+        "backend_mapping_iterations": 6915,
+        "iterations_consistent": true,
+        "static_psnr_db": 29.0982,
+        "static_depth_l1_cm": 19.966
+      },
+      "C": {
+        "run": "2026-11-10-02-04-03",
+        "dir": "results/paper3_bpw/adaptive_itr_person_tracking/datasets_bonn/adaptive_itr_person_tracking/seed_1/2026-11-10-02-04-03",
+        "ate_cm": 10.121,
+        "gaussians": 58052,
+        "mapping_iterations": 6775,
+        "mapping_calls": 231,
+        "iterations_source": "backend_timing",
+        "frames": 580,
+        "backend_early_calls": 7,
+        "backend_late_calls": 108,
+        "backend_mapping_iterations": 6775,
+        "iterations_consistent": true,
+        "static_psnr_db": 29.0054,
+        "static_depth_l1_cm": 19.2072,
+        "schedule_params": {
+          "itr_early": 30,
+          "itr_late": 50,
+          "kf_threshold": 8
+        }
+      },
+      "delta_ate_cm": 0.5136,
+      "saving_iterations": 140
+    },
+    "2": {
+      "B": {
+        "run": "2026-11-10-03-31-56",
+        "dir": "results/paper3_bpw/itrsweep50_maskstat_off/datasets_bonn/itrsweep50_maskstat_off/seed_2/2026-11-10-03-31-56",
+        "ate_cm": 11.3917,
+        "gaussians": 59462,
+        "mapping_iterations": 6915,
+        "mapping_calls": 231,
+        "iterations_source": "backend_timing",
+        "frames": 580,
+        "backend_early_calls": 0,
+        "backend_late_calls": 0,
+        "backend_mapping_iterations": 6915,
+        "iterations_consistent": true,
+        "static_psnr_db": 28.8247,
+        "static_depth_l1_cm": 19.2422
+      },
+      "C": {
+        "run": "2026-11-10-02-33-24",
+        "dir": "results/paper3_bpw/adaptive_itr_person_tracking/datasets_bonn/adaptive_itr_person_tracking/seed_2/2026-11-10-02-33-24",
+        "ate_cm": 10.4243,
+        "gaussians": 56678,
+        "mapping_iterations": 6775,
+        "mapping_calls": 231,
+        "iterations_source": "backend_timing",
+        "frames": 580,
+        "backend_early_calls": 7,
+        "backend_late_calls": 108,
+        "backend_mapping_iterations": 6775,
+        "iterations_consistent": true,
+        "static_psnr_db": 28.8904,
+        "static_depth_l1_cm": 20.4846,
+        "schedule_params": {
+          "itr_early": 30,
+          "itr_late": 50,
+          "kf_threshold": 8
+        }
+      },
+      "delta_ate_cm": -0.9674,
+      "saving_iterations": 140
+    }
+  },
+  "deltas": [
+    -0.8321,
+    0.5136,
+    -0.9674
+  ],
+  "verdict": "L2_SIGN_UNSTABLE",
+  "reasons": [
+    "Δ 跨 seed 异号：[-0.8321, 0.5136, -0.9674]（Amd A3 §2 出口 1 = 止损）"
+  ],
+  "render_report": {
+    "median_C_psnr_db": 29.0054,
+    "median_B_psnr_db": 29.0982,
+    "median_C_depth_l1_cm": 19.2072,
+    "median_B_depth_l1_cm": 19.966,
+    "tradeoff_triggered": false
+  },
+  "median_delta_ate_cm": -0.8321
+}

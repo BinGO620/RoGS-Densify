@@ -1,0 +1,7 @@
+arm=on
+seed=0
+rc=0
+elapsed_s=538
+max_frames=40
+log=/data/monogs-ours/paper3/results/evidence/maskstat_l1_person_tracking_smoke_20261104-030017.log
+finished_rc0=yes

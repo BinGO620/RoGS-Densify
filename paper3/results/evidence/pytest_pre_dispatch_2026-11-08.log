@@ -1,0 +1,17 @@
+........................................................................ [ 11%]
+........................................................................ [ 23%]
+........................................................................ [ 35%]
+........................................................................ [ 46%]
+........................................................................ [ 58%]
+........................................................................ [ 70%]
+........................................................................ [ 81%]
+........................................................................ [ 93%]
+.........................................                                [100%]
+=============================== warnings summary ===============================
+../conda_envs/monogs-ours/lib/python3.10/site-packages/evo/core/lie_algebra.py:36
+../conda_envs/monogs-ours/lib/python3.10/site-packages/evo/core/lie_algebra.py:36
+  /data/conda_envs/monogs-ours/lib/python3.10/site-packages/evo/core/lie_algebra.py:36: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    _USE_DCM_NAME = LooseVersion(scipy_version) < LooseVersion("1.4")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+617 passed, 2 warnings in 73.66s (0:01:13)

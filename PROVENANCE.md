@@ -1,8 +1,8 @@
 # PROVENANCE — 本仓库与 monogs-ours 的对应关系
 
-- **源**：`/data/monogs-ours` @ `1b9e3fff7`（分支 `feat/bpw-densification`，2026-11-03
-  回灌：FDose n=6 判决收口节点）。上一基线 = `31b0f0367`（2026-10-31）。monogs-ours 本身**不拆分、不修改**，
-  作为备份库保留。
+- **源**：`/data/monogs-ours` @ `d0cddb9f7`（分支 `feat/adaptive-itr`，2026-11-10 回灌：
+  E 轴 L2 止损收口 + F 轴 novelty 评估节点）。上一基线 = `1b9e3fff7`（2026-11-03，FDose n=6 收口），
+  更早 = `31b0f0367`（2026-10-31）。monogs-ours 本身**不拆分、不修改**，作为备份库保留。
 - **构建方式**：按 manifest（复制清单）从源复制 → 减法（删论文2 专属机制）→ 验证。
   重建命令：`python /data/monogs-export/copy_by_manifest.py --manifest
   /data/monogs-export/manifests/rogs_densify.yaml --dst <新目录>`，再按本文件修改点表
@@ -132,6 +132,7 @@ dyn_port_buffer, dyn_port_online, dyn_port_offline, dynport_causal_log}.py`
 | `pytest tests/densification tests/paper3_bpw tests/test_config_valid.py` | **105 passed**（monogs-ours 基线 96 + config 校验） |
 | submodule pin | `diff-gaussian-rasterization@43e21bff`、`simple-knn@44f764299`（与 monogs-ours 历史及 upstream MonoGS 一致） |
 | 2060 冒烟 A/B（40 帧，bpw_off，seed 0） | 裁剪仓 vs monogs-ours@31b0f0367 纯净参照：ATE RMSE 1.1688 vs 1.1718 cm（Δ=0.003cm ≈ 0.26%，CUDA 非确定性量级，低于同配置跨批噪声 0.18–0.62cm）；stats_final/per_frame_ape/tracking_raw 全字段一致（仅时间戳与噪声级小数差）。**减法未改变管线行为** |
+| **2026-11-10 回灌 @ `d0cddb9f7`** | parity 全部同源 · pytest **316 passed** · closure_check 仅 `gui`/`utils` 两项**已知工具误报**（纯净源同报）· 40 帧冒烟 bpw_off seed0 裁剪仓 **1.1906 cm** vs 历史同配置参照 1.1682 cm（Δ=0.0224 cm ≈ 1.9%，远低于同配置跨批噪声带 0.18–0.62 cm）⇒ 等价性通过 · **手术重放**：旧 overlay 已过期（`adaptive_itr` 命中 0，slam_backend 较 11-03 净增 156 行），按**精确删除块**（非行号）重放 14 块全部命中 1 次，diff 行数保持 61/190/43（与表 2 一致）· **manifest 修复**：补 9 个 bonn 序列配置（原只列 pt/balloon ⇒ 闸② 20 项 FileNotFoundError）+ 判据键登记机 `scripts/02_analysis/prereg_criterion_keys.py` · 新带入 E 轴（adaptive_itr 实现/判据链/33 单测/L1+L2 判决/F 轴 novelty）与 MissStreak/MaskStat A1/E2 P1 机制 |
 | **2026-11-03 回灌 @ `1b9e3fff7`** | parity 全部同源（25/25 configs）· pytest **121 passed** · 40 帧冒烟 bpw_off ~/. 裁剪仓 **1.1818 cm** vs 纯净源参照 1.1718 cm（Δ=0.010 cm ≈ 0.85%，低于跨批噪声带 0.18–0.62 cm）⇒ 等价性通过 · closure_check 报 `gui`/`utils` 两项为**工具误报**（纯净源同报，包名解析问题）· submodule pin 保持 `43e21bff`/`44f76429` · 新带入 FDose n=6 判决工件与 seeds 3/4/5 run 产物 |
 
 ## 归档原则（2026-11-04 登记；用户指令，适用于每一个仓库）

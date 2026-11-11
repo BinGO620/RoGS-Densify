@@ -1,0 +1,122 @@
+{
+ "prereg": [
+  "paper3/results/evidence/prereg_maskstat_2026-11-04.md"
+ ],
+ "sequence": "person_tracking",
+ "n_pairs": 2,
+ "pairs": [
+  {
+   "seed": 0,
+   "off": {
+    "run_dir": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-05-00-44-00",
+    "ate_cm": 11.3558,
+    "num_frames": 580,
+    "online_gaussians": 47973,
+    "refined_gaussians": 52973,
+    "final_gaussians": 47973
+   },
+   "on": {
+    "run_dir": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_0/2026-11-05-00-44-00",
+    "ate_cm": 11.2295,
+    "num_frames": 580,
+    "online_gaussians": 59980,
+    "refined_gaussians": 59980,
+    "final_gaussians": 59980
+   },
+   "done": {
+    "off": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-05-00-44-00/maskstat_off_seed0.done",
+    "on": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_0/2026-11-05-00-44-00/maskstat_on_seed0.done"
+   },
+   "on_minus_off": -0.12630000000000052,
+   "gauss_ratio_on_over_off_refined": 1.1322749325127894,
+   "maskstat_trace": {
+    "present": true,
+    "path": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_0/2026-11-05-00-44-00/maskstat_trace.csv",
+    "n_calls": 5988,
+    "share_w_lt_1_mean": 0.770600748162959,
+    "share_w_eq_0_mean": 0.0,
+    "mean_w_mean": 0.9050861825317231,
+    "mean_mask_ratio_mean": 0.09491381746826945
+   },
+   "mech_trace_present": true,
+   "mech_action": true,
+   "mech_mean_w_mean": 0.9050861825317231,
+   "g6_dose_ok": false
+  },
+  {
+   "seed": 1,
+   "off": {
+    "run_dir": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_1/2026-11-05-01-09-13",
+    "ate_cm": 12.1748,
+    "num_frames": 580,
+    "online_gaussians": 68062,
+    "refined_gaussians": 68062,
+    "final_gaussians": 68062
+   },
+   "on": {
+    "run_dir": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_1/2026-11-05-01-09-08",
+    "ate_cm": 11.67,
+    "num_frames": 580,
+    "online_gaussians": 48890,
+    "refined_gaussians": 48890,
+    "final_gaussians": 48890
+   },
+   "done": {
+    "off": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_1/2026-11-05-01-09-13/maskstat_off_seed1.done",
+    "on": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_1/2026-11-05-01-09-08/maskstat_on_seed1.done"
+   },
+   "on_minus_off": -0.5047999999999995,
+   "gauss_ratio_on_over_off_refined": 0.7183156533748641,
+   "maskstat_trace": {
+    "present": true,
+    "path": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_1/2026-11-05-01-09-08/maskstat_trace.csv",
+    "n_calls": 5939,
+    "share_w_lt_1_mean": 0.7719914650614245,
+    "share_w_eq_0_mean": 0.0,
+    "mean_w_mean": 0.9047931414379466,
+    "mean_mask_ratio_mean": 0.09520685856204689
+   },
+   "mech_trace_present": true,
+   "mech_action": true,
+   "mech_mean_w_mean": 0.9047931414379466,
+   "g6_dose_ok": true
+  }
+ ],
+ "deltas_on_minus_off": [
+  -0.12630000000000052,
+  -0.5047999999999995
+ ],
+ "mean_on_minus_off": -0.31555,
+ "direction_consistent": true,
+ "sd_used": 1.491,
+ "sd_sources": {
+  "A_paired_on_off": {
+   "sd": 1.491,
+   "n_seed": 3,
+   "src": "bpw_on vs bpw_off, person_tracking, 3 seeds"
+  }
+ },
+ "mde_cm": 13.395887653778603,
+ "floor_cm": 3.83,
+ "rule_applied": 1,
+ "verdict": "DEVICE_FAIL — 装置门未过（G6 剂量非爆炸：on 臂高斯膨胀 >10%）",
+ "gates": {
+  "mech_share_min": 0.05,
+  "mech_mean_w_max": 0.98,
+  "dose_ratio_max": 1.1
+ },
+ "caveats": [
+  "n=2 的 ATE 是方向参考：MDE(2)=13.396cm（sd=1.491 固定口径），不构成效果结论（prereg §3）。",
+  "本批若产自本地 2060 ⇒ 非权威 provisional，不得进论文表（G-算力条）。",
+  "剂量下降本身不是收益（P3-D2-004）；终态高斯比只作机制作用量量化。",
+  "机制输入 = 运行期 MaskRCNN 掩码（机制输入，非评测仪器）；判决不消费掩码。",
+  "负结果、评测协议与「不退化」不得作论文贡献或 headline（DISCIPLINE 论文叙事纪律）。"
+ ],
+ "provenance": {
+  "manifest": "paper3/results/evidence/maskstat_runs_3090_2026-11-05.json",
+  "head_at_judge": "fc3021e10",
+  "machine": "local",
+  "manifest_note": "3090 权威复跑（HEAD 1ee5b05f5）：off = 剂量-响应 1× 臂同 run；on 臂含 MaskRCNN。跨机对拍：本地 2060 provisional 判决（P3-D2-017）读数不参与本判读。",
+  "judged_at": "2026-11-05 02:15:50 +0800"
+ }
+}

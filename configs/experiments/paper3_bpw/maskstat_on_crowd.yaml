@@ -1,0 +1,27 @@
+# MaskStat L2 场景泛化 — arm `on`（crowd，P3-D2-040 开放区收尾）。
+#
+# 背景：自调节泛化探针（selfreg_generalization_2026-11-07）测得 crowd churn = 28.9%
+# （pt 的 1.7×，超 20% 线）——高 churn 区的既有机制从未被测试。本臂把 MaskStat
+# （唯一的统计纯度族机制）补到 crowd，回答「高 churn 处机制是否有益」。
+#
+# 与 maskstat_on_person_tracking.yaml 同构（同四个 MaskStat 自持键），唯一差别 = 序列。
+# off 臂 = instr_off_crowd（已存在；解析后与本臂只差 Mapping.maskstat_dens_stats + 路径键）。
+inherit_from: "configs/rgbd/bonn/crowd.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "crowd"
+
+SelectiveDensification:
+  enabled: false
+
+Mapping:
+  maskstat_dens_stats: true
+  maskstat_model: "maskrcnn"
+  maskstat_dynamic_classes: [1]
+  maskstat_dilate_px: 5
+  maskstat_max_mask_ratio: 0.95
+
+Results:
+  save_dir: "results/paper3_bpw/maskstat_on_crowd"
+  save_per_frame_ape: true

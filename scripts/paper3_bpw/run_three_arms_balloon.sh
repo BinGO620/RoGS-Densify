@@ -12,8 +12,8 @@
 # 注意：串行。本地 2060 只有一张卡，并发会互相抢显存。
 set -u
 
-REPO=/data/monogs-ours
-PY=/data/conda_envs/monogs-ours/bin/python
+REPO=${MONOGS_REPO:-/data/monogs-ours}
+PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
 ARMS="off on negctl"
 MAX_FRAMES=${MAX_FRAMES:-0}
 

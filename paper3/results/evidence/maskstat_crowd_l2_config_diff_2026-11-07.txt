@@ -1,0 +1,54 @@
+# MaskStat crowd L2 单变量 diff 工件（2026-11-07，G2-M3 处置）
+
+## A. load_config 解析后 diff（prereg §1 的口径）
+Mapping.maskstat_dens_stats: None -> True
+Mapping.maskstat_dilate_px: None -> 5
+Mapping.maskstat_dynamic_classes: None -> [1]
+Mapping.maskstat_max_mask_ratio: None -> 0.95
+Mapping.maskstat_model: None -> 'maskrcnn'
+Results.save_dir: 'results/paper3_bpw/instr_off_crowd' -> 'results/paper3_bpw/instrument_maskstat_on_crowd'
+inherit_from: 'configs/rgbd/bonn/crowd.yaml' -> 'configs/experiments/paper3_bpw/maskstat_on_crowd.yaml'
+
+## B. run 内 config.yml diff（G2 复算口径；含 slam.py 运行期注入键；save_dir/source_dir 时间戳路径行省略）
+   pcd_downsample_init: 32
+   point_size: 0.01
+   sensor_type: depth
+-  sequence: instr_off_crowd
++  sequence: instrument_maskstat_on_crowd
+   single_thread: true
+   type: bonn
+ DeferredCommit:
+   - 2
+ Mapping:
+   lifecycle_mode: prune
++  maskstat_dens_stats: true
++  maskstat_dilate_px: 5
++  maskstat_dynamic_classes:
++  - 1
++  maskstat_max_mask_ratio: 0.95
++  maskstat_model: maskrcnn
+ MaskQA:
+   enabled: false
+   gap_abs_thresh: 0.005
+   soft_floor: 0.1
+   soft_strength: 1.0
+ Results:
+   eval_rendering: true
+   save_final_gaussians: true
+   save_final_mapping: false
+   save_final_tracking: true
+   - 50
+   static_bg_mask_subdir: dynamic_mask
+   success_threshold_cm: 5.0
+   use_gui: false
+   use_wandb: false
+ RobustTracking:
+   protect_newest: 2
+   reliability_dynamic_tau: 0.5
+   sample_rays: 2048
+-inherit_from: configs/rgbd/bonn/crowd.yaml
++inherit_from: configs/experiments/paper3_bpw/maskstat_on_crowd.yaml
+ method: Combined-Prune
+ method_from: configs/experiments/combined_prune/method.yaml
+ model_params:
+(另省略 6 行 run 路径差异——时间戳目录名，非行为变量)

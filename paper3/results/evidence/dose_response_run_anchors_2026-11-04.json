@@ -1,0 +1,113 @@
+{
+ "purpose": "剂量-响应筛查 5 个新 run 的完成锚点与 HEAD 溯源（P3-D2-019 G2-M5）",
+ "generated_by": "post-hoc inventory 2026-11-04 19:43 CST",
+ "note": "HEAD 由 run 目录名时间戳（启动时刻）与 git log 提交时间重建，不是当前 HEAD。两个 HEAD 之间 utils/ gaussian_splatting/ slam.py 零改动，代码等价。全部 run 均为全长 580 帧。",
+ "code_equivalence": {
+  "commit_a": "06065f36b",
+  "commit_b": "0f1837a9c",
+  "diff_paths": ["utils/", "gaussian_splatting/", "slam.py"],
+  "diff_empty": true
+ },
+ "runs": [
+  {
+   "arm": "dose_tau05x",
+   "tau_scale": 0.5,
+   "seed": 0,
+   "run_dir": "results/paper3_bpw/dose_tau05x_person_tracking/datasets_bonn/dose_tau05x_person_tracking/seed_0/2026-11-04-12-20-20",
+   "started_at": "2026-11-04T12:20:20+08:00",
+   "head_at_start": "06065f36b",
+   "completion_evidence": {
+    "done_file": "dose_tau05x_seed0.done",
+    "done_finished_rc0": "yes",
+    "done_mtime": "2026-11-04T13:10:22+08:00",
+    "console_tail_has_done": true
+   },
+   "artifacts": {
+    "num_frames": 580,
+    "ate_rmse_cm": 14.3685,
+    "tracking_raw_sha256_16": "14ea31d5eb3e2007"
+   }
+  },
+  {
+   "arm": "dose_tau2x",
+   "tau_scale": 2.0,
+   "seed": 0,
+   "run_dir": "results/paper3_bpw/dose_tau2x_person_tracking/datasets_bonn/dose_tau2x_person_tracking/seed_0/2026-11-04-13-10-52",
+   "started_at": "2026-11-04T13:10:52+08:00",
+   "head_at_start": "06065f36b",
+   "completion_evidence": {
+    "done_file": "dose_tau2x_seed0.done",
+    "done_finished_rc0": "yes",
+    "done_mtime": "2026-11-04T13:50:10+08:00",
+    "console_tail_has_done": true
+   },
+   "artifacts": {
+    "num_frames": 580,
+    "ate_rmse_cm": 10.5178,
+    "tracking_raw_sha256_16": "c0dd68c684fadb0e"
+   }
+  },
+  {
+   "arm": "dose_tau4x",
+   "tau_scale": 4.0,
+   "seed": 0,
+   "run_dir": "results/paper3_bpw/dose_tau4x_person_tracking/datasets_bonn/dose_tau4x_person_tracking/seed_0/2026-11-04-13-50-18",
+   "started_at": "2026-11-04T13:50:18+08:00",
+   "head_at_start": "06065f36b",
+   "completion_evidence": {
+    "done_file": "dose_tau4x_seed0.done",
+    "done_finished_rc0": "yes",
+    "done_mtime": "2026-11-04T14:27:58+08:00",
+    "console_tail_has_done": true
+   },
+   "artifacts": {
+    "num_frames": 580,
+    "ate_rmse_cm": 10.4638,
+    "tracking_raw_sha256_16": "815d6de0fcf8b462"
+   }
+  },
+  {
+   "arm": "dose_tau2x",
+   "tau_scale": 2.0,
+   "seed": 1,
+   "run_dir": "results/paper3_bpw/dose_tau2x_person_tracking/datasets_bonn/dose_tau2x_person_tracking/seed_1/2026-11-04-14-33-45",
+   "started_at": "2026-11-04T14:33:45+08:00",
+   "head_at_start": "06065f36b",
+   "completion_evidence": {
+    "done_file": null,
+    "done_finished_rc0": null,
+    "console_tail_has_done": true,
+    "console_mtime": "2026-11-04T15:12:42+08:00"
+   },
+   "artifacts": {
+    "num_frames": 580,
+    "ate_rmse_cm": 12.5489,
+    "tracking_raw_sha256_16": "a35f52a37815cf62"
+   }
+  },
+  {
+   "arm": "dose_tau4x",
+   "tau_scale": 4.0,
+   "seed": 1,
+   "run_dir": "results/paper3_bpw/dose_tau4x_person_tracking/datasets_bonn/dose_tau4x_person_tracking/seed_1/2026-11-04-15-12-48",
+   "started_at": "2026-11-04T15:12:48+08:00",
+   "head_at_start": "0f1837a9c",
+   "completion_evidence": {
+    "done_file": null,
+    "done_finished_rc0": null,
+    "console_tail_has_done": true,
+    "console_mtime": "2026-11-04T15:50:39+08:00"
+   },
+   "artifacts": {
+    "num_frames": 580,
+    "ate_rmse_cm": 12.1067,
+    "tracking_raw_sha256_16": "d275e021251c789d"
+   }
+  }
+ ],
+ "baseline_1x": {
+  "note": "1× 臂复用 maskstat_off 现有全长 run（prereg §1 明示），不重跑",
+  "seed0": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-04-03-22-44",
+  "seed1": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_1/2026-11-04-04-54-57"
+ }
+}

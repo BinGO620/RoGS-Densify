@@ -1,0 +1,18 @@
+{
+    "mapping": {
+        "calls": 0,
+        "time_ms": 0.0,
+        "valid_pixels": 0,
+        "mean_dynamic_evidence": null,
+        "mean_unmapped_evidence": null,
+        "mean_boundary_evidence": null,
+        "mean_static_weight": null,
+        "saved_visualizations": 0,
+        "updated_gaussians": 0,
+        "gaussian_memory": {}
+    },
+    "total": {
+        "tri_reliability_calls": 0,
+        "tri_reliability_time_ms": 0.0
+    }
+}

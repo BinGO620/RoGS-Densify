@@ -1,0 +1,84 @@
+{
+  "tool": "selfreg_ledger (P3-D2-040)",
+  "waste_ratio_line": 0.2,
+  "ledger": {
+    "pt": {
+      "n_events": 11,
+      "initial_gaussians": 7188,
+      "last_event_gaussians": 18402,
+      "sum_n_added": 11842,
+      "obs_saturation_median": {
+        "1": null,
+        "3": null,
+        "5": null,
+        "10": null,
+        "20": null,
+        "30": null
+      },
+      "sum_console_removed": 1975,
+      "n_prune_console_lines": 4,
+      "final_gaussians": 19771,
+      "waste_ratio": 0.1668,
+      "waste_ratio_below_line": true
+    },
+    "balloon": {
+      "n_events": 11,
+      "initial_gaussians": 6745,
+      "last_event_gaussians": 16268,
+      "sum_n_added": 10224,
+      "obs_saturation_median": {
+        "1": null,
+        "3": null,
+        "5": null,
+        "10": null,
+        "20": null,
+        "30": null
+      },
+      "sum_console_removed": 1801,
+      "n_prune_console_lines": 5,
+      "final_gaussians": 17637,
+      "waste_ratio": 0.1762,
+      "waste_ratio_below_line": true
+    },
+    "crowd": {
+      "n_events": 11,
+      "initial_gaussians": 7686,
+      "last_event_gaussians": 15431,
+      "sum_n_added": 8346,
+      "obs_saturation_median": {
+        "1": null,
+        "3": null,
+        "5": null,
+        "10": null,
+        "20": null,
+        "30": null
+      },
+      "sum_console_removed": 2413,
+      "n_prune_console_lines": 5,
+      "final_gaussians": 17734,
+      "waste_ratio": 0.2891,
+      "waste_ratio_below_line": false
+    },
+    "moving_nonobstructing_box": {
+      "n_events": 11,
+      "initial_gaussians": 7948,
+      "last_event_gaussians": 14654,
+      "sum_n_added": 7077,
+      "obs_saturation_median": {
+        "1": null,
+        "3": null,
+        "5": null,
+        "10": null,
+        "20": null,
+        "30": null
+      },
+      "sum_console_removed": 1501,
+      "n_prune_console_lines": 4,
+      "final_gaussians": 14990,
+      "waste_ratio": 0.2121,
+      "waste_ratio_below_line": false
+    }
+  },
+  "all_below_line": false,
+  "errors": []
+}

@@ -1,0 +1,76 @@
+{
+ "prereg": [
+  "paper3/results/evidence/prereg_maskstat_2026-11-04.md"
+ ],
+ "sequence": "person_tracking",
+ "n_pairs": 1,
+ "pairs": [
+  {
+   "seed": 0,
+   "off": {
+    "run_dir": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-04-03-22-44",
+    "ate_cm": 9.3029,
+    "num_frames": 580,
+    "online_gaussians": 74977,
+    "refined_gaussians": 74977,
+    "final_gaussians": 74977
+   },
+   "on": {
+    "run_dir": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_0/2026-11-04-04-08-00",
+    "ate_cm": 11.3469,
+    "num_frames": 580,
+    "online_gaussians": 61093,
+    "refined_gaussians": 61093,
+    "final_gaussians": 61093
+   },
+   "done": {
+    "off": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-04-03-22-44/maskstat_off_seed0.done",
+    "on": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_0/2026-11-04-04-08-00/maskstat_on_seed0.done"
+   },
+   "on_minus_off": 2.0440000000000005,
+   "gauss_ratio_on_over_off_refined": 0.8148232124518185,
+   "maskstat_trace": {
+    "present": true,
+    "path": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_0/2026-11-04-04-08-00/maskstat_trace.csv",
+    "n_calls": 9769,
+    "share_w_lt_1_mean": 0.7565257625140225,
+    "share_w_eq_0_mean": 0.0,
+    "mean_w_mean": 0.9057297362063583,
+    "mean_mask_ratio_mean": 0.09427026379363306
+   },
+   "mech_trace_present": true,
+   "mech_action": true,
+   "mech_mean_w_mean": 0.9057297362063583,
+   "g6_dose_ok": true
+  }
+ ],
+ "deltas_on_minus_off": [
+  2.0440000000000005
+ ],
+ "mean_on_minus_off": 2.0440000000000005,
+ "direction_consistent": true,
+ "sd_used": 1.491,
+ "sd_sources": {
+  "A_paired_on_off": {
+   "sd": 1.491,
+   "n_seed": 3,
+   "src": "bpw_on vs bpw_off, person_tracking, 3 seeds"
+  }
+ },
+ "mde_cm": null,
+ "floor_cm": 3.83,
+ "rule_applied": 0,
+ "verdict": "SINGLE_SEED_UNJUDGEABLE — 机制门通过，n=1 按预注册一律不可判（等 seed1）",
+ "gates": {
+  "mech_share_min": 0.05,
+  "mech_mean_w_max": 0.98,
+  "dose_ratio_max": 1.1
+ },
+ "caveats": [
+  "n=1 的 ATE 是方向参考：MDE(1)=—（sd=1.491 固定口径），不构成效果结论（prereg §3）。",
+  "本批若产自本地 2060 ⇒ 非权威 provisional，不得进论文表（G-算力条）。",
+  "剂量下降本身不是收益（P3-D2-004）；终态高斯比只作机制作用量量化。",
+  "机制输入 = 运行期 MaskRCNN 掩码（机制输入，非评测仪器）；判决不消费掩码。",
+  "负结果、评测协议与「不退化」不得作论文贡献或 headline（DISCIPLINE 论文叙事纪律）。"
+ ]
+}

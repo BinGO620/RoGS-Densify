@@ -1,0 +1,8 @@
+# async_iter_per_kf 扫描臂（prereg_async_iter_sweep_2026-11-06）：唯一改动 = Training.async_iter_per_kf
+inherit_from: "configs/experiments/paper3_bpw/maskstat_off_person_tracking.yaml"
+
+Training:
+  async_iter_per_kf: 40
+
+Results:
+  save_dir: "results/paper3_bpw/asynciter40_maskstat_off"

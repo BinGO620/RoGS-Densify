@@ -1,0 +1,94 @@
+{
+  "gate_results": {
+    "M1": {
+      "deltas": [
+        1.0742,
+        0.4659,
+        -0.0759
+      ],
+      "median_delta": 0.4659,
+      "same_sign": false,
+      "pass": false
+    },
+    "M2": {
+      "ratios": [
+        1.0199,
+        0.9898,
+        0.9692
+      ],
+      "tol": 0.1,
+      "pass": true
+    },
+    "M3": {
+      "psnr_worst_drop_db": -0.271,
+      "tol": 0.5,
+      "pass": true
+    }
+  },
+  "per_seed": {
+    "0": {
+      "off": {
+        "run": "2026-11-06-06-57-42",
+        "ate_cm": 13.5941,
+        "gaussians": 51073,
+        "psnr": 28.5843,
+        "depth_l1_cm": 23.5233,
+        "frames": 580
+      },
+      "on": {
+        "run": "2026-11-06-07-44-40",
+        "ate_cm": 14.6683,
+        "gaussians": 52089,
+        "psnr": 28.5202,
+        "depth_l1_cm": 23.4622,
+        "frames": 580
+      },
+      "err_off": null,
+      "err_on": null
+    },
+    "1": {
+      "off": {
+        "run": "2026-11-06-08-31-43",
+        "ate_cm": 13.9182,
+        "gaussians": 46028,
+        "psnr": 28.8543,
+        "depth_l1_cm": 22.0441,
+        "frames": 580
+      },
+      "on": {
+        "run": "2026-11-06-09-18-41",
+        "ate_cm": 14.3841,
+        "gaussians": 45557,
+        "psnr": 28.5836,
+        "depth_l1_cm": 23.8083,
+        "frames": 580
+      },
+      "err_off": null,
+      "err_on": null
+    },
+    "2": {
+      "off": {
+        "run": "2026-11-06-10-05-42",
+        "ate_cm": 13.7268,
+        "gaussians": 51296,
+        "psnr": 28.5576,
+        "depth_l1_cm": 23.8948,
+        "frames": 580
+      },
+      "on": {
+        "run": "2026-11-06-10-52-56",
+        "ate_cm": 13.6509,
+        "gaussians": 49714,
+        "psnr": 28.5632,
+        "depth_l1_cm": 24.1398,
+        "frames": 580
+      },
+      "err_off": null,
+      "err_on": null
+    }
+  },
+  "verdict": "CLOSED_NO_EFFECT",
+  "reasons": [
+    "M1 不过（median Δ=+0.466cm，同号=False）⇒ 机制无读数，关闭"
+  ]
+}

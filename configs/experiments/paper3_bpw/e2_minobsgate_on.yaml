@@ -1,0 +1,9 @@
+# E2 逐事件落盘臂（prereg_e2_event_pairing_2026-11-06 P1/P2）：
+# base = minobsgate_on，唯一改动 = E2.trace_events: true（仪器模式三开关原样继承）
+inherit_from: "configs/experiments/paper3_bpw/minobsgate_on.yaml"
+
+E2:
+  trace_events: true
+
+Results:
+  save_dir: "results/paper3_bpw/e2_minobsgate_on"

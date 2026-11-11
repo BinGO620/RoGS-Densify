@@ -1,0 +1,41 @@
+{
+ "note": "3090 权威复跑（2026-11-04 22:17 ~ 11-05 01:39 CST，HEAD 1ee5b05f5，两卡并行、卡内串行）：四臂×2seed 全重跑；1× 臂 = `maskstat_off` 配置（prereg §1 复用口径的 3090 版，非 dose_tau1x——该配置不存在）。本地 2060 旧读数仅作跨机对拍参照，不参与判读。",
+ "runs": {
+  "0": {
+   "0.5": {
+    "run_dir": "results/paper3_bpw/dose_tau05x_person_tracking/datasets_bonn/dose_tau05x_person_tracking/seed_0/2026-11-04-22-17-47",
+    "done": "dose_tau05x_seed0.done"
+   },
+   "1.0": {
+    "run_dir": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-05-00-44-00",
+    "done": "maskstat_off_seed0.done"
+   },
+   "2.0": {
+    "run_dir": "results/paper3_bpw/dose_tau2x_person_tracking/datasets_bonn/dose_tau2x_person_tracking/seed_0/2026-11-04-23-09-05",
+    "done": "dose_tau2x_seed0.done"
+   },
+   "4.0": {
+    "run_dir": "results/paper3_bpw/dose_tau4x_person_tracking/datasets_bonn/dose_tau4x_person_tracking/seed_0/2026-11-04-22-17-47",
+    "done": "dose_tau4x_seed0.done"
+   }
+  },
+  "1": {
+   "0.5": {
+    "run_dir": "results/paper3_bpw/dose_tau05x_person_tracking/datasets_bonn/dose_tau05x_person_tracking/seed_1/2026-11-04-22-43-41",
+    "done": "dose_tau05x_seed1.done"
+   },
+   "1.0": {
+    "run_dir": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_1/2026-11-05-01-09-13",
+    "done": "maskstat_off_seed1.done"
+   },
+   "2.0": {
+    "run_dir": "results/paper3_bpw/dose_tau2x_person_tracking/datasets_bonn/dose_tau2x_person_tracking/seed_1/2026-11-04-23-29-46",
+    "done": "dose_tau2x_seed1.done"
+   },
+   "4.0": {
+    "run_dir": "results/paper3_bpw/dose_tau4x_person_tracking/datasets_bonn/dose_tau4x_person_tracking/seed_1/2026-11-04-22-42-03",
+    "done": "dose_tau4x_seed1.done"
+   }
+  }
+ }
+}

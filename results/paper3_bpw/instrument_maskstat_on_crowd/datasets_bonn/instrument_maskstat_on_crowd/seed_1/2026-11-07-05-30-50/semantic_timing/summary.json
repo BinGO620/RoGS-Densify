@@ -1,0 +1,20 @@
+{
+  "frontend": {
+    "calls": 928,
+    "time_ms": 117571.79949787678,
+    "hard_calls": 928,
+    "soft_calls": 0
+  },
+  "total": {
+    "calls": 1114,
+    "time_ms": 140864.885366027,
+    "hard_calls": 1114,
+    "soft_calls": 0
+  },
+  "backend": {
+    "calls": 186,
+    "time_ms": 23293.08586815023,
+    "hard_calls": 186,
+    "soft_calls": 0
+  }
+}

@@ -1,0 +1,7 @@
+arm=tau4x
+seed=0
+rc=0
+elapsed_s=2268
+max_frames=0
+log=/data/monogs-ours/paper3/results/evidence/dose_response_person_tracking_20261104-122016.log
+finished_rc0=yes

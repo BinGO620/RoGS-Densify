@@ -1,0 +1,14 @@
+arm=instrument_dose_zero_person_tracking
+stage=instrument
+run=1
+seed=1
+rc=0
+elapsed_s=2871
+max_frames=0
+hashseed=0
+cublas=:4096:8
+head=d827bace5
+deterministic=on
+single_thread=on
+det_backward=on
+finished_rc0=yes

@@ -1,0 +1,8 @@
+# E2 trace 版 N=100 臂（prereg_minobsgate_n100 的前置闸用）
+inherit_from: "configs/experiments/paper3_bpw/minobsgate_n100.yaml"
+
+E2:
+  trace_events: true
+
+Results:
+  save_dir: "results/paper3_bpw/e2_minobsgate_n100"

@@ -1,0 +1,66 @@
+[criterion-keys] results/dynport_offline/evidence/prereg_dynport_offline_L1.md
+    J3_static: ['J3_samepose_static_delta'] via ['scripts/dynport/judge_dynport.py', 'scripts/dynport_offline/collect_L1.py'] => OK
+    J1_dynamic: ['J1_samepose_bad_psnr_delta'] via ['scripts/dynport/judge_dynport.py', 'scripts/dynport_offline/collect_L1.py'] => OK
+    J2_depth: ['J2_samepose_bad_dl1_ratio'] via ['scripts/dynport/judge_dynport.py', 'scripts/dynport_offline/collect_L1.py'] => OK
+    J3_diag_finalmap: ['J3_static_delta'] via ['scripts/dynport/judge_dynport.py'] => OK
+    J3_full: ['J3_full_delta', 'J3_samepose_full_delta'] via ['scripts/dynport/judge_dynport.py', 'scripts/dynport_offline/collect_L1.py'] => OK
+    J6_judgeable: ['dyn_bad_px', 'J6_frame_coverage'] via ['scripts/dynport/judge_dynport.py', 'scripts/dynport_offline/collect_L1.py'] => OK
+    J4_offline_budget: ['repair_wall_s'] via ['scripts/dynport_offline/collect_L1.py'] => OK
+    J5_guard: ['J5_counters_ok', 'J5_n_dyn_peak', 'J5_two_state_full_psnr_maxabs'] via ['scripts/dynport/judge_dynport.py', 'scripts/dynport_offline/collect_L1.py'] => OK
+    J9_guard: ['J9_status', 'batch_off_state'] via ['scripts/dynport_offline/collect_L1.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_cgb_2026-10-30.md
+    R1_dose: ['g1_budget_err_max_abs'] via ['scripts/paper3_bpw/check_cgb_gate.py'] => OK
+    R1_placement: ['g2_ratio_mean'] via ['scripts/paper3_bpw/check_cgb_gate.py'] => OK
+    R1_disjoint: ['g3_ref_extra_overlap'] via ['scripts/paper3_bpw/check_cgb_gate.py'] => OK
+    R2_dose_columns: ['relative_gap_online', 'relative_gap_refined', 'columns_agree_in_sign'] via ['scripts/paper3_bpw/judge_cgb_l1.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_fdose_2026-10-31.md
+    F1_dose: ['events_with_wrong_k'] via ['scripts/paper3_bpw/check_fdose_gate.py'] => OK
+    F2_plan: ['f2_plan_faithful', 'f2_overflow_flag_violations', 'f2_plan_events'] via ['scripts/paper3_bpw/check_fdose_gate.py'] => OK
+    F3a_prime_gamma_active: ['f3a_prime_mean', 'f3a_prime_share_above'] via ['scripts/paper3_bpw/check_fdose_gate.py'] => OK
+    F3a_cross_arm_report: ['f3a_cross_arm', 'pool_baseline_ratio'] via ['scripts/paper3_bpw/check_fdose_gate.py'] => OK
+    F3b_index_jaccard_report: ['f3b_index_jaccard'] via ['scripts/paper3_bpw/check_fdose_gate.py'] => OK
+    F4_pool: ['below_pool_total'] via ['scripts/paper3_bpw/check_fdose_gate.py'] => OK
+    F5_activity: ['f5_activity', 'sum_sel_G', 'sum_sel_S', 'f5_k0_report', 'sum_sel_k0'] via ['scripts/paper3_bpw/check_fdose_gate.py'] => OK
+    R_outcome: ['rule_applied', 'mde_cm', 'S_minus_G'] via ['scripts/paper3_bpw/judge_fdose.py'] => OK
+    R6R7_residuals: ['R6_pool_drift', 'R7_ordinal_time_shift'] via ['scripts/paper3_bpw/judge_fdose.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_maskstat_2026-11-04.md
+    G1_G2_weight_math: ['weight * grad_norm', 'denom[update_filter] += weight'] via ['gaussian_splatting/scene/gaussian_model.py'] => OK
+    G3_fail_closed: ['禁止静默按 w=1 退化'] via ['utils/maskstat.py'] => OK
+    G4_trace: ['maskstat_trace.csv', 'share_w_lt_1', 'share_w_eq_0', 'mean_mask_ratio'] via ['utils/maskstat.py'] => OK
+    R_outcome: ['rule_applied', 'mde_cm', 'on_minus_off'] via ['scripts/paper3_bpw/judge_maskstat.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_dose_response_2026-11-04.md
+    R1_platform: ['platform_ok', 'gap_2x_4x_cm', 'gap_2x_1x_cm', 'gap_4x_1x_cm'] via ['scripts/paper3_bpw/render_dose_response.py'] => OK
+    R2_d1: ['d1_dose_changed', 'd1_total_drop_pct', 'd1_dose_monotone'] via ['scripts/paper3_bpw/render_dose_response.py'] => OK
+    R3_frames: ['num_frames', 'expect_frames', 'd3_frames_ok'] via ['scripts/paper3_bpw/render_dose_response.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_dose_a4_instrument_2026-11-06.md
+    R1_effect: ['POSITIVE_ATE_DOSE_OK', 'median_delta_ate_cm', 'same_sign', 'claim_floor_cm'] via ['scripts/paper3_bpw/judge_dose_a4_instrument.py'] => OK
+    R2_dose_cap: ['DOSE_CONFOUND', 'max_gauss_ratio', 'gauss_ratio_cap'] via ['scripts/paper3_bpw/judge_dose_a4_instrument.py'] => OK
+    R3_frames_rc: ['n_frames_expected', 'finished_rc0', 'INSTRUMENT_INVALID'] via ['scripts/paper3_bpw/judge_dose_a4_instrument.py'] => OK
+    R4_outcome: ['BELOW_CLAIM_FLOOR', 'CLOSED_NEGATIVE_OR_UNSTABLE', 'CLOSED_NEGATIVE_OR_UNSTABLE'] via ['scripts/paper3_bpw/judge_dose_a4_instrument.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_dose_reverse_2026-11-06.md
+    R1_effect: ['POSITIVE_DEFAULT_OVERDOSED', 'median_delta_ate_cm', 'same_sign', 'claim_floor_cm'] via ['scripts/paper3_bpw/judge_dose_scan.py'] => OK
+    R2_dose_band: ['DOSE_CONFOUND', 'min_gauss_ratio', 'max_gauss_ratio', 'gauss_ratio_band'] via ['scripts/paper3_bpw/judge_dose_scan.py'] => OK
+    R3_psnr_gate: ['max_psnr_drop_db', 'psnr_drop_cap_db', 'static_psnr_db'] via ['scripts/paper3_bpw/judge_dose_scan.py'] => OK
+    R4_joint: ['BOTH_SIDES_WORSE', 'MONOTONE_WORSE_DOWN', 'DOWN_SIDE_HAS_EFFECT', 'joint_verdict'] via ['scripts/paper3_bpw/judge_dose_scan.py'] => OK
+    R5_frames_rc: ['n_frames_expected', 'finished_rc0', 'INSTRUMENT_INVALID'] via ['scripts/paper3_bpw/judge_dose_scan.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_maskstat_crowd_l2_2026-11-07.md
+    R_outcome: ['rule_applied', 'maskstat_trace', 'mean_w'] via ['scripts/paper3_bpw/judge_maskstat.py'] => OK
+    R_frames: ['n_frames_expected', 'expect_frames'] via ['scripts/paper3_bpw/judge_maskstat_instrument.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_dose_oversupply_2026-11-07.md
+    H1_routes: ['PREDICTION_CONFIRMED', 'GAIN_NO_PREDICTOR', 'SEQUENCE_DEPENDENT', 'NO_GENERALIZATION'] via ['scripts/paper3_bpw/judge_dose_oversupply.py'] => OK
+    H1_gain: ['gain_cm', 'median_delta_ate_cm', 'claim_floor_cm'] via ['scripts/paper3_bpw/judge_dose_oversupply.py'] => OK
+    H2_left: ['median_delta_vs_default_cm'] via ['scripts/paper3_bpw/judge_dose_oversupply.py'] => OK
+    R_frames_rc: ['finished_rc0', 'INSTRUMENT_INVALID'] via ['scripts/paper3_bpw/judge_dose_oversupply.py'] => OK
+[criterion-keys] paper3/results/evidence/prereg_dose_oversupply_amendment_a1_seed3_2026-11-08.md
+    H1_routes: ['PREDICTION_CONFIRMED', 'GAIN_NO_PREDICTOR', 'SEQUENCE_DEPENDENT', 'NO_GENERALIZATION'] via ['scripts/paper3_bpw/judge_dose_oversupply.py'] => OK
+    H1_gain: ['gain_cm', 'median_delta_ate_cm', 'claim_floor_cm'] via ['scripts/paper3_bpw/judge_dose_oversupply.py'] => OK
+    R_frames_rc: ['finished_rc0', 'INSTRUMENT_INVALID'] via ['scripts/paper3_bpw/judge_dose_oversupply.py'] => OK
+    R_valid_anchor: ['R1_bitwise_identical', 'R2'] via ['scripts/paper3_bpw/run_instrument.sh'] => OK
+[criterion-keys] paper3/results/evidence/prereg_dose_async_migration_2026-11-08.md
+    Migration_routes: ['RUN_INVALID', 'CONTRADICTED', 'FULL_TRANSFER', 'MAP_PSNR_TRANSFERRED_ATE_ENVELOPE', 'MIXED'] via ['scripts/paper3_bpw/judge_dose_async_migration.py'] => OK
+    C1_ratio_gates: ['gauss_ratio', 'UNJUDGEABLE_BAND'] via ['scripts/paper3_bpw/judge_dose_async_migration.py'] => OK
+    C2_psnr: ['static_psnr_delta_db'] via ['scripts/paper3_bpw/judge_dose_async_migration.py'] => OK
+    C3_ate_envelope: ['DIRECTION_JUDGED', 'ENVELOPE_UNJUDGEABLE', 'SIGN_UNSTABLE', 'envelope_cm', 'direction_vs_instrument'] via ['scripts/paper3_bpw/judge_dose_async_migration.py'] => OK
+    R_frames_rc: ['finished_rc0'] via ['scripts/paper3_bpw/judge_dose_async_migration.py'] => OK
+MISSING_TOTAL = 0
+rc=0

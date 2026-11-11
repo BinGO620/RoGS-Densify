@@ -1,0 +1,20 @@
+# MaskStat L1 — arm `off`（person_tracking，账本 P3-D2-016 / prereg_maskstat_2026-11-04 + A1）。
+#
+# 与 bpw_off_person_tracking.yaml 完全同链，唯一差别是 save_dir。
+# **不含任何语义掩码段**（Amendment A1：SemanticMask.enabled 另有 ≥5 处既有消费者，
+# 开它 = 混入他族机制行为 ⇒ off 必须是纯基线）。单变量差别 = on 臂的统计加权。
+#
+# 用法：python slam.py --config configs/experiments/paper3_bpw/maskstat_off_person_tracking.yaml --eval
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+# 三臂必须互为因果孪生（与 bpw_off 同值；slam.py 用 config basename 覆写 sequence）。
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: false
+
+Results:
+  save_dir: "results/paper3_bpw/maskstat_off_person_tracking"
+  save_per_frame_ape: true

@@ -1,0 +1,84 @@
+MonoGS: saving results in 
+results/paper3_bpw/e2_minobsgate_on/datasets_bonn/e2_minobsgate_on/seed_0/2026-1
+1-06-12-53-28
+MonoGS: logging console output to 
+results/paper3_bpw/e2_minobsgate_on/datasets_bonn/e2_minobsgate_on/seed_0/2026-1
+1-06-12-53-28/console.log
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+MonoGS: Semantic insertion gate frame 0: 37048 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Resetting the system
+MonoGS: Initialized map
+MonoGS: Semantic insertion gate frame 5: 36309 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: :map iter=1100 n=13857 mean_static_prob=0.700 frac_dyn(<0.3)=0.000
+MonoGS: Candidate insert KF 5: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 10: 35596 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: :map iter=1250 n=15233 mean_static_prob=0.700 frac_dyn(<0.3)=0.000
+MonoGS: Candidate insert KF 10: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 15: 36222 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 1 lineage(s): removed 0 Gaussians
+MonoGS: :map iter=1400 n=17916 mean_static_prob=0.700 frac_dyn(<0.3)=0.000
+MonoGS: Candidate insert KF 15: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 20: 38828 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 12 lineage(s): removed 0 Gaussians
+MonoGS: Evaluating ATE at frame:  21
+Eval: RMSE ATE [m] 0.012336297673944188
+MonoGS: :map iter=1550 n=19981 mean_static_prob=0.700 frac_dyn(<0.3)=0.000
+MonoGS: Candidate insert KF 20: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+Traceback (most recent call last):
+  File "/data/monogs-ours/slam.py", line 765, in <module>
+    slam = SLAM(config, save_dir=save_dir)
+  File "/data/monogs-ours/slam.py", line 358, in __init__
+    self.frontend.run()
+  File "/data/monogs-ours/utils/slam_frontend.py", line 2810, in run
+    render_pkg = self.tracking(cur_frame_idx, viewpoint)
+  File "/data/monogs-ours/utils/slam_frontend.py", line 1194, in tracking
+    semantic_mask = compute_semantic_dynamic_mask(
+  File "/data/monogs-ours/utils/semantic_mask.py", line 149, in compute_semantic_dynamic_mask
+    out = model([x_img])[0]
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/models/detection/generalized_rcnn.py", line 105, in forward
+    detections, detector_losses = self.roi_heads(features, proposals, images.image_sizes, targets)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/models/detection/roi_heads.py", line 761, in forward
+    box_features = self.box_roi_pool(features, proposals, image_shapes)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/ops/poolers.py", line 314, in forward
+    return _multiscale_roi_align(
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/ops/poolers.py", line 204, in _multiscale_roi_align
+    result_idx_in_level = roi_align(
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/ops/roi_align.py", line 236, in roi_align
+    return _roi_align(input, rois, spatial_scale, output_size[0], output_size[1], sampling_ratio, aligned)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/ops/roi_align.py", line 168, in _roi_align
+    val = _bilinear_interpolate(input, roi_batch_ind, y, x, ymask, xmask)  # [K, C, PH, PW, IY, IX]
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/ops/roi_align.py", line 65, in _bilinear_interpolate
+    v4 = masked_index(y_high, x_high)
+  File "/data/conda_envs/monogs-ours/lib/python3.10/site-packages/torchvision/ops/roi_align.py", line 55, in masked_index
+    return input[
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 110.00 MiB. GPU 0 has a total capacty of 5.78 GiB of which 100.19 MiB is free. Process 2917 has 2.49 GiB memory in use. Process 4232 has 530.00 MiB memory in use. Including non-PyTorch memory, this process has 2.17 GiB memory in use. Process 146941 has 456.00 MiB memory in use. Of the allocated memory 1.55 GiB is allocated by PyTorch, and 345.60 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

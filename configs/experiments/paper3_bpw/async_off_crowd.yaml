@@ -1,0 +1,20 @@
+# async 迁移检查（P3-D2-043 / prereg_dose_async_migration_2026-11-08）：crowd off 臂。
+#
+# **部署口径（async）**——不含任何仪器开关（Training/Dataset.single_thread 与
+# Rasterizer.deterministic_backward 均不设 ⇒ 默认关），与 instrument_dose_tau4x_crowd
+# 所在的仪器口径**永不混引**（prereg §1 口径声明）。
+# 与 dose_tau4x_crowd.yaml（async 基座，d827bace5 立项时建）唯一差别 =
+# opt_params.densify_grad_threshold（单变量，契约单测锁定）。
+# base = maskstat_off_person_tracking 同链（Combined-Prune 栈，机制全关），仅换序列 + save_dir。
+inherit_from: "configs/rgbd/bonn/crowd.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "crowd"
+
+SelectiveDensification:
+  enabled: false
+
+Results:
+  save_dir: "results/paper3_bpw/async_off_crowd"
+  save_per_frame_ape: true

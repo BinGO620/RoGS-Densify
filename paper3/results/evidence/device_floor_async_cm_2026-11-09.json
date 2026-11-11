@@ -1,0 +1,41 @@
+{
+  "prereg": "paper3/results/evidence/prereg_device_floor_async_cm_2026-11-09.md",
+  "head": "5ae19bb28",
+  "caliber": "async_deploy",
+  "seed": 2,
+  "r_valid": "N/A (async 无逐位门，L2 极差口径)",
+  "envelope": {
+    "crowd": {
+      "ate_selfdiff_cm": 0.3379,
+      "ates_cm": [
+        2.5279,
+        2.19
+      ],
+      "gauss_range_pct": 3.54,
+      "gaussians": [
+        49052,
+        47346
+      ],
+      "runs": [
+        "2026-11-09-01-33-01",
+        "2026-11-09-02-06-30"
+      ]
+    },
+    "mnobox": {
+      "ate_selfdiff_cm": 0.3889,
+      "ates_cm": [
+        2.8064,
+        3.1953
+      ],
+      "gauss_range_pct": 2.36,
+      "gaussians": [
+        42840,
+        41840
+      ],
+      "runs": [
+        "2026-11-09-01-33-02",
+        "2026-11-09-02-03-07"
+      ]
+    }
+  }
+}

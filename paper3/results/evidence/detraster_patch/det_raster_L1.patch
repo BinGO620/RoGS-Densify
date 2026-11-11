@@ -1,0 +1,314 @@
+diff --git a/cuda_rasterizer/backward.cu b/cuda_rasterizer/backward.cu
+index 777bf3b..52f3bd7 100644
+--- a/cuda_rasterizer/backward.cu
++++ b/cuda_rasterizer/backward.cu
+@@ -559,6 +559,21 @@ __device__ void render_cuda_reduce_sum(group_t g, Lists... lists) {
+ }
+ 
+ 
++// ---------------------------------------------------------------------------
++// Deterministic gradient accumulation（det-raster，P3-D2-027）。
++// 跨 block 的 float atomicAdd 顺序不定 ⇒ 重跑分叉（P3-D2-024/026）。det 模式下
++// 每 flush 贡献量化为 int64 定点（scale 2^24，绝对精度 ~6e-8，钳 ±1e4），整数
++// atomicAdd：加法可交换 ⇒ 结果与到达顺序无关 ⇒ 重跑逐位一致。镜像缓冲与 float
++// 缓冲同布局；render 与 preprocess 之间由 BACKWARD::convert_det 转回。
++// ---------------------------------------------------------------------------
++__device__ __forceinline__ unsigned long long quantize_det(float v)
++{
++	const float kScale = 16777216.0f;   // 2^24
++	float s = v * kScale;
++	s = fminf(fmaxf(s, -1.0e4f * kScale), 1.0e4f * kScale);
++	return (unsigned long long)(long long)llrintf(s);
++}
++
+ // Backward version of the rendering procedure.
+ template <uint32_t C>
+ __global__ void __launch_bounds__(BLOCK_X * BLOCK_Y)
+@@ -579,7 +594,13 @@ renderCUDA(
+ 	float4* __restrict__ dL_dconic2D,
+ 	float* __restrict__ dL_dopacity,
+ 	float* __restrict__ dL_dcolors,
+-	float* __restrict__ dL_ddepths)
++	float* __restrict__ dL_ddepths,
++	long long* __restrict__ dL_dmean2D_det,
++	long long* __restrict__ dL_dconic2D_det,
++	long long* __restrict__ dL_dopacity_det,
++	long long* __restrict__ dL_dcolors_det,
++	long long* __restrict__ dL_ddepths_det,
++	const int det_flag)
+ {
+ 	// We rasterize again. Compute necessary block info.
+ 	auto block = cg::this_thread_block();
+@@ -771,19 +792,32 @@ renderCUDA(
+ 				float3 dL_dcolors_acc = dL_dcolors_shared[0];
+ 				float dL_ddepths_acc = dL_ddepths_shared[0];
+ 
+-				atomicAdd(&dL_dmean2D[global_id].x, dL_dmean2D_acc.x);
+-				atomicAdd(&dL_dmean2D[global_id].y, dL_dmean2D_acc.y);
+-				atomicAdd(&dL_dconic2D[global_id].x, dL_dconic2D_acc.x);
+-				atomicAdd(&dL_dconic2D[global_id].y, dL_dconic2D_acc.y);
+-				atomicAdd(&dL_dconic2D[global_id].w, dL_dconic2D_acc.w);
+-				atomicAdd(&dL_dopacity[global_id], dL_dopacity_acc);
+-				atomicAdd(&dL_dcolors[global_id * C + 0], dL_dcolors_acc.x);
+-				atomicAdd(&dL_dcolors[global_id * C + 1], dL_dcolors_acc.y);
+-				atomicAdd(&dL_dcolors[global_id * C + 2], dL_dcolors_acc.z);
+-				atomicAdd(&dL_ddepths[global_id], dL_ddepths_acc);
++				if (det_flag) {
++					atomicAdd((unsigned long long*)&dL_dmean2D_det[global_id * 3 + 0], quantize_det(dL_dmean2D_acc.x));
++					atomicAdd((unsigned long long*)&dL_dmean2D_det[global_id * 3 + 1], quantize_det(dL_dmean2D_acc.y));
++					atomicAdd((unsigned long long*)&dL_dconic2D_det[global_id * 4 + 0], quantize_det(dL_dconic2D_acc.x));
++					atomicAdd((unsigned long long*)&dL_dconic2D_det[global_id * 4 + 1], quantize_det(dL_dconic2D_acc.y));
++					atomicAdd((unsigned long long*)&dL_dconic2D_det[global_id * 4 + 3], quantize_det(dL_dconic2D_acc.w));
++					atomicAdd((unsigned long long*)&dL_dopacity_det[global_id], quantize_det(dL_dopacity_acc));
++					atomicAdd((unsigned long long*)&dL_dcolors_det[global_id * C + 0], quantize_det(dL_dcolors_acc.x));
++					atomicAdd((unsigned long long*)&dL_dcolors_det[global_id * C + 1], quantize_det(dL_dcolors_acc.y));
++					atomicAdd((unsigned long long*)&dL_dcolors_det[global_id * C + 2], quantize_det(dL_dcolors_acc.z));
++					atomicAdd((unsigned long long*)&dL_ddepths_det[global_id], quantize_det(dL_ddepths_acc));
++				} else {
++					atomicAdd(&dL_dmean2D[global_id].x, dL_dmean2D_acc.x);
++					atomicAdd(&dL_dmean2D[global_id].y, dL_dmean2D_acc.y);
++					atomicAdd(&dL_dconic2D[global_id].x, dL_dconic2D_acc.x);
++					atomicAdd(&dL_dconic2D[global_id].y, dL_dconic2D_acc.y);
++					atomicAdd(&dL_dconic2D[global_id].w, dL_dconic2D_acc.w);
++					atomicAdd(&dL_dopacity[global_id], dL_dopacity_acc);
++					atomicAdd(&dL_dcolors[global_id * C + 0], dL_dcolors_acc.x);
++					atomicAdd(&dL_dcolors[global_id * C + 1], dL_dcolors_acc.y);
++					atomicAdd(&dL_dcolors[global_id * C + 2], dL_dcolors_acc.z);
++					atomicAdd(&dL_ddepths[global_id], dL_ddepths_acc);
++				}
+ 			}
+-		}
+ 	}
++		}
+ }
+ 
+ void BACKWARD::preprocess(
+@@ -859,6 +893,24 @@ void BACKWARD::preprocess(
+ 		dL_dtau);
+ }
+ 
++// det-raster（P3-D2-027）：int64 定点镜像 → float 缓冲。
++// 同一 int64 值逐位确定地转成 float（double 中间量，避免二次舍入差异）。
++__global__ void convert_det_kernel(const long long* __restrict__ src, float* __restrict__ dst, long long n)
++{
++	long long i = (long long)blockIdx.x * blockDim.x + threadIdx.x;
++	if (i < n) {
++		dst[i] = (float)((double)src[i] / 16777216.0);
++	}
++}
++
++void BACKWARD::convert_det(const long long* src, float* dst, long long n)
++{
++	if (n <= 0) return;
++	const int threads = 256;
++	const long long blocks = (n + threads - 1) / threads;
++	convert_det_kernel << <(unsigned int)blocks, threads >> > (src, dst, n);
++}
++
+ void BACKWARD::render(
+ 	const dim3 grid, const dim3 block,
+ 	const uint2* ranges,
+@@ -877,7 +929,13 @@ void BACKWARD::render(
+ 	float4* dL_dconic2D,
+ 	float* dL_dopacity,
+ 	float* dL_dcolors,
+-	float* dL_ddepths)
++	float* dL_ddepths,
++	long long* dL_dmean2D_det,
++	long long* dL_dconic2D_det,
++	long long* dL_dopacity_det,
++	long long* dL_dcolors_det,
++	long long* dL_ddepths_det,
++	const int det_flag)
+ {
+ 	renderCUDA<NUM_CHANNELS> << <grid, block >> >(
+ 		ranges,
+@@ -896,6 +954,12 @@ void BACKWARD::render(
+ 		dL_dconic2D,
+ 		dL_dopacity,
+ 		dL_dcolors,
+-		dL_ddepths
++		dL_ddepths,
++		dL_dmean2D_det,
++		dL_dconic2D_det,
++		dL_dopacity_det,
++		dL_dcolors_det,
++		dL_ddepths_det,
++		det_flag
+ 	);
+ }
+\ No newline at end of file
+diff --git a/cuda_rasterizer/backward.h b/cuda_rasterizer/backward.h
+index 3eb09ec..45aa559 100644
+--- a/cuda_rasterizer/backward.h
++++ b/cuda_rasterizer/backward.h
+@@ -38,7 +38,16 @@ namespace BACKWARD
+ 		float4* dL_dconic2D,
+ 		float* dL_dopacity,
+ 		float* dL_dcolors,
+-		float* dL_ddepths);
++		float* dL_ddepths,
++		long long* dL_dmean2D_det,
++		long long* dL_dconic2D_det,
++		long long* dL_dopacity_det,
++		long long* dL_dcolors_det,
++		long long* dL_ddepths_det,
++		const int det_flag);
++
++	// det-raster（P3-D2-027）：定点镜像 → float 缓冲，render 与 preprocess 之间调用。
++	void convert_det(const long long* src, float* dst, long long n);
+ 
+ 	void preprocess(
+ 		int P, int D, int M,
+diff --git a/cuda_rasterizer/rasterizer.h b/cuda_rasterizer/rasterizer.h
+index 59e1923..6d2152d 100644
+--- a/cuda_rasterizer/rasterizer.h
++++ b/cuda_rasterizer/rasterizer.h
+@@ -88,6 +88,12 @@ namespace CudaRasterizer
+ 			float* dL_dscale,
+ 			float* dL_drot,
+ 			float* dL_dtau,
++			long long* dL_dmean2D_det,
++			long long* dL_dconic2D_det,
++			long long* dL_dopacity_det,
++			long long* dL_dcolors_det,
++			long long* dL_ddepths_det,
++			const bool det,
+ 			bool debug);
+ 	};
+ };
+diff --git a/cuda_rasterizer/rasterizer_impl.cu b/cuda_rasterizer/rasterizer_impl.cu
+index 236e2cc..49554dc 100644
+--- a/cuda_rasterizer/rasterizer_impl.cu
++++ b/cuda_rasterizer/rasterizer_impl.cu
+@@ -378,6 +378,12 @@ void CudaRasterizer::Rasterizer::backward(
+ 	float* dL_dscale,
+ 	float* dL_drot,
+ 	float* dL_dtau,
++	long long* dL_dmean2D_det,
++	long long* dL_dconic2D_det,
++	long long* dL_dopacity_det,
++	long long* dL_dcolors_det,
++	long long* dL_ddepths_det,
++	const bool det,
+ 	bool debug)
+ {
+ 	GeometryState geomState = GeometryState::fromChunk(geom_buffer, P);
+@@ -420,9 +426,25 @@ void CudaRasterizer::Rasterizer::backward(
+ 		(float4*)dL_dconic,
+ 		dL_dopacity,
+ 		dL_dcolor,
+-		dL_ddepth
++		dL_ddepth,
++		dL_dmean2D_det,
++		dL_dconic2D_det,
++		dL_dopacity_det,
++		dL_dcolors_det,
++		dL_ddepths_det,
++		det ? 1 : 0
+     ), debug)
+ 
++	// det-raster（P3-D2-027）：必须在 preprocess 之前把定点镜像转回 float 缓冲，
++	// preprocess 逐 Gaussian 读取 dL_dmean2D / dL_dconic（无跨 block 累加）。
++	if (det && P > 0) {
++		BACKWARD::convert_det(dL_dmean2D_det, dL_dmean2D, (long long)P * 3);
++		BACKWARD::convert_det(dL_dconic2D_det, dL_dconic, (long long)P * 4);
++		BACKWARD::convert_det(dL_dopacity_det, dL_dopacity, (long long)P);
++		BACKWARD::convert_det(dL_dcolors_det, dL_dcolor, (long long)P * NUM_CHANNELS);
++		BACKWARD::convert_det(dL_ddepths_det, dL_ddepth, (long long)P);
++	}
++
+ 	// Take care of the rest of preprocessing. Was the precomputed covariance
+ 	// given to us or a scales/rot pair? If precomputed, pass that. If not,
+ 	// use the one we computed ourselves.
+diff --git a/diff_gaussian_rasterization/__init__.py b/diff_gaussian_rasterization/__init__.py
+index 6775f8a..92ff815 100644
+--- a/diff_gaussian_rasterization/__init__.py
++++ b/diff_gaussian_rasterization/__init__.py
+@@ -135,6 +135,7 @@ class _RasterizeGaussians(torch.autograd.Function):
+                 num_rendered,
+                 binningBuffer,
+                 imgBuffer,
++                raster_settings.deterministic_backward,
+                 raster_settings.debug)
+ 
+         # Compute gradients for relevant tensors by invoking backward method
+@@ -184,6 +185,7 @@ class GaussianRasterizationSettings(NamedTuple):
+     campos : torch.Tensor
+     prefiltered : bool
+     debug : bool
++    deterministic_backward : bool = False
+ 
+ class GaussianRasterizer(nn.Module):
+     def __init__(self, raster_settings):
+diff --git a/rasterize_points.cu b/rasterize_points.cu
+index 7f0d53c..f79f6a4 100644
+--- a/rasterize_points.cu
++++ b/rasterize_points.cu
+@@ -20,6 +20,7 @@
+ #include <memory>
+ #include "cuda_rasterizer/config.h"
+ #include "cuda_rasterizer/rasterizer.h"
++#include "cuda_rasterizer/backward.h"
+ #include <fstream>
+ #include <string>
+ #include <functional>
+@@ -145,6 +146,7 @@ std::tuple<torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Te
+ 	const int R,
+ 	const torch::Tensor& binningBuffer,
+ 	const torch::Tensor& imageBuffer,
++	const bool det,
+ 	const bool debug) 
+ {
+   const int P = means3D.size(0);
+@@ -169,6 +171,25 @@ std::tuple<torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Te
+   torch::Tensor dL_drotations = torch::zeros({P, 4}, means3D.options());
+   torch::Tensor dL_dtau = torch::zeros({P,6}, means3D.options());
+ 
++  // det-raster（P3-D2-027）：int64 定点镜像（render 的跨 block 梯度累加落在其上），
++  // 调用后由 BACKWARD::convert_det 逐位确定地转回上面的 float 缓冲。
++  torch::Tensor dL_dmean2D_det, dL_dconic_det, dL_dopacity_det, dL_dcolors_det, dL_ddepths_det;
++  long long *dL_dmean2D_det_p = nullptr, *dL_dconic_det_p = nullptr, *dL_dopacity_det_p = nullptr;
++  long long *dL_dcolors_det_p = nullptr, *dL_ddepths_det_p = nullptr;
++  if (det && P > 0) {
++    auto i64opts = means3D.options().dtype(torch::kLong);
++    dL_dmean2D_det = torch::zeros({P, 3}, i64opts);
++    dL_dconic_det = torch::zeros({P, 2, 2}, i64opts);
++    dL_dopacity_det = torch::zeros({P, 1}, i64opts);
++    dL_dcolors_det = torch::zeros({P, NUM_CHANNELS}, i64opts);
++    dL_ddepths_det = torch::zeros({P, 1}, i64opts);
++    dL_dmean2D_det_p = (long long*)dL_dmean2D_det.data_ptr<int64_t>();
++    dL_dconic_det_p = (long long*)dL_dconic_det.data_ptr<int64_t>();
++    dL_dopacity_det_p = (long long*)dL_dopacity_det.data_ptr<int64_t>();
++    dL_dcolors_det_p = (long long*)dL_dcolors_det.data_ptr<int64_t>();
++    dL_ddepths_det_p = (long long*)dL_ddepths_det.data_ptr<int64_t>();
++  }
++
+   if(P != 0)
+   {  
+ 	  CudaRasterizer::Rasterizer::backward(P, degree, M, R,
+@@ -204,6 +225,12 @@ std::tuple<torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Te
+ 	  dL_dscales.contiguous().data<float>(),
+ 	  dL_drotations.contiguous().data<float>(),
+       dL_dtau.contiguous().data<float>(),
++	  dL_dmean2D_det_p,
++	  dL_dconic_det_p,
++	  dL_dopacity_det_p,
++	  dL_dcolors_det_p,
++	  dL_ddepths_det_p,
++	  det,
+ 	  debug);
+   }
+ 
+diff --git a/rasterize_points.h b/rasterize_points.h
+index 5d086a2..1f45652 100644
+--- a/rasterize_points.h
++++ b/rasterize_points.h
+@@ -62,6 +62,7 @@ std::tuple<torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Te
+ 	const int R,
+ 	const torch::Tensor& binningBuffer,
+ 	const torch::Tensor& imageBuffer,
++	const bool det,
+ 	const bool debug);
+ 		
+ torch::Tensor markVisible(

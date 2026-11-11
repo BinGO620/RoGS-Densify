@@ -10,8 +10,8 @@
 # 配置须已存在：configs/experiments/paper3_bpw/bpw_{arm}_{SEQ}.yaml
 set -u
 
-REPO=/data/monogs-ours
-PY=/data/conda_envs/monogs-ours/bin/python
+REPO=${MONOGS_REPO:-/data/monogs-ours}
+PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
 ARMS="off on negctl"
 SEQ=${1:?"用法: run_three_arms.sh <sequence>  例如 balloon / person_tracking"}
 MAX_FRAMES=${MAX_FRAMES:-0}

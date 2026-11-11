@@ -1,0 +1,14 @@
+{
+ "note": "3090 权威复跑（HEAD 1ee5b05f5）：off = 剂量-响应 1× 臂同 run；on 臂含 MaskRCNN。跨机对拍：本地 2060 provisional 判决（P3-D2-017）读数不参与本判读。",
+ "sequence": "person_tracking",
+ "expect_frames": 580,
+ "floor_cm": 3.83,
+ "pairs": [
+  {"seed": 0,
+   "off": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-05-00-44-00",
+   "on": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_0/2026-11-05-00-44-00"},
+  {"seed": 1,
+   "off": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_1/2026-11-05-01-09-13",
+   "on": "results/paper3_bpw/maskstat_on_person_tracking/datasets_bonn/maskstat_on_person_tracking/seed_1/2026-11-05-01-09-08"}
+ ]
+}

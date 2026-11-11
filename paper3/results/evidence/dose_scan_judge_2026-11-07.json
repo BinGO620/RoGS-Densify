@@ -1,0 +1,238 @@
+{
+  "prereg": "paper3/results/evidence/prereg_dose_reverse_2026-11-06.md",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "claim_floor_cm": 0.5,
+  "gauss_ratio_band": [
+    0.5,
+    1.5
+  ],
+  "psnr_drop_cap_db": 0.5,
+  "n_frames_expected": 580,
+  "per_arm": {
+    "tau2x": {
+      "verdict": "SEED_UNSTABLE",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-05-22-12-05",
+            "ate_cm": 13.5941,
+            "gaussians": 51073,
+            "frames": 580,
+            "refined_gaussians": 56073,
+            "static_psnr_db": 28.5843,
+            "static_depth_l1_cm": 23.5233,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "arm": {
+            "run": "2026-11-06-22-54-31",
+            "ate_cm": 13.8117,
+            "gaussians": 21453,
+            "frames": 580,
+            "refined_gaussians": 26453,
+            "static_psnr_db": 27.7148,
+            "static_depth_l1_cm": 20.2796,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": 0.2176,
+          "gauss_ratio": 0.42,
+          "refined_gauss_ratio": 0.4718,
+          "psnr_delta_db": -0.8695
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-05-23-50-30",
+            "ate_cm": 13.9182,
+            "gaussians": 46028,
+            "frames": 580,
+            "refined_gaussians": 51028,
+            "static_psnr_db": 28.8543,
+            "static_depth_l1_cm": 22.0441,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "arm": {
+            "run": "2026-11-06-23-42-29",
+            "ate_cm": 12.4391,
+            "gaussians": 20121,
+            "frames": 580,
+            "refined_gaussians": 25121,
+            "static_psnr_db": 27.9337,
+            "static_depth_l1_cm": 18.464,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -1.4791,
+          "gauss_ratio": 0.4371,
+          "refined_gauss_ratio": 0.4923,
+          "psnr_delta_db": -0.9206
+        },
+        "2": {
+          "off": {
+            "run": "2026-11-06-01-26-10",
+            "ate_cm": 13.7268,
+            "gaussians": 51296,
+            "frames": 580,
+            "refined_gaussians": 56296,
+            "static_psnr_db": 28.5576,
+            "static_depth_l1_cm": 23.8948,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "arm": {
+            "run": "2026-11-06-22-06-38",
+            "ate_cm": 11.0067,
+            "gaussians": 21577,
+            "frames": 580,
+            "refined_gaussians": 26577,
+            "static_psnr_db": 28.13,
+            "static_depth_l1_cm": 19.7499,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -2.7201,
+          "gauss_ratio": 0.4206,
+          "refined_gauss_ratio": 0.4721,
+          "psnr_delta_db": -0.4276
+        }
+      },
+      "deltas": [
+        0.2176,
+        -1.4791,
+        -2.7201
+      ],
+      "median_delta_ate_cm": -1.4791,
+      "same_sign": false,
+      "gauss_ratios": [
+        0.42,
+        0.4371,
+        0.4206
+      ],
+      "min_gauss_ratio": 0.42,
+      "max_gauss_ratio": 0.4371,
+      "max_psnr_drop_db": 0.9206,
+      "reasons": [
+        "Δ 有正有负（跨 seed 不稳定）：[0.2176, -1.4791, -2.7201]"
+      ]
+    },
+    "tau4x": {
+      "verdict": "DOSE_CONFOUND",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-05-22-12-05",
+            "ate_cm": 13.5941,
+            "gaussians": 51073,
+            "frames": 580,
+            "refined_gaussians": 56073,
+            "static_psnr_db": 28.5843,
+            "static_depth_l1_cm": 23.5233,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "arm": {
+            "run": "2026-11-06-22-54-49",
+            "ate_cm": 10.9686,
+            "gaussians": 11439,
+            "frames": 580,
+            "refined_gaussians": 16439,
+            "static_psnr_db": 27.5162,
+            "static_depth_l1_cm": 18.537,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -2.6255,
+          "gauss_ratio": 0.224,
+          "refined_gauss_ratio": 0.2932,
+          "psnr_delta_db": -1.0681
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-05-23-50-30",
+            "ate_cm": 13.9182,
+            "gaussians": 46028,
+            "frames": 580,
+            "refined_gaussians": 51028,
+            "static_psnr_db": 28.8543,
+            "static_depth_l1_cm": 22.0441,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "arm": {
+            "run": "2026-11-06-23-42-31",
+            "ate_cm": 11.0794,
+            "gaussians": 11313,
+            "frames": 580,
+            "refined_gaussians": 16313,
+            "static_psnr_db": 27.4203,
+            "static_depth_l1_cm": 18.8762,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -2.8388,
+          "gauss_ratio": 0.2458,
+          "refined_gauss_ratio": 0.3197,
+          "psnr_delta_db": -1.434
+        },
+        "2": {
+          "off": {
+            "run": "2026-11-06-01-26-10",
+            "ate_cm": 13.7268,
+            "gaussians": 51296,
+            "frames": 580,
+            "refined_gaussians": 56296,
+            "static_psnr_db": 28.5576,
+            "static_depth_l1_cm": 23.8948,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "arm": {
+            "run": "2026-11-07-00-30-23",
+            "ate_cm": 12.0375,
+            "gaussians": 11028,
+            "frames": 580,
+            "refined_gaussians": 16028,
+            "static_psnr_db": 27.3485,
+            "static_depth_l1_cm": 19.2252,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -1.6893,
+          "gauss_ratio": 0.215,
+          "refined_gauss_ratio": 0.2847,
+          "psnr_delta_db": -1.2091
+        }
+      },
+      "deltas": [
+        -2.6255,
+        -2.8388,
+        -1.6893
+      ],
+      "median_delta_ate_cm": -2.6255,
+      "same_sign": true,
+      "gauss_ratios": [
+        0.224,
+        0.2458,
+        0.215
+      ],
+      "min_gauss_ratio": 0.215,
+      "max_gauss_ratio": 0.2458,
+      "max_psnr_drop_db": 1.434,
+      "reasons": [
+        "ATE 改善 median Δ=-2.626cm，但",
+        "min gauss_ratio=0.215 < 0.5（地图可能退化）",
+        "static PSNR 最多掉 1.434dB > 0.5dB",
+        "⇒ 剂量/质量混杂，不可区分"
+      ]
+    }
+  },
+  "joint_verdict": "INCONCLUSIVE",
+  "reasons": [
+    "出口组合未落任何机械分支：{'tau2x': 'SEED_UNSTABLE', 'tau4x': 'DOSE_CONFOUND'}"
+  ]
+}

@@ -278,6 +278,10 @@ class SLAM:
         model_params.sh_degree = 3 if self.use_spherical_harmonics else 0
 
         self.gaussians = GaussianModel(model_params.sh_degree, config=self.config)
+        # MissStreak（prereg_miss_streak_2026-11-06）：None = 关 ⇒ 逐位不变
+        from utils.miss_streak import miss_streak_active as _ms_active
+        if _ms_active(self.config):
+            self.gaussians._miss_streak_cfg = self.config
         self.gaussians.init_lr(6.0)
         self.dataset = load_dataset(
             model_params, model_params.source_path, config=config

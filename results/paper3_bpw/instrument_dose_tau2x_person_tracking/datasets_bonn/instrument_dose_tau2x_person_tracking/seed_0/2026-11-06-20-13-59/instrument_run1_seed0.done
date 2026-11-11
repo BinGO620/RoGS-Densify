@@ -1,0 +1,14 @@
+arm=instrument_dose_tau2x_person_tracking
+stage=instrument
+run=1
+seed=0
+rc=0
+elapsed_s=363
+max_frames=20
+hashseed=0
+cublas=:4096:8
+head=14da552c8
+deterministic=on
+single_thread=on
+det_backward=on
+finished_rc0=yes

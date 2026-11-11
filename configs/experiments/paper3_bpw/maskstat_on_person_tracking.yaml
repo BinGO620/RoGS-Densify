@@ -1,0 +1,27 @@
+# MaskStat L1 — arm `on`（person_tracking，账本 P3-D2-016 / prereg_maskstat_2026-11-04 + A1）。
+#
+# 与 maskstat_off_person_tracking.yaml 唯一差别 = Mapping.maskstat_dens_stats: true
+# —— 每视角对致密化统计的贡献按静态像素占比 w 加权（grad/denom 同权，无阈值参数）。
+# 掩码参数为 MaskStat **自持块**（Mapping.maskstat_*，Amendment A1：不设 SemanticMask，
+# 该标志的既有消费者——插入门控等——必须保持关闭）；loss/优化器/SelectiveDensification 全不动。
+#
+# 用法：python slam.py --config configs/experiments/paper3_bpw/maskstat_on_person_tracking.yaml --eval
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: false
+
+Mapping:
+  maskstat_dens_stats: true
+  maskstat_model: "maskrcnn"
+  maskstat_dynamic_classes: [1]
+  maskstat_dilate_px: 5
+  maskstat_max_mask_ratio: 0.95
+
+Results:
+  save_dir: "results/paper3_bpw/maskstat_on_person_tracking"
+  save_per_frame_ape: true

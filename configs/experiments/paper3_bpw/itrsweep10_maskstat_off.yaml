@@ -1,0 +1,8 @@
+# mapping_itr_num 低端扫描臂（P3-D2-032 §4 丙 part3）：base = instrument_maskstat_off，唯一改动 = Training.mapping_itr_num
+inherit_from: "configs/experiments/paper3_bpw/instrument_maskstat_off.yaml"
+
+Training:
+  mapping_itr_num: 10
+
+Results:
+  save_dir: "results/paper3_bpw/itrsweep10_maskstat_off"

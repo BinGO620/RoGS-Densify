@@ -1,0 +1,9 @@
+stage=full
+run=2
+seed=0
+rc=0
+elapsed_s=1413
+max_frames=0
+cublas=:4096:8
+head=9d11ad78c
+deterministic=on

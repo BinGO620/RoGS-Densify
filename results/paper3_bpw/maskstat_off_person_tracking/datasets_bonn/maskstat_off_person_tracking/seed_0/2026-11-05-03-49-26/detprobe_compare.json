@@ -1,0 +1,108 @@
+{
+  "pairs": {
+    "A-B": {
+      "same": [
+        "config.yml(save_dir掩蔽)"
+      ],
+      "diff": [
+        "tracking_raw.csv",
+        "per_frame_ape.csv",
+        "efficiency_raw.csv",
+        "mapping_raw.csv",
+        "plot/stats_final.json",
+        "plot/trj_final.json",
+        "plot/trj_full_final.json",
+        "detprobe_efficiency_raw_lastrow.txt",
+        "detprobe_mapping_raw_lastrow.txt"
+      ],
+      "missing": []
+    },
+    "A-C": {
+      "same": [
+        "config.yml(save_dir掩蔽)"
+      ],
+      "diff": [
+        "tracking_raw.csv",
+        "per_frame_ape.csv",
+        "efficiency_raw.csv",
+        "mapping_raw.csv",
+        "plot/stats_final.json",
+        "plot/trj_final.json",
+        "plot/trj_full_final.json",
+        "detprobe_efficiency_raw_lastrow.txt",
+        "detprobe_mapping_raw_lastrow.txt"
+      ],
+      "missing": []
+    },
+    "B-C": {
+      "same": [
+        "config.yml(save_dir掩蔽)"
+      ],
+      "diff": [
+        "tracking_raw.csv",
+        "per_frame_ape.csv",
+        "efficiency_raw.csv",
+        "mapping_raw.csv",
+        "plot/stats_final.json",
+        "plot/trj_final.json",
+        "plot/trj_full_final.json",
+        "detprobe_efficiency_raw_lastrow.txt",
+        "detprobe_mapping_raw_lastrow.txt"
+      ],
+      "missing": []
+    }
+  },
+  "files": {
+    "tracking_raw.csv": {
+      "A": "dfa3e6d2cee2bd576a30e6b4ed06c2e4",
+      "B": "6d589d5bd137b07977b9d5f0707b4017",
+      "C": "af70c0675342b26c331b4555c27ee2f7"
+    },
+    "per_frame_ape.csv": {
+      "A": "c96dac09a10d2ec551d80970eb59ee5c",
+      "B": "9447f71fbef0bbdb14bbbc2208700bba",
+      "C": "86c1f7ef9771b3430e59655d8e46f041"
+    },
+    "efficiency_raw.csv": {
+      "A": "c2ec395051ee4a8193b17e4fae2ffc4b",
+      "B": "243a3421d4a82f72aacafbd2484a1c68",
+      "C": "ce2d2f55f4c99aa810c2f415bde08d42"
+    },
+    "mapping_raw.csv": {
+      "A": "a43a300862aec4495b6b0d7d4b39d57f",
+      "B": "4de175b5e8d146bfd3a011f58b48b854",
+      "C": "f3b0d3f262ba2a3a921c1771d545ea49"
+    },
+    "plot/stats_final.json": {
+      "A": "bceef5b256c89cbe6964e7281e85da04",
+      "B": "73d012d763031fd7f7b4508ad05d0d86",
+      "C": "a46153e53cf77236a51d12f758d19a9d"
+    },
+    "plot/trj_final.json": {
+      "A": "6e3e544dea1d3d7b0ed1e8d2d4138d08",
+      "B": "31121b3bbf6b72b71745540751c2db9c",
+      "C": "b1d030a50f2e99bc00e4d6af5bfc90be"
+    },
+    "plot/trj_full_final.json": {
+      "A": "89bb964d70fe9d0e0060f3aaf7994acf",
+      "B": "8e933f183e5edc77c0ff101109c9830c",
+      "C": "6424b9a118c474b5067c33a57b976347"
+    },
+    "detprobe_efficiency_raw_lastrow.txt": {
+      "A": "22e81398b867f6d8624b60fccf3a467b",
+      "B": "525f50ab68e0ce9b2a815cfbf4a0ac0b",
+      "C": "fbc7347833861c088b46ae09837d22c4"
+    },
+    "detprobe_mapping_raw_lastrow.txt": {
+      "A": "49f6b7b9549b0f46ea383ce8bbc895f3",
+      "B": "57da1d10c47edf60fa24daf53104ea52",
+      "C": "e41341f32a4ab24e3b114a3600c03888"
+    },
+    "config.yml(save_dir掩蔽)": {
+      "A": "ff4f9daa3f1bcf024a911654f5cdc5db",
+      "B": "ff4f9daa3f1bcf024a911654f5cdc5db",
+      "C": "ff4f9daa3f1bcf024a911654f5cdc5db"
+    }
+  },
+  "verdict": "R2_divergent"
+}

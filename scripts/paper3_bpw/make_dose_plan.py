@@ -89,7 +89,8 @@ def main(argv=None):
     ap.add_argument("--n-init", type=int, default=None,
                     help="前多少个事件属于 initialize_map 站点（A4 契约：必须显式给出并"
                          "写进计划；判据机默认从计划读。580 帧 person_tracking 实测 11，"
-                         "由 init_itr_num/init_gaussian_update 决定，见 NEXT_SESSION 陷阱表）。")
+                         "由 init_itr_num/init_gaussian_update 决定，见 PITFALLS.md 装置陷阱"
+                         "条与 paper3/DECISIONS.md P3-D2-012/014 行；NEXT_SESSION 已按只留最新精简。")
     args = ap.parse_args(argv)
 
     if args.n_init is None:

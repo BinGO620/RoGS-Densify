@@ -1,0 +1,21 @@
+# 仪器模式派生物（P3-D2-030）：base = maskstat_on_crowd
+#
+# 与 base 的唯一差别 = 三处仪器开关（机制设置原样继承）+ 独立 save_dir。
+# 仪器模式定义与证据见 paper3/results/evidence/detraster_L2_2x2_2026-11-05.md：
+# 只有「单线程 × det-ON」这一格达成 40 帧 ×2 逐位一致。
+#
+# **两个 single_thread key 必须同时设**（前端读 Training、后端读 Dataset）。
+# runner 必须 export PYTHONHASHSEED=0 + CUBLAS_WORKSPACE_CONFIG=:4096:8
+# + PYTHONPATH=scripts/paper3_bpw/deterministic_probe（见 run_instrument.sh）。
+inherit_from: "configs/experiments/paper3_bpw/maskstat_on_crowd.yaml"
+
+Training:
+  single_thread: true
+Dataset:
+  single_thread: true
+
+Rasterizer:
+  deterministic_backward: true
+
+Results:
+  save_dir: "results/paper3_bpw/instrument_maskstat_on_crowd"

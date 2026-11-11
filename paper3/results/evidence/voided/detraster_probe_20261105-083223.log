@@ -1,0 +1,5 @@
+=== 确定性栅格探针 40 帧×2 probe — person_tracking seed=0 ===
+  HEAD: 550e87a6b  branch=feat/bpw-densification
+  cfg: configs/experiments/paper3_bpw/detraster_on_person_tracking.yaml   CUDA_VISIBLE_DEVICES=0
+  CUBLAS_WORKSPACE_CONFIG=:4096:8
+  selfcheck: deterministic flags active ✔

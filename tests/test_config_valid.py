@@ -64,10 +64,23 @@ def load_config_with_inherit(path, _seen=None):
         base = load_config_with_inherit(inherit_from, _seen)
         if method_from:
             method_cfg = load_config_with_inherit(method_from, _seen)
-            base.update(method_cfg)
-        base.update(cfg)
+            _update_recursive(base, method_cfg)
+        # 必须深合并（与 utils/config_utils.update_recursive 同语义）：
+        # 曾用 dict.update 浅合并，仪器派生臂在 Dataset: 段只加一个
+        # single_thread 键就把基座整个 Dataset dict 覆盖没了 ⇒ 误报缺字段。
+        # 运行时从未受影响（真实 load_config 一直是深合并）。
+        _update_recursive(base, cfg)
         return base
     return cfg
+
+
+def _update_recursive(dst, src):
+    """与 utils/config_utils.update_recursive 同语义的深合并。"""
+    for k, v in src.items():
+        if isinstance(v, dict) and isinstance(dst.get(k), dict):
+            _update_recursive(dst[k], v)
+        else:
+            dst[k] = v
 
 
 class TestBaseConfigs:

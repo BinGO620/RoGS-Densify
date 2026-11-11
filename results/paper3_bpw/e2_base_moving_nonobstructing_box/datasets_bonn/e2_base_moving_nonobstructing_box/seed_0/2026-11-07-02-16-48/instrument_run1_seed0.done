@@ -1,0 +1,14 @@
+arm=e2_base_moving_nonobstructing_box
+stage=instrument
+run=1
+seed=0
+rc=0
+elapsed_s=419
+max_frames=40
+hashseed=0
+cublas=:4096:8
+head=7f2917b82
+deterministic=on
+single_thread=on
+det_backward=on
+finished_rc0=yes

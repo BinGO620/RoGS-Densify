@@ -14,8 +14,8 @@
 #   WAIT_GPU=0 bash scripts/paper3_bpw/run_p0_sweep.sh # 立刻跑（确认 GPU 空闲时）
 set -u
 
-REPO=/data/monogs-ours
-PY=/data/conda_envs/monogs-ours/bin/python
+REPO=${MONOGS_REPO:-/data/monogs-ours}
+PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
 SEQ=person_tracking
 WAIT_GPU=${WAIT_GPU:-1}
 P0S="0 2 32 128"

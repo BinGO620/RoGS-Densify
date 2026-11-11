@@ -1,0 +1,10 @@
+stage=full
+run=1
+seed=0
+rc=0
+elapsed_s=624
+max_frames=40
+cublas=:4096:8
+head=550e87a6b
+deterministic=on
+arm=detraster_on

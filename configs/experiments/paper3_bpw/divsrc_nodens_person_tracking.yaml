@@ -1,0 +1,19 @@
+# divsrc-bisect D1 臂（P3-D2-026 / prereg_divsrc_bisect_2026-11-05 §1）。
+# 与 maskstat_off_person_tracking.yaml 同链，仅覆盖 4 键关停 clone/split/prune 决策；
+# 仍活跃：deferred promotion、reset_opacity_nonvisible、语义插入门（prereg §1 如实列出）。
+# 用法：python slam.py --config configs/experiments/paper3_bpw/divsrc_nodens_person_tracking.yaml --eval --seed 0
+inherit_from: "configs/experiments/paper3_bpw/maskstat_off_person_tracking.yaml"
+
+opt_params:
+  # YAML 1.1 坑：1.0e9（无指数符号）被 PyYAML 解析成 str ⇒ Tensor>=str 崩（首冒烟实测）；
+  # 必须写 1.0e+9。
+  densify_grad_threshold: 1.0e+9  # clone/split 永不触发（update_filter 恒空；init 段同一键）
+  densify_from_iter: 1000000000   # 只移除 init 段 reset 的 OR 分支（init 真正 densify 门
+                                  # = init_gaussian_update=100 取模，由上一键关停 clone/split）
+Training:
+  gaussian_update_every: 1000000000  # 主环 densify_and_prune 永不触发（主环 iteration_count
+                                     # 从 init 消耗 init_itr_num 后起步 >50，1e9 周期内不可能 ==50）
+  init_gaussian_th: -1.0             # init 段 prune-by-opacity 永不删（opacity ≥ 0 > -1）
+
+Results:
+  save_dir: "results/paper3_bpw/divsrc_nodens_person_tracking"

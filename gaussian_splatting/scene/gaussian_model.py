@@ -14,6 +14,8 @@ import os
 import numpy as np
 import open3d as o3d
 import torch
+
+from utils.miss_streak import extend_prune_mask
 from plyfile import PlyData, PlyElement
 from simple_knn._C import distCUDA2
 from torch import nn
@@ -78,6 +80,8 @@ def sparse_scale_fallback_value(
 
 class GaussianModel:
     def __init__(self, sh_degree: int, config=None):
+        # MissStreak 配置（None = 关；slam_backend 在建图开始时注入）
+        self._miss_streak_cfg = None
         self.active_sh_degree = 0
         self.max_sh_degree = sh_degree
 
@@ -1468,6 +1472,10 @@ class GaussianModel:
             prune_mask = torch.logical_or(
                 torch.logical_or(prune_mask, big_points_vs), big_points_ws
             )
+        # MissStreak（prereg_miss_streak_2026-11-06）：连续未命中 > M 的基元额外裁剪。
+        # 门默认关 ⇒ extend_prune_mask 原样返回 prune_mask（逐位不变）。
+        if self._miss_streak_cfg is not None:
+            prune_mask = extend_prune_mask(self._miss_streak_cfg, self, prune_mask)
         # DynPort 豁免（默认关）：动态层基元不受静态管线裁剪（生命周期归 DynPort 自己管）
         prune_mask = self._dynport_protect(prune_mask)
         self.prune_points(prune_mask)
@@ -1487,11 +1495,49 @@ class GaussianModel:
         dyn = (self.lineage_id.to(prune_mask.device) >= base)
         return prune_mask & (~dyn)
 
-    def add_densification_stats(self, viewspace_point_tensor, update_filter):
-        self.xyz_gradient_accum[update_filter] += torch.norm(
+    def update_miss_streak(self, visibility_filter):
+        """连续未命中计数（prereg_miss_streak_2026-11-06 的信号）。
+
+        每次渲染：命中（visibility_filter=True）⇒ 清零；未命中 ⇒ +1。
+        **只在 `MissStreak.enabled` 时被调用**（默认关 ⇒ 本方法从不执行，
+        字段不存在，逐位不变）。
+
+        与 `denom` 的区别（E2 实测的关键教训）：`denom` 是事件窗口内的命中**计数**，
+        在 densify 事件间隔（100 iteration）下几乎全部高斯都饱和在上限（=100），
+        完全无区分度。`miss_streak` 是**连续**未命中数，动态/遮挡区的基元才会累积，
+        是真有区分度的「最近是否被支持」信号。
+        """
+        if not hasattr(self, "miss_streak"):
+            self.miss_streak = torch.zeros(
+                (self._xyz.shape[0], 1), dtype=torch.float32, device="cuda"
+            )
+        n = self.miss_streak.shape[0]
+        cur = self._xyz.shape[0]
+        if n != cur:
+            # 高斯数变化（clone/split/prune 后）⇒ 新基元从 0 起算，旧基元保留
+            fresh = torch.zeros((cur, 1), dtype=torch.float32, device="cuda")
+            keep = min(n, cur)
+            fresh[:keep] = self.miss_streak[:keep]
+            self.miss_streak = fresh
+        self.miss_streak += 1.0
+        self.miss_streak[visibility_filter] = 0.0
+
+    def add_densification_stats(self, viewspace_point_tensor, update_filter, weight=None):
+        """累积致密化统计；`weight=None` ⇒ 原式（grad 全量 + denom +1），逐位一致。
+
+        MaskStat（P3-D2-016，prereg_maskstat §0）：weight ∈ [0,1] = 视角静态像素占比
+        ⇒ `accum += w·grad_norm`、`denom += w`（w=1 与 None 数学全等；w=0 零贡献）。
+        剂量与阈值通路不在此改动——加权只改变「谁有资格跨过 ADC 阈值」的统计输入。
+        """
+        grad_norm = torch.norm(
             viewspace_point_tensor.grad[update_filter, :2], dim=-1, keepdim=True
         )
-        self.denom[update_filter] += 1
+        if weight is None:
+            self.xyz_gradient_accum[update_filter] += grad_norm
+            self.denom[update_filter] += 1
+        else:
+            self.xyz_gradient_accum[update_filter] += weight * grad_norm
+            self.denom[update_filter] += weight
 
     def compress_deletion(
         self, op_floor=0.05, op_and_foot_th=0.10, foot_th_m=0.02, log_prefix=""

@@ -1,0 +1,7 @@
+arm=off
+seed=0
+rc=0
+elapsed_s=2698
+max_frames=0
+log=/data/monogs-ours/paper3/results/evidence/maskstat_l1_person_tracking_stage1_20261104-032240.log
+finished_rc0=yes

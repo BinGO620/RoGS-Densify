@@ -1,0 +1,26 @@
+# 剂量轴 A4 —— 历史致密化组合的干净复验（prereg_dose_a4_instrument_2026-11-06 / P3-D2-038）。
+#
+# 唯一变量 = 两个 opt_params 键（历史 `A4_aggressive_clone` 的同两个键）：
+#   densify_grad_threshold: 0.0002 → 0.0001   （更多点通过 clone 门）
+#   percent_dense:          0.01   → 0.02     （放宽 dense 判定 ⇒ 更多点走 split）
+# 历史读数（旧栈 · async · moving_obstructing_box，3 seed 31.36 vs 44.44 = −29.4%）
+# **不得与本臂读数并列**——栈/序列/口径三条均不满足并列条件（prereg §0 口径警告）。
+#
+# 其余与 maskstat_off 完全同链（机制全关）：
+#   person_tracking → bonn/base_config → tum/base_config；method_from = combined_prune。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: false
+
+opt_params:
+  densify_grad_threshold: 0.0001
+  percent_dense: 0.02
+
+Results:
+  save_dir: "results/paper3_bpw/dose_a4_person_tracking"
+  save_per_frame_ape: true

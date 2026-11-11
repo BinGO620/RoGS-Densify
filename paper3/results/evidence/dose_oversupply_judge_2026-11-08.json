@@ -1,0 +1,233 @@
+{
+  "prereg": "paper3/results/evidence/prereg_dose_oversupply_2026-11-07.md",
+  "seeds": [
+    0,
+    1
+  ],
+  "claim_floor_cm": 0.5,
+  "predicted_order": [
+    "crowd",
+    "mnobox",
+    "balloon"
+  ],
+  "per_seq": {
+    "crowd": {
+      "status": "ok",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-07-04-13-12",
+            "ate_cm": 3.4004,
+            "gaussians": 24286,
+            "frames": 928,
+            "static_psnr_db": 26.3958,
+            "static_depth_l1_cm": 11.7587,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "tau4x": {
+            "run": "2026-11-07-16-10-25",
+            "ate_cm": 2.0322,
+            "gaussians": 5899,
+            "frames": 928,
+            "static_psnr_db": 26.1547,
+            "static_depth_l1_cm": 14.2105,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -1.3682,
+          "gauss_ratio": 0.2429,
+          "psnr_delta_db": -0.2411
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-07-05-29-18",
+            "ate_cm": 2.0305,
+            "gaussians": 23180,
+            "frames": 928,
+            "static_psnr_db": 26.1984,
+            "static_depth_l1_cm": 11.0786,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "tau4x": {
+            "run": "2026-11-07-17-22-33",
+            "ate_cm": 1.957,
+            "gaussians": 5917,
+            "frames": 928,
+            "static_psnr_db": 25.9558,
+            "static_depth_l1_cm": 14.7784,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -0.0735,
+          "gauss_ratio": 0.2553,
+          "psnr_delta_db": -0.2426
+        }
+      },
+      "deltas": [
+        -1.3682,
+        -0.0735
+      ],
+      "gauss_ratios": [
+        0.2429,
+        0.2553
+      ],
+      "same_sign": true,
+      "reasons": [],
+      "gain_cm": 0.7208,
+      "judged": true,
+      "median_delta_ate_cm": -0.7208
+    },
+    "mnobox": {
+      "status": "ok",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-07-18-34-15",
+            "ate_cm": 1.993,
+            "gaussians": 28312,
+            "frames": 778,
+            "static_psnr_db": 28.3488,
+            "static_depth_l1_cm": 12.7849,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "tau4x": {
+            "run": "2026-11-07-21-50-41",
+            "ate_cm": 2.4653,
+            "gaussians": 5645,
+            "frames": 778,
+            "static_psnr_db": 27.4379,
+            "static_depth_l1_cm": 14.0791,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": 0.4723,
+          "gauss_ratio": 0.1994,
+          "psnr_delta_db": -0.9109
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-07-19-42-55",
+            "ate_cm": 2.0323,
+            "gaussians": 28859,
+            "frames": 778,
+            "static_psnr_db": 28.3947,
+            "static_depth_l1_cm": 13.772,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "tau4x": {
+            "run": "2026-11-07-22-50-24",
+            "ate_cm": 2.569,
+            "gaussians": 5689,
+            "frames": 778,
+            "static_psnr_db": 27.6837,
+            "static_depth_l1_cm": 12.8241,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": 0.5367,
+          "gauss_ratio": 0.1971,
+          "psnr_delta_db": -0.711
+        }
+      },
+      "deltas": [
+        0.4723,
+        0.5367
+      ],
+      "gauss_ratios": [
+        0.1994,
+        0.1971
+      ],
+      "same_sign": true,
+      "reasons": [],
+      "gain_cm": -0.5045,
+      "judged": true,
+      "median_delta_ate_cm": 0.5045
+    },
+    "balloon": {
+      "status": "ok",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-07-18-05-57",
+            "ate_cm": 2.9904,
+            "gaussians": 27027,
+            "frames": 439,
+            "static_psnr_db": 27.4472,
+            "static_depth_l1_cm": 14.8017,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "tau4x": {
+            "run": "2026-11-07-19-56-32",
+            "ate_cm": 2.7318,
+            "gaussians": 6070,
+            "frames": 439,
+            "static_psnr_db": 27.2988,
+            "static_depth_l1_cm": 13.7126,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -0.2586,
+          "gauss_ratio": 0.2246,
+          "psnr_delta_db": -0.1484
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-07-18-43-08",
+            "ate_cm": 2.8302,
+            "gaussians": 26356,
+            "frames": 439,
+            "static_psnr_db": 27.1951,
+            "static_depth_l1_cm": 16.2583,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "tau4x": {
+            "run": "2026-11-07-20-32-46",
+            "ate_cm": 2.6113,
+            "gaussians": 6299,
+            "frames": 439,
+            "static_psnr_db": 26.9775,
+            "static_depth_l1_cm": 13.3289,
+            "full_psnr_db": null,
+            "full_depth_l1_cm": null
+          },
+          "delta_ate_cm": -0.2189,
+          "gauss_ratio": 0.239,
+          "psnr_delta_db": -0.2176
+        }
+      },
+      "deltas": [
+        -0.2586,
+        -0.2189
+      ],
+      "gauss_ratios": [
+        0.2246,
+        0.239
+      ],
+      "same_sign": true,
+      "reasons": [],
+      "gain_cm": 0.2388,
+      "judged": true,
+      "median_delta_ate_cm": -0.2388
+    }
+  },
+  "h1_verdict": "SEQUENCE_DEPENDENT",
+  "h2": {
+    "median_delta_vs_default_cm": 3.617,
+    "deltas": [
+      0.693,
+      6.0224,
+      3.617
+    ],
+    "errors": [],
+    "note": "H2 前沿形状分类在判决文档做（prereg §2 三形态）"
+  },
+  "reasons": [
+    "部分序列可判为正（['crowd']）、其余无增益 ⇒ 剂量处方按序列诊断"
+  ]
+}

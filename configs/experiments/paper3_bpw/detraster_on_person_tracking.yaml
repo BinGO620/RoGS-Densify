@@ -1,0 +1,10 @@
+# det-raster L1 探针臂（P3-D2-027 / prereg_det_raster_2026-11-05）。
+# 与 maskstat_off_person_tracking.yaml 同链，唯一变量 = 确定性 backward 开。
+# 判据：40 帧 × 2 run 同 seed ⇒ 逐位一致（10 件判据件 + KF 模式）。
+inherit_from: "configs/experiments/paper3_bpw/maskstat_off_person_tracking.yaml"
+
+Rasterizer:
+  deterministic_backward: true
+
+Results:
+  save_dir: "results/paper3_bpw/detraster_on_person_tracking"

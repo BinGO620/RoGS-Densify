@@ -1,0 +1,13 @@
+arm=instrument_maskstat_on
+stage=instrument
+run=1
+seed=0
+rc=1
+elapsed_s=2888
+max_frames=0
+hashseed=0
+cublas=:4096:8
+head=b6d0e7ef6
+deterministic=on
+single_thread=on
+det_backward=on

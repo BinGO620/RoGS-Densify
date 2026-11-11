@@ -1,0 +1,13 @@
+source_kf,event,count,age_keyframes
+5,candidate_overflow,19794,0
+5,created_front_foreground,1625,0
+5,created_background_reveal,3375,0
+5,created,5000,0
+10,candidate_overflow,18256,0
+10,created_front_foreground,1704,0
+10,created_background_reveal,3296,0
+10,created,5000,0
+15,candidate_overflow,7748,0
+15,created_front_foreground,1448,0
+15,created_background_reveal,3552,0
+15,created,5000,0

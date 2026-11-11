@@ -1,0 +1,129 @@
+{
+  "prereg": "paper3/results/evidence/prereg_dose_a4_instrument_2026-11-06.md",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "claim_floor_cm": 0.5,
+  "gauss_ratio_cap": 1.5,
+  "n_frames_expected": 580,
+  "per_seed": {
+    "0": {
+      "off": {
+        "run": "2026-11-05-22-12-05",
+        "ate_cm": 13.5941,
+        "gaussians": 51073,
+        "frames": 580,
+        "refined_gaussians": 56073,
+        "full_psnr_db": null,
+        "full_depth_l1_cm": null,
+        "static_psnr_db": 28.5843,
+        "static_depth_l1_cm": 23.5233,
+        "psnr": null,
+        "depth_l1_cm": null
+      },
+      "a4": {
+        "run": "2026-11-06-15-25-55",
+        "ate_cm": 17.6903,
+        "gaussians": 134163,
+        "frames": 580,
+        "refined_gaussians": 139163,
+        "full_psnr_db": null,
+        "full_depth_l1_cm": null,
+        "static_psnr_db": 28.9669,
+        "static_depth_l1_cm": 28.074,
+        "psnr": null,
+        "depth_l1_cm": null
+      },
+      "err_off": null,
+      "err_a4": null,
+      "delta_ate_cm": 4.0962,
+      "gauss_ratio": 2.6269,
+      "refined_gauss_ratio": 2.4818
+    },
+    "1": {
+      "off": {
+        "run": "2026-11-05-23-50-30",
+        "ate_cm": 13.9182,
+        "gaussians": 46028,
+        "frames": 580,
+        "refined_gaussians": 51028,
+        "full_psnr_db": null,
+        "full_depth_l1_cm": null,
+        "static_psnr_db": 28.8543,
+        "static_depth_l1_cm": 22.0441,
+        "psnr": null,
+        "depth_l1_cm": null
+      },
+      "a4": {
+        "run": "2026-11-06-17-25-29",
+        "ate_cm": 17.0682,
+        "gaussians": 115848,
+        "frames": 580,
+        "refined_gaussians": 120848,
+        "full_psnr_db": null,
+        "full_depth_l1_cm": null,
+        "static_psnr_db": 28.8968,
+        "static_depth_l1_cm": 27.7519,
+        "psnr": null,
+        "depth_l1_cm": null
+      },
+      "err_off": null,
+      "err_a4": null,
+      "delta_ate_cm": 3.15,
+      "gauss_ratio": 2.5169,
+      "refined_gauss_ratio": 2.3683
+    },
+    "2": {
+      "off": {
+        "run": "2026-11-06-01-26-10",
+        "ate_cm": 13.7268,
+        "gaussians": 51296,
+        "frames": 580,
+        "refined_gaussians": 56296,
+        "full_psnr_db": null,
+        "full_depth_l1_cm": null,
+        "static_psnr_db": 28.5576,
+        "static_depth_l1_cm": 23.8948,
+        "psnr": null,
+        "depth_l1_cm": null
+      },
+      "a4": {
+        "run": "2026-11-06-18-23-58",
+        "ate_cm": 16.4876,
+        "gaussians": 130817,
+        "frames": 580,
+        "refined_gaussians": 135817,
+        "full_psnr_db": null,
+        "full_depth_l1_cm": null,
+        "static_psnr_db": 28.8172,
+        "static_depth_l1_cm": 27.2655,
+        "psnr": null,
+        "depth_l1_cm": null
+      },
+      "err_off": null,
+      "err_a4": null,
+      "delta_ate_cm": 2.7608,
+      "gauss_ratio": 2.5502,
+      "refined_gauss_ratio": 2.4126
+    }
+  },
+  "verdict": "CLOSED_NEGATIVE_OR_UNSTABLE",
+  "reasons": [
+    "三 seed 同号但 A4 更差：median Δ=+3.150cm ≥ +0.5cm"
+  ],
+  "median_delta_ate_cm": 3.15,
+  "deltas": [
+    4.0962,
+    3.15,
+    2.7608
+  ],
+  "gauss_ratios": [
+    2.6269,
+    2.5169,
+    2.5502
+  ],
+  "max_gauss_ratio": 2.6269,
+  "same_sign": true
+}

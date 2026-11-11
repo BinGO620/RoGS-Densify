@@ -1,0 +1,18 @@
+# async 迁移检查（P3-D2-043 / prereg_dose_async_migration_2026-11-08）：mnobox off 臂。
+#
+# **部署口径（async）**——不含任何仪器开关（与 instrument_dose_tau4x_moving_nonobstructing_box
+# 所在的仪器口径**永不混引**，prereg §1 口径声明）。
+# 与 dose_tau4x_moving_nonobstructing_box.yaml（async 基座）唯一差别 =
+# opt_params.densify_grad_threshold（单变量，契约单测锁定）。
+inherit_from: "configs/rgbd/bonn/moving_nonobstructing_box.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "moving_nonobstructing_box"
+
+SelectiveDensification:
+  enabled: false
+
+Results:
+  save_dir: "results/paper3_bpw/async_off_moving_nonobstructing_box"
+  save_per_frame_ape: true

@@ -1,0 +1,8 @@
+# MissStreak off 对照 + E2 trace（前置闸的基线臂）
+inherit_from: "configs/experiments/paper3_bpw/miss_streak_off.yaml"
+
+E2:
+  trace_events: true
+
+Results:
+  save_dir: "results/paper3_bpw/e2_miss_streak_off"

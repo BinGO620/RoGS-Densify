@@ -1,0 +1,77 @@
+=== 分叉源二分 D1 臂 smoke — person_tracking seed=0 ===
+  HEAD: 563720e9d  branch=feat/bpw-densification
+  cfg: configs/experiments/paper3_bpw/divsrc_nodens_person_tracking.yaml   CUDA_VISIBLE_DEVICES=0
+  CUBLAS_WORKSPACE_CONFIG=:4096:8
+  selfcheck: deterministic flags active ✔
+
+=== [06:13:19] run1  cfg=configs/experiments/paper3_bpw/divsrc_nodens_person_tracking.yaml  seed=0  max_frames=40 ===
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+MonoGS: Running MonoGS evaluation mode
+MonoGS: Following config will be overriden
+MonoGS:         save_results=True
+MonoGS:         eval_rendering=True
+MonoGS:         save_raw_metrics=True
+MonoGS:         save_final_tracking=True
+MonoGS:         save_final_gaussians=True
+MonoGS: saving results in 
+results/paper3_bpw/divsrc_nodens_person_tracking/datasets_bonn/divsrc_nodens_per
+son_tracking/seed_0/2026-11-05-06-13-22
+MonoGS: logging console output to 
+results/paper3_bpw/divsrc_nodens_person_tracking/datasets_bonn/divsrc_nodens_per
+son_tracking/seed_0/2026-11-05-06-13-22/console.log
+MonoGS: Semantic insertion gate frame 0: 37048 person px zeroed (no dynamic 
+Gaussians)
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+MonoGS: Resetting the system
+MonoGS: Backend worker failed: TypeError: '>=' not supported between instances 
+of 'Tensor' and 'str'
+Traceback (most recent call last):
+  File "/home/jiangwenheng/cron/monogs-ours/utils/slam_backend.py", line 2073, 
+in run
+    self._run_loop()
+  File "/home/jiangwenheng/cron/monogs-ours/utils/slam_backend.py", line 2137, 
+in _run_loop
+    self.initialize_map(cur_frame_idx, viewpoint)
+  File "/home/jiangwenheng/cron/monogs-ours/utils/slam_backend.py", line 461, in
+initialize_map
+    self.gaussians.densify_and_prune(
+  File 
+"/home/jiangwenheng/cron/monogs-ours/gaussian_splatting/scene/gaussian_model.py"
+, line 1448, in densify_and_prune
+    self.densify_and_clone(
+  File 
+"/home/jiangwenheng/cron/monogs-ours/gaussian_splatting/scene/gaussian_model.py"
+, line 1393, in densify_and_clone
+    selected_pts_mask = torch.where(grad_norm >= grad_threshold, True, False)
+TypeError: '>=' not supported between instances of 'Tensor' and 'str'
+
+Process Process-3:
+Traceback (most recent call last):
+  File "/home/jiangwenheng/anaconda3/envs/monogs-ours-3090/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/home/jiangwenheng/anaconda3/envs/monogs-ours-3090/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/jiangwenheng/cron/monogs-ours/utils/slam_backend.py", line 2073, in run
+    self._run_loop()
+  File "/home/jiangwenheng/cron/monogs-ours/utils/slam_backend.py", line 2137, in _run_loop
+    self.initialize_map(cur_frame_idx, viewpoint)
+  File "/home/jiangwenheng/cron/monogs-ours/utils/slam_backend.py", line 461, in initialize_map
+    self.gaussians.densify_and_prune(
+  File "/home/jiangwenheng/cron/monogs-ours/gaussian_splatting/scene/gaussian_model.py", line 1448, in densify_and_prune
+    self.densify_and_clone(
+  File "/home/jiangwenheng/cron/monogs-ours/gaussian_splatting/scene/gaussian_model.py", line 1393, in densify_and_clone
+    selected_pts_mask = torch.where(grad_norm >= grad_threshold, True, False)
+TypeError: '>=' not supported between instances of 'Tensor' and 'str'
+Traceback (most recent call last):
+  File "/home/jiangwenheng/cron/monogs-ours/slam.py", line 765, in <module>
+    slam = SLAM(config, save_dir=save_dir)
+  File "/home/jiangwenheng/cron/monogs-ours/slam.py", line 358, in __init__
+    self.frontend.run()
+  File "/home/jiangwenheng/cron/monogs-ours/utils/slam_frontend.py", line 3020, in run
+    raise RuntimeError(f"Backend worker failed: {data[1]}")
+RuntimeError: Backend worker failed: TypeError: '>=' not supported between instances of 'Tensor' and 'str'
+[W CudaIPCTypes.cpp:15] Producer process has been terminated before all shared CUDA tensors released. See Note [Sharing CUDA tensors]
+=== [06:13:30] run1 done rc=1 elapsed=11s ===
+  done 锚点: results/paper3_bpw/divsrc_nodens_person_tracking/datasets_bonn/divsrc_nodens_person_tracking/seed_0/2026-11-05-06-13-22/divsrc_run1_seed0.done
+=== DIVSRC SMOKE FAIL — config 边界崩，按 prereg §2 R-crash 处置 ===

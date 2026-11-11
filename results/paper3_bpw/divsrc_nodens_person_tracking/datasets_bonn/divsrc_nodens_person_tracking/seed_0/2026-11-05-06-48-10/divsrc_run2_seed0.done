@@ -1,0 +1,10 @@
+stage=full
+run=2
+seed=0
+rc=0
+elapsed_s=1483
+max_frames=0
+cublas=:4096:8
+head=fcafdb88a
+deterministic=on
+arm=D1_nodens

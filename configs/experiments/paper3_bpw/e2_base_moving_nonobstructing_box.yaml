@@ -1,0 +1,11 @@
+# 戊泛化探针（P3-D2-040）：基线臂 + E2 trace（纯日志开关，默认关 ⇒ 打开只加落盘）。
+# 目的：把 P3-D2-036 的「生长浪费账本 + 干预强度」从 person_tracking 推广到三类序列，
+# 检验「管线自调节、无机制可干预」是否序列无关（戊叙事的承重墙）。
+# 与 instr_off_moving_nonobstructing_box 的唯一差别 = E2.trace_events + save_dir（机制零改动）。
+inherit_from: "configs/experiments/paper3_bpw/instr_off_moving_nonobstructing_box.yaml"
+
+E2:
+  trace_events: true
+
+Results:
+  save_dir: "results/paper3_bpw/e2_base_moving_nonobstructing_box"

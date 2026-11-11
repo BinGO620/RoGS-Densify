@@ -1,0 +1,16 @@
+MonoGS: saving results in 
+results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_perso
+n_tracking/seed_0/2026-11-04-04-54-09
+MonoGS: logging console output to 
+results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_perso
+n_tracking/seed_0/2026-11-04-04-54-09/console.log
+MonoGS: Semantic insertion gate frame 0: 37048 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Resetting the system
+MonoGS: Initialized map
+MonoGS: Semantic insertion gate frame 5: 36309 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Candidate insert KF 5: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn

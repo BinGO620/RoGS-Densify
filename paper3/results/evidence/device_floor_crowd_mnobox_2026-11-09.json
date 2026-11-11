@@ -1,0 +1,38 @@
+{
+  "prereg": "paper3/results/evidence/prereg_device_floor_crowd_mnobox_2026-11-08.md",
+  "head": "fcf3bdf53",
+  "caliber": "instrument",
+  "seed": 3,
+  "r_valid": {
+    "crowd": "R1_bitwise_identical (run_instrument.sh 内置比对, same=12 diff=0)",
+    "mnobox": "R1_bitwise_identical (run_instrument.sh 内置比对, same=12 diff=0)"
+  },
+  "envelope": {
+    "crowd": {
+      "ate_selfdiff_cm": 0.0,
+      "ates_cm": [
+        3.0744,
+        3.0744
+      ],
+      "gauss_range_pct": 0.0,
+      "gaussians": [
+        24967,
+        24967
+      ],
+      "kf_ate_selfdiff_cm": null
+    },
+    "mnobox": {
+      "ate_selfdiff_cm": 0.0,
+      "ates_cm": [
+        2.1622,
+        2.1622
+      ],
+      "gauss_range_pct": 0.0,
+      "gaussians": [
+        27937,
+        27937
+      ],
+      "kf_ate_selfdiff_cm": null
+    }
+  }
+}

@@ -1,0 +1,100 @@
+MonoGS: saving results in 
+results/paper3_bpw/e2_miss_streak_on/datasets_bonn/e2_miss_streak_on/seed_0/2026
+-11-06-13-49-28
+MonoGS: logging console output to 
+results/paper3_bpw/e2_miss_streak_on/datasets_bonn/e2_miss_streak_on/seed_0/2026
+-11-06-13-49-28/console.log
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+MonoGS: Semantic insertion gate frame 0: 37048 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Resetting the system
+MonoGS: Initialized map
+MonoGS: Semantic insertion gate frame 5: 36309 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Candidate insert KF 5: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 10: 35596 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Candidate insert KF 10: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 15: 36222 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Candidate insert KF 15: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 20: 38828 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 9 lineage(s): removed 1 Gaussians
+MonoGS: Evaluating ATE at frame:  21
+Eval: RMSE ATE [m] 0.012210570111004692
+MonoGS: Candidate insert KF 20: inserted 5000 Gaussians
+MonoGS: Deferred promotion health: invalid={'xyz': 0, 'features_dc': 0, 
+'features_rest': 0, 'opacity': 0, 'scaling': 0, 'rotation': 0}, 
+scale_min=0.001000, scale_max=0.020000, scale_init=knn
+MonoGS: Semantic insertion gate frame 25: 39529 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Pruned 23 lineage(s): removed 1 Gaussians
+MonoGS: Backend worker failed: OutOfMemoryError: CUDA out of memory. Tried to 
+allocate 2.00 MiB. GPU 0 has a total capacty of 5.78 GiB of which 2.19 MiB is 
+free. Process 997484 has 2.38 GiB memory in use. Process 998859 has 558.00 MiB 
+memory in use. Process 1137921 has 2.31 GiB memory in use. Including non-PyTorch
+memory, this process has 484.00 MiB memory in use. Of the allocated memory 
+207.08 MiB is allocated by PyTorch, and 18.92 MiB is reserved by PyTorch but 
+unallocated. If reserved but unallocated memory is large try setting 
+max_split_size_mb to avoid fragmentation.  See documentation for Memory 
+Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "/data/monogs-ours/utils/slam_backend.py", line 2102, in run
+    self._run_loop()
+  File "/data/monogs-ours/utils/slam_backend.py", line 2272, in _run_loop
+    self.map(self.current_window, iters=iter_per_kf)
+  File "/data/monogs-ours/utils/slam_backend.py", line 763, in map
+    loss_mapping += get_loss_mapping(
+  File "/data/monogs-ours/utils/slam_utils.py", line 616, in get_loss_mapping
+    return get_loss_mapping_rgbd(
+  File "/data/monogs-ours/utils/slam_utils.py", line 717, in 
+get_loss_mapping_rgbd
+    rgb_pixel_mask = (gt_image.sum(dim=0) > 
+rgb_boundary_threshold).view(*depth.shape)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 MiB. GPU
+0 has a total capacty of 5.78 GiB of which 2.19 MiB is free. Process 997484 has 
+2.38 GiB memory in use. Process 998859 has 558.00 MiB memory in use. Process 
+1137921 has 2.31 GiB memory in use. Including non-PyTorch memory, this process 
+has 484.00 MiB memory in use. Of the allocated memory 207.08 MiB is allocated by
+PyTorch, and 18.92 MiB is reserved by PyTorch but unallocated. If reserved but 
+unallocated memory is large try setting max_split_size_mb to avoid 
+fragmentation.  See documentation for Memory Management and 
+PYTORCH_CUDA_ALLOC_CONF
+
+Process Process-3:
+Traceback (most recent call last):
+  File "/data/conda_envs/monogs-ours/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/data/conda_envs/monogs-ours/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/data/monogs-ours/utils/slam_backend.py", line 2102, in run
+    self._run_loop()
+  File "/data/monogs-ours/utils/slam_backend.py", line 2272, in _run_loop
+    self.map(self.current_window, iters=iter_per_kf)
+  File "/data/monogs-ours/utils/slam_backend.py", line 763, in map
+    loss_mapping += get_loss_mapping(
+  File "/data/monogs-ours/utils/slam_utils.py", line 616, in get_loss_mapping
+    return get_loss_mapping_rgbd(
+  File "/data/monogs-ours/utils/slam_utils.py", line 717, in get_loss_mapping_rgbd
+    rgb_pixel_mask = (gt_image.sum(dim=0) > rgb_boundary_threshold).view(*depth.shape)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 MiB. GPU 0 has a total capacty of 5.78 GiB of which 2.19 MiB is free. Process 997484 has 2.38 GiB memory in use. Process 998859 has 558.00 MiB memory in use. Process 1137921 has 2.31 GiB memory in use. Including non-PyTorch memory, this process has 484.00 MiB memory in use. Of the allocated memory 207.08 MiB is allocated by PyTorch, and 18.92 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+[W CudaIPCTypes.cpp:15] Producer process has been terminated before all shared CUDA tensors released. See Note [Sharing CUDA tensors]
+Traceback (most recent call last):
+  File "/data/monogs-ours/slam.py", line 769, in <module>
+    slam = SLAM(config, save_dir=save_dir)
+  File "/data/monogs-ours/slam.py", line 362, in __init__
+    self.frontend.run()
+  File "/data/monogs-ours/utils/slam_frontend.py", line 3020, in run
+    raise RuntimeError(f"Backend worker failed: {data[1]}")
+RuntimeError: Backend worker failed: OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 MiB. GPU 0 has a total capacty of 5.78 GiB of which 2.19 MiB is free. Process 997484 has 2.38 GiB memory in use. Process 998859 has 558.00 MiB memory in use. Process 1137921 has 2.31 GiB memory in use. Including non-PyTorch memory, this process has 484.00 MiB memory in use. Of the allocated memory 207.08 MiB is allocated by PyTorch, and 18.92 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

@@ -1,0 +1,9 @@
+# MissStreak on 臂（prereg_miss_streak_2026-11-06）：prune 侧机制，M=30 先验锁定
+inherit_from: "configs/experiments/paper3_bpw/miss_streak_off.yaml"
+
+MissStreak:
+  enabled: true
+  max_miss_streak: 30
+
+Results:
+  save_dir: "results/paper3_bpw/miss_streak_on"

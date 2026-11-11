@@ -1,0 +1,19 @@
+# 剂量过供给验证批（P3-D2-041）L2：tau4x 臂（grad 0.0002 → 0.0008，剂量 ÷4）。
+# 唯一变量 = densify_grad_threshold；percent_dense 不动（纯 grad 轴，P3-D2-039 约定）。
+# 动机：churn 梯度（crowd 28.9% > mnobox 21.2% > balloon 17.6%）预言
+# gain 同序（H1，prereg_dose_oversupply_2026-11-07 §1）。
+inherit_from: "configs/rgbd/bonn/balloon.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "balloon"
+
+SelectiveDensification:
+  enabled: false
+
+opt_params:
+  densify_grad_threshold: 0.0008
+
+Results:
+  save_dir: "results/paper3_bpw/dose_tau4x_balloon"
+  save_per_frame_ape: true

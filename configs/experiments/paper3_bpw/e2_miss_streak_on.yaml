@@ -1,0 +1,8 @@
+# MissStreak on + E2 trace（前置闸用，prereg §3 前置闸）
+inherit_from: "configs/experiments/paper3_bpw/miss_streak_on.yaml"
+
+E2:
+  trace_events: true
+
+Results:
+  save_dir: "results/paper3_bpw/e2_miss_streak_on"

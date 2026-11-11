@@ -1,0 +1,74 @@
+=== 确定性栅格探针 40 帧×2 probe — person_tracking seed=0 ===
+  HEAD: 550e87a6b  branch=feat/bpw-densification
+  cfg: configs/experiments/paper3_bpw/detraster_on_person_tracking.yaml   CUDA_VISIBLE_DEVICES=0
+  CUBLAS_WORKSPACE_CONFIG=:4096:8
+  selfcheck: deterministic flags active ✔
+用法: /data/monogs-ours/scripts/paper3_bpw/run_detraster_probe.sh smoke|full
+=== 确定性栅格探针 40 帧×2 full — person_tracking seed=0 ===
+  HEAD: 550e87a6b  branch=feat/bpw-densification
+  cfg: configs/experiments/paper3_bpw/detraster_on_person_tracking.yaml   CUDA_VISIBLE_DEVICES=0
+  CUBLAS_WORKSPACE_CONFIG=:4096:8
+  selfcheck: deterministic flags active ✔
+
+=== [08:33:00] run1  cfg=configs/experiments/paper3_bpw/detraster_on_person_tracking.yaml  seed=0  max_frames=40 ===
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+MonoGS: Running MonoGS evaluation mode
+MonoGS: Following config will be overriden
+MonoGS:         save_results=True
+MonoGS:         eval_rendering=True
+MonoGS:         save_raw_metrics=True
+MonoGS:         save_final_tracking=True
+MonoGS:         save_final_gaussians=True
+MonoGS: saving results in 
+results/paper3_bpw/detraster_on_person_tracking/datasets_bonn/detraster_on_perso
+n_tracking/seed_0/2026-11-05-08-33-17
+MonoGS: logging console output to 
+results/paper3_bpw/detraster_on_person_tracking/datasets_bonn/detraster_on_perso
+n_tracking/seed_0/2026-11-05-08-33-17/console.log
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+[detprobe] deterministic mode ON: use_deterministic_algorithms(True), CUBLAS_WORKSPACE_CONFIG=:4096:8, cudnn.deterministic=True, benchmark=False, tf32=off
+MonoGS: Semantic insertion gate frame 0: 37048 person px zeroed (no dynamic 
+Gaussians)
+MonoGS: Resetting the system
+MonoGS: Backend worker failed: TypeError: 
+GaussianRasterizationSettings.__new__() got an unexpected keyword argument 
+'projmatrix_raw'
+Traceback (most recent call last):
+  File "/data/monogs-ours/utils/slam_backend.py", line 2073, in run
+    self._run_loop()
+  File "/data/monogs-ours/utils/slam_backend.py", line 2137, in _run_loop
+    self.initialize_map(cur_frame_idx, viewpoint)
+  File "/data/monogs-ours/utils/slam_backend.py", line 384, in initialize_map
+    render_pkg = render(
+  File "/data/monogs-ours/gaussian_splatting/gaussian_renderer/__init__.py", 
+line 64, in render
+    raster_settings = GaussianRasterizationSettings(
+TypeError: GaussianRasterizationSettings.__new__() got an unexpected keyword 
+argument 'projmatrix_raw'
+
+Process Process-3:
+Traceback (most recent call last):
+  File "/data/conda_envs/monogs-ours/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/data/conda_envs/monogs-ours/lib/python3.10/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/data/monogs-ours/utils/slam_backend.py", line 2073, in run
+    self._run_loop()
+  File "/data/monogs-ours/utils/slam_backend.py", line 2137, in _run_loop
+    self.initialize_map(cur_frame_idx, viewpoint)
+  File "/data/monogs-ours/utils/slam_backend.py", line 384, in initialize_map
+    render_pkg = render(
+  File "/data/monogs-ours/gaussian_splatting/gaussian_renderer/__init__.py", line 64, in render
+    raster_settings = GaussianRasterizationSettings(
+TypeError: GaussianRasterizationSettings.__new__() got an unexpected keyword argument 'projmatrix_raw'
+Traceback (most recent call last):
+  File "/data/monogs-ours/slam.py", line 765, in <module>
+    slam = SLAM(config, save_dir=save_dir)
+  File "/data/monogs-ours/slam.py", line 358, in __init__
+    self.frontend.run()
+  File "/data/monogs-ours/utils/slam_frontend.py", line 3020, in run
+    raise RuntimeError(f"Backend worker failed: {data[1]}")
+RuntimeError: Backend worker failed: TypeError: GaussianRasterizationSettings.__new__() got an unexpected keyword argument 'projmatrix_raw'
+=== [08:33:42] run1 done rc=1 elapsed=42s ===
+  done 锚点: results/paper3_bpw/detraster_on_person_tracking/datasets_bonn/detraster_on_person_tracking/seed_0/2026-11-05-08-33-17/detraster_run1_seed0.done
+=== DET-RASTER PROBE FAIL @ run1（R-crash 出口，停）===

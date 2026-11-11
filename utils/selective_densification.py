@@ -104,6 +104,21 @@ def compute_per_gaussian_knobs(config, gaussians, iteration_count):
         )
         gen = torch.Generator(device="cpu").manual_seed(seed)
         s = s.cpu()[torch.randperm(s.numel(), generator=gen)].to(s.device)
+    elif signal == "obs_gate":
+        # MinObsGate（prereg_minobs_gate_2026-11-06，候选池第 3 方向）：
+        # 触发资格门 —— denom（自上次 densify 事件以来的渲染命中数）< min_obs
+        # 的高斯没有 clone/split 资格（阈值 +inf），其余保持标量默认。
+        # 与 BPW 的区别：BPW 重排名额（预算守恒），本门设槛（预算不守恒，
+        # 故 M2 预算混杂门是硬性的）。此处只走资格门，static_prob 不参与。
+        obs = gaussians.denom.detach().squeeze(-1).clamp_min(0.0)
+        gated = obs < float(min_obs)
+        thr_vec = torch.where(
+            gated,
+            torch.full_like(obs, float("inf")),
+            torch.full_like(obs, thr_d),
+        )
+        pd_vec = torch.full_like(obs, pd_d)
+        return thr_vec.unsqueeze(-1), pd_vec.unsqueeze(-1)
     elif signal != "static_prob":
         raise ValueError(f"Unknown SelectiveDensification.signal: {signal}")
 

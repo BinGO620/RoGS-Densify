@@ -1,0 +1,23 @@
+# 剂量过供给验证批（P3-D2-041）左端点：densify 全关的干净臂。
+#
+# 唯一变量 = opt_params.densify_grad_threshold: 1000000000（纯整数字面量——
+# PyYAML 把 `1.0e9` 解析成 str 的坑，PITFALLS 已登记）。该键同时作用于 init 段与
+# map 段的 densify_and_prune（slam_backend 两处同一 self.opt_params 键）
+# ⇒ clone/split 永不触发；地图 = 初始 + KF 插入 − 自调节 prune。
+# prune（opacity 自调节）保留——它正是本研究要刻画的机制。
+# percent_dense 不动（0.01，纯 grad 轴约定沿 P3-D2-039）。
+inherit_from: "configs/rgbd/bonn/person_tracking.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "person_tracking"
+
+SelectiveDensification:
+  enabled: false
+
+opt_params:
+  densify_grad_threshold: 1000000000
+
+Results:
+  save_dir: "results/paper3_bpw/dose_zero_person_tracking"
+  save_per_frame_ape: true

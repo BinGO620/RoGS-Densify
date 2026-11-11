@@ -16,8 +16,8 @@
 # 注意：串行；两次 run 的 config 除保存目录时间戳外逐字节相同。
 set -u
 
-REPO=/data/monogs-ours
-PY=/data/conda_envs/monogs-ours/bin/python
+REPO=${MONOGS_REPO:-/data/monogs-ours}
+PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
 CFG=${CFG:-configs/experiments/paper3_bpw/bpw_on_balloon.yaml}
 MAX_FRAMES=${1:-120}
 

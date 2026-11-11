@@ -1,0 +1,67 @@
+{
+  "seeds": [
+    0,
+    1
+  ],
+  "claim_floor_cm": 0.5,
+  "n_frames_expected": 928,
+  "per_seed": {
+    "0": {
+      "off": {
+        "run": "2026-11-07-04-13-12",
+        "ate_cm": 3.4004,
+        "kf_ate_cm": 6.5717,
+        "rpe_cm": 3.9809,
+        "gaussians": 24286,
+        "map_iterations": 28985,
+        "frames": 928
+      },
+      "on": {
+        "run": "2026-11-07-04-14-00",
+        "ate_cm": 3.0819,
+        "kf_ate_cm": 5.7231,
+        "rpe_cm": 3.3553,
+        "gaussians": 22752,
+        "map_iterations": 28985,
+        "frames": 928
+      },
+      "err_off": null,
+      "err_on": null,
+      "delta_ate_cm": -0.3185,
+      "gauss_ratio": 0.9368
+    },
+    "1": {
+      "off": {
+        "run": "2026-11-07-05-29-18",
+        "ate_cm": 2.0305,
+        "kf_ate_cm": 2.7963,
+        "rpe_cm": 1.4751,
+        "gaussians": 23180,
+        "map_iterations": 28985,
+        "frames": 928
+      },
+      "on": {
+        "run": "2026-11-07-05-30-50",
+        "ate_cm": 2.5279,
+        "kf_ate_cm": 4.2872,
+        "rpe_cm": 2.4752,
+        "gaussians": 26628,
+        "map_iterations": 28985,
+        "frames": 928
+      },
+      "err_off": null,
+      "err_on": null,
+      "delta_ate_cm": 0.4974,
+      "gauss_ratio": 1.1487
+    }
+  },
+  "verdict": "SEED_UNSTABLE",
+  "reasons": [
+    "Δ 有正有负：[-0.3185, 0.4974]"
+  ],
+  "median_delta_ate_cm": 0.0895,
+  "deltas": [
+    -0.3185,
+    0.4974
+  ]
+}

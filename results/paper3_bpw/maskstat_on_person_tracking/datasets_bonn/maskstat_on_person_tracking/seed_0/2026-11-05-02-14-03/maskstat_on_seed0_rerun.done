@@ -1,0 +1,7 @@
+tag=on_rerun
+cfg=configs/experiments/paper3_bpw/maskstat_on_person_tracking.yaml
+rc=0
+elapsed_s=1459
+head=49b543a2e
+console=/home/jiangwenheng/device_floor_3090/on_rerun.consolelog
+finished_rc0=yes

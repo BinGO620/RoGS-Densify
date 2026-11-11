@@ -1,0 +1,19 @@
+rootdir: /data/monogs-ours
+configfile: pyproject.toml
+plugins: dash-4.4.0, anyio-4.15.1
+collecting ... collected 11 items
+
+tests/densification/test_maskstat_stats.py::test_g1_weight_none_bit_identical PASSED [  9%]
+tests/densification/test_maskstat_stats.py::test_g2a_weight_one_equals_none PASSED [ 18%]
+tests/densification/test_maskstat_stats.py::test_g2b_weight_fraction_scales PASSED [ 27%]
+tests/densification/test_maskstat_stats.py::test_g2c_weight_zero_no_contribution PASSED [ 36%]
+tests/densification/test_maskstat_stats.py::test_g3_fail_closed_when_no_image PASSED [ 45%]
+tests/densification/test_maskstat_stats.py::test_g3_weight_from_cached_mask PASSED [ 54%]
+tests/densification/test_maskstat_stats.py::test_g3_inactive_returns_unit_weight PASSED [ 63%]
+tests/densification/test_maskstat_stats.py::test_c1_config_gate_default_off PASSED [ 72%]
+tests/densification/test_maskstat_stats.py::test_c2_static_ratio_math PASSED [ 81%]
+tests/densification/test_maskstat_stats.py::test_g4_trace_writes_rows PASSED [ 90%]
+tests/densification/test_maskstat_stats.py::test_g4_tracer_requires_save_dir PASSED [100%]
+
+============================== 11 passed in 2.65s ==============================
+471 passed, 2 warnings in 79.07s (0:01:19)

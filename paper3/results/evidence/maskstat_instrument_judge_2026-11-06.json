@@ -1,0 +1,93 @@
+{
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "claim_floor_cm": 0.5,
+  "n_frames_expected": 580,
+  "per_seed": {
+    "0": {
+      "off": {
+        "run": "2026-11-05-22-12-05",
+        "ate_cm": 13.5941,
+        "kf_ate_cm": 14.1399,
+        "rpe_cm": 1.9449,
+        "gaussians": 51073,
+        "map_iterations": 18415,
+        "frames": 580
+      },
+      "on": {
+        "run": "2026-11-05-23-01-23",
+        "ate_cm": 13.7028,
+        "kf_ate_cm": 14.1657,
+        "rpe_cm": 2.0087,
+        "gaussians": 52275,
+        "map_iterations": 18415,
+        "frames": 580
+      },
+      "err_off": null,
+      "err_on": null,
+      "delta_ate_cm": 0.1087,
+      "gauss_ratio": 1.0235
+    },
+    "1": {
+      "off": {
+        "run": "2026-11-05-23-50-30",
+        "ate_cm": 13.9182,
+        "kf_ate_cm": 14.4882,
+        "rpe_cm": 2.0511,
+        "gaussians": 46028,
+        "map_iterations": 18415,
+        "frames": 580
+      },
+      "on": {
+        "run": "2026-11-06-00-38-38",
+        "ate_cm": 16.8024,
+        "kf_ate_cm": 17.3593,
+        "rpe_cm": 2.0996,
+        "gaussians": 46047,
+        "map_iterations": 18415,
+        "frames": 580
+      },
+      "err_off": null,
+      "err_on": null,
+      "delta_ate_cm": 2.8842,
+      "gauss_ratio": 1.0004
+    },
+    "2": {
+      "off": {
+        "run": "2026-11-06-01-26-10",
+        "ate_cm": 13.7268,
+        "kf_ate_cm": 14.1088,
+        "rpe_cm": 1.9873,
+        "gaussians": 51296,
+        "map_iterations": 18415,
+        "frames": 580
+      },
+      "on": {
+        "run": "2026-11-06-02-15-08",
+        "ate_cm": 14.3759,
+        "kf_ate_cm": 14.867,
+        "rpe_cm": 2.0164,
+        "gaussians": 50974,
+        "map_iterations": 18415,
+        "frames": 580
+      },
+      "err_off": null,
+      "err_on": null,
+      "delta_ate_cm": 0.6491,
+      "gauss_ratio": 0.9937
+    }
+  },
+  "verdict": "DIRECTIONAL_EFFECT",
+  "reasons": [
+    "三 seed 同号，|median Δ|=0.649cm >= 0.5cm"
+  ],
+  "median_delta_ate_cm": 0.6491,
+  "deltas": [
+    0.1087,
+    2.8842,
+    0.6491
+  ]
+}

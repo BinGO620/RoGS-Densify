@@ -1,0 +1,307 @@
+{
+  "prereg": "paper3/results/evidence/prereg_dose_async_migration_2026-11-08.md",
+  "caliber": "async_deploy",
+  "envelope_cm": 2.14,
+  "reference_signs": {
+    "crowd": -1,
+    "mnobox": 1,
+    "pt_tau4x": -1,
+    "pt_zero": 1
+  },
+  "pairs": {
+    "pt_zero": {
+      "status": "ok",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-08-18-12-29",
+            "ate_cm": 11.5082,
+            "gaussians": 51597,
+            "frames": 580,
+            "static_psnr_db": 28.6617
+          },
+          "arm": {
+            "run": "2026-11-08-20-28-51",
+            "ate_cm": 9.4781,
+            "gaussians": 29002,
+            "frames": 580,
+            "static_psnr_db": 26.8433
+          },
+          "delta_ate_cm": -2.0301,
+          "gauss_ratio": 0.5621,
+          "static_psnr_delta_db": -1.8184
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-08-18-36-42",
+            "ate_cm": 11.2068,
+            "gaussians": 51694,
+            "frames": 580,
+            "static_psnr_db": 27.4777
+          },
+          "arm": {
+            "run": "2026-11-08-20-51-04",
+            "ate_cm": 9.4711,
+            "gaussians": 11557,
+            "frames": 580,
+            "static_psnr_db": 26.716
+          },
+          "delta_ate_cm": -1.7357,
+          "gauss_ratio": 0.2236,
+          "static_psnr_delta_db": -0.7617
+        },
+        "2": {
+          "off": {
+            "run": "2026-11-08-18-58-11",
+            "ate_cm": 11.7511,
+            "gaussians": 61220,
+            "frames": 580,
+            "static_psnr_db": 28.2415
+          },
+          "arm": {
+            "run": "2026-11-08-21-14-24",
+            "ate_cm": 9.0814,
+            "gaussians": 11909,
+            "frames": 580,
+            "static_psnr_db": 26.8333
+          },
+          "delta_ate_cm": -2.6697,
+          "gauss_ratio": 0.1945,
+          "static_psnr_delta_db": -1.4082
+        }
+      },
+      "deltas": [
+        -2.0301,
+        -1.7357,
+        -2.6697
+      ],
+      "gauss_ratios": [
+        0.5621,
+        0.2236,
+        0.1945
+      ],
+      "arm_tag": "zero",
+      "reasons": [],
+      "median_delta_ate_cm": -2.0301,
+      "median_gauss_ratio": 0.2236,
+      "ate_status": "ENVELOPE_UNJUDGEABLE",
+      "ratio_status": "TRANSFERRED",
+      "median_static_psnr_delta_db": -1.4082,
+      "psnr_status": "UNJUDGEABLE_BAND",
+      "name": "pt_zero",
+      "envelope_provenance": "pt_config_measured"
+    },
+    "pt_tau4x": {
+      "status": "ok",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-08-18-12-29",
+            "ate_cm": 11.5082,
+            "gaussians": 51597,
+            "frames": 580,
+            "static_psnr_db": 28.6617
+          },
+          "arm": {
+            "run": "2026-11-08-19-20-52",
+            "ate_cm": 9.2706,
+            "gaussians": 34585,
+            "frames": 580,
+            "static_psnr_db": 28.1266
+          },
+          "delta_ate_cm": -2.2376,
+          "gauss_ratio": 0.6703,
+          "static_psnr_delta_db": -0.5351
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-08-18-36-42",
+            "ate_cm": 11.2068,
+            "gaussians": 51694,
+            "frames": 580,
+            "static_psnr_db": 27.4777
+          },
+          "arm": {
+            "run": "2026-11-08-19-44-45",
+            "ate_cm": 10.5288,
+            "gaussians": 39086,
+            "frames": 580,
+            "static_psnr_db": 27.9609
+          },
+          "delta_ate_cm": -0.678,
+          "gauss_ratio": 0.7561,
+          "static_psnr_delta_db": 0.4832
+        },
+        "2": {
+          "off": {
+            "run": "2026-11-08-18-58-11",
+            "ate_cm": 11.7511,
+            "gaussians": 61220,
+            "frames": 580,
+            "static_psnr_db": 28.2415
+          },
+          "arm": {
+            "run": "2026-11-08-20-07-43",
+            "ate_cm": 9.1179,
+            "gaussians": 37301,
+            "frames": 580,
+            "static_psnr_db": 28.5248
+          },
+          "delta_ate_cm": -2.6332,
+          "gauss_ratio": 0.6093,
+          "static_psnr_delta_db": 0.2833
+        }
+      },
+      "deltas": [
+        -2.2376,
+        -0.678,
+        -2.6332
+      ],
+      "gauss_ratios": [
+        0.6703,
+        0.7561,
+        0.6093
+      ],
+      "arm_tag": "tau4x",
+      "reasons": [],
+      "median_delta_ate_cm": -2.2376,
+      "median_gauss_ratio": 0.6703,
+      "ate_status": "DIRECTION_JUDGED",
+      "ratio_status": "UNJUDGEABLE_BAND",
+      "psnr_status": null,
+      "name": "pt_tau4x",
+      "direction_sign": -1,
+      "direction_vs_instrument": "SAME",
+      "envelope_provenance": "pt_config_measured"
+    },
+    "crowd": {
+      "status": "ok",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-08-18-12-29",
+            "ate_cm": 2.2347,
+            "gaussians": 52843,
+            "frames": 928,
+            "static_psnr_db": 26.1884
+          },
+          "arm": {
+            "run": "2026-11-08-19-15-46",
+            "ate_cm": 2.6385,
+            "gaussians": 21898,
+            "frames": 928,
+            "static_psnr_db": 26.1268
+          },
+          "delta_ate_cm": 0.4038,
+          "gauss_ratio": 0.4144,
+          "static_psnr_delta_db": -0.0616
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-08-18-46-06",
+            "ate_cm": 2.471,
+            "gaussians": 42065,
+            "frames": 928,
+            "static_psnr_db": 26.1012
+          },
+          "arm": {
+            "run": "2026-11-08-19-46-22",
+            "ate_cm": 2.3961,
+            "gaussians": 22265,
+            "frames": 928,
+            "static_psnr_db": 25.9127
+          },
+          "delta_ate_cm": -0.0749,
+          "gauss_ratio": 0.5293,
+          "static_psnr_delta_db": -0.1885
+        }
+      },
+      "deltas": [
+        0.4038,
+        -0.0749
+      ],
+      "gauss_ratios": [
+        0.4144,
+        0.5293
+      ],
+      "arm_tag": "tau4x",
+      "reasons": [
+        "seeds 异号（不取中位判方向）：[0.4038, -0.0749]"
+      ],
+      "median_delta_ate_cm": 0.1644,
+      "median_gauss_ratio": 0.4718,
+      "ate_status": "SIGN_UNSTABLE",
+      "ratio_status": "UNJUDGEABLE_BAND",
+      "psnr_status": null,
+      "name": "crowd",
+      "envelope_cm_pair": 0.3379,
+      "envelope_provenance_pair": "measured_async"
+    },
+    "mnobox": {
+      "status": "ok",
+      "per_seed": {
+        "0": {
+          "off": {
+            "run": "2026-11-08-20-18-55",
+            "ate_cm": 2.8378,
+            "gaussians": 33637,
+            "frames": 778,
+            "static_psnr_db": 28.2782
+          },
+          "arm": {
+            "run": "2026-11-08-21-14-14",
+            "ate_cm": 2.9015,
+            "gaussians": 14317,
+            "frames": 778,
+            "static_psnr_db": 27.8745
+          },
+          "delta_ate_cm": 0.0637,
+          "gauss_ratio": 0.4256,
+          "static_psnr_delta_db": -0.4037
+        },
+        "1": {
+          "off": {
+            "run": "2026-11-08-20-45-52",
+            "ate_cm": 2.7065,
+            "gaussians": 33196,
+            "frames": 778,
+            "static_psnr_db": 28.4105
+          },
+          "arm": {
+            "run": "2026-11-08-21-43-12",
+            "ate_cm": 2.7861,
+            "gaussians": 18116,
+            "frames": 778,
+            "static_psnr_db": 27.9621
+          },
+          "delta_ate_cm": 0.0796,
+          "gauss_ratio": 0.5457,
+          "static_psnr_delta_db": -0.4484
+        }
+      },
+      "deltas": [
+        0.0637,
+        0.0796
+      ],
+      "gauss_ratios": [
+        0.4256,
+        0.5457
+      ],
+      "arm_tag": "tau4x",
+      "reasons": [],
+      "median_delta_ate_cm": 0.0717,
+      "median_gauss_ratio": 0.4856,
+      "ate_status": "ENVELOPE_UNJUDGEABLE",
+      "ratio_status": "UNJUDGEABLE_BAND",
+      "psnr_status": null,
+      "name": "mnobox",
+      "envelope_cm_pair": 0.3889,
+      "envelope_provenance_pair": "measured_async",
+      "envelope_provenance": "measured_async"
+    }
+  },
+  "verdict": "MIXED",
+  "reasons": [
+    "比例档: [('pt_zero', 'TRANSFERRED'), ('pt_tau4x', 'UNJUDGEABLE_BAND'), ('crowd', 'UNJUDGEABLE_BAND'), ('mnobox', 'UNJUDGEABLE_BAND')]；PSNR 档: [('pt_zero', 'UNJUDGEABLE_BAND')]"
+  ]
+}

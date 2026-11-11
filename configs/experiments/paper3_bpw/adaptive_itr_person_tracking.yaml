@@ -1,0 +1,22 @@
+# Adaptive itr C 臂（E 轴，P3-D2-045 / prereg_adaptive_itr_schedule_2026-11-08 §2）。
+#
+# base = instrument_person_tracking（A 臂，默认定长 itr=150）。与 A 的唯一差别 =
+# Mapping.adaptive_itr 块（+ save_dir / inherit_from）——单变量由
+# tests/paper3_bpw/test_adaptive_itr.py::test_arm_config_single_variable_vs_default 守护。
+#
+# 机制：按关键帧调用序数两段式 —— 前 8 次 keyframe 建图调用 itr=30，其后 itr=50。
+# 阈值 8 校准自本仓实测「40 帧内 itr 不敏感（极差 0.015cm）」（prereg §1），非调参。
+# 初始化 BA（frame 0 的 init_itr_num=1050 / window 满时的 300）不在调度内。
+#
+# 派发与仪器口径同款：scripts/paper3_bpw/run_instrument.sh（三项仪器前置 + 确定性套件）。
+inherit_from: "configs/experiments/paper3_bpw/instrument_person_tracking.yaml"
+
+Mapping:
+  adaptive_itr:
+    enabled: true
+    itr_early: 30
+    itr_late: 50
+    kf_threshold: 8
+
+Results:
+  save_dir: "results/paper3_bpw/adaptive_itr_person_tracking"

@@ -1,0 +1,13 @@
+arm=instrument_person_tracking
+stage=instrument
+run=2
+seed=0
+rc=0
+elapsed_s=636
+max_frames=40
+hashseed=0
+cublas=:4096:8
+head=9eb8e6ef8
+deterministic=on
+single_thread=on
+det_backward=on

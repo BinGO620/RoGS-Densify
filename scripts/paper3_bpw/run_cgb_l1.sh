@@ -10,8 +10,8 @@
 #   本脚本不重跑它；判读时用同 seed 的既有 off run 作基线 + 同批 g0 作控位对照。
 set -u
 
-REPO=/data/monogs-ours
-PY=/data/conda_envs/monogs-ours/bin/python
+REPO=${MONOGS_REPO:-/data/monogs-ours}
+PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
 ARMS="g1 g0"
 SEQ=${SEQ:-person_tracking}
 MAX_FRAMES=${MAX_FRAMES:-0}

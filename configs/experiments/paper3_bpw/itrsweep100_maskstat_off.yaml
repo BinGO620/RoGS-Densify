@@ -1,0 +1,11 @@
+# mapping_itr_num 扫描臂（P3-D2-032 §4 丙）：base = instrument_maskstat_off，唯一改动 = Training.mapping_itr_num
+#
+# 用途：量化「每关键帧优化量」对 ATE 的敏感度 ⇒ 判断仪器口径外推到 async 的风险。
+# 仪器三项开关全部继承自 base（不在此重复，防漂移）。
+inherit_from: "configs/experiments/paper3_bpw/instrument_maskstat_off.yaml"
+
+Training:
+  mapping_itr_num: 100
+
+Results:
+  save_dir: "results/paper3_bpw/itrsweep100_maskstat_off"

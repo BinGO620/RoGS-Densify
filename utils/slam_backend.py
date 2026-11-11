@@ -139,6 +139,25 @@ from utils.semantic_mask import (
     mask_mapping_enabled,
     write_semantic_timing_summary,
 )
+from utils.miss_streak import miss_streak_active
+from utils.adaptive_itr import (
+    adaptive_itr_active,
+    itr_early,
+    itr_late,
+    kf_threshold,
+    schedule_iters,
+    validate_mode as validate_adaptive_itr_mode,
+)
+from utils.e2_trace import (
+    e2_enabled,
+    log_event as log_e2_event,
+    snapshot_inputs as snapshot_e2_inputs,
+)
+from utils.maskstat import (
+    MaskStatTracer,
+    compute_stats_weight,
+    maskstat_active,
+)
 from utils import alpha_lifecycle
 from utils import occupancy_memory
 from utils import obsdebt
@@ -192,6 +211,7 @@ class BackEnd(mp.Process):
         self.rng = CounterRNG(*base_rng_key(config))
         self.iteration_count = 0
         self.last_sent = 0
+        self._e2_event_idx = 0   # E2 逐事件序号（prereg_e2_event_pairing P1）
         self.occ_aware_visibility = {}
         self.viewpoints = {}
         self.current_window = []
@@ -200,6 +220,15 @@ class BackEnd(mp.Process):
         self.mapping_time_s = 0.0
         self.mapping_calls = 0
         self.mapping_iterations = 0
+        # Adaptive itr（E 轴，默认关；P3-D2-045 / prereg_adaptive_itr_schedule
+        # _2026-11-08）：关键帧序数从 1 起计，reset() 归零。关闭时这两个计数
+        # 只被写、不被读，行为与主线逐位一致。
+        self._kf_calls = 0
+        self.adaptive_itr_early_calls = 0
+        self.adaptive_itr_late_calls = 0
+        # 默认关；set_hyperparams() 会按 config 覆写。预置在 __init__ 是为了让
+        # 未调用 set_hyperparams 的直连调用点（探针/单测）也不会 AttributeError。
+        self.adaptive_itr_on = False
         self.color_refinement_time_s = 0.0
         self.color_refinement_iterations = 26000
         # Arm-activity ledger. R2-P02-E2 shipped an inert treatment arm all the way
@@ -313,6 +342,20 @@ class BackEnd(mp.Process):
         )
         if self.color_refinement_iterations < 0:
             raise ValueError("Training.color_refinement_iterations must be >= 0")
+        # Adaptive itr（E 轴，默认关；prereg_adaptive_itr_schedule_2026-11-08）。
+        # 开启时校验口径（fail-closed：async 下开调度属未预注册实验）并把
+        # 三参数与阈值读进来，供 keyframe 分支做 per-call 选择。
+        self.adaptive_itr_on = adaptive_itr_active(self.config)
+        if self.adaptive_itr_on:
+            validate_adaptive_itr_mode(self.config, self.single_thread)
+            self.adaptive_itr_early = itr_early(self.config)
+            self.adaptive_itr_late = itr_late(self.config)
+            self.adaptive_itr_kf_threshold = kf_threshold(self.config)
+            Log(
+                "adaptive_itr enabled: itr "
+                f"{self.adaptive_itr_early} for KF<= {self.adaptive_itr_kf_threshold}, "
+                f"{self.adaptive_itr_late} after"
+            )
 
     def _log_promoted_parameter_health(self, inserted):
         if inserted <= 0:
@@ -350,6 +393,19 @@ class BackEnd(mp.Process):
         self.current_window = []
         self.initialized = not self.monocular
         self.keyframe_optimizers = None
+        # Adaptive itr：关键帧序数随地图重建归零（新地图 = 新的「早期相位」）。
+        # 序数口径（预注册 §1 字面）：**初始化关键帧（frame 0）算第 1 个关键帧** ——
+        # 校准证据「40 帧 = 前 8 个关键帧，KF 模式 0/5/…/35」正是这么数的。
+        # 故 reset() 后序数 = 1；首个 keyframe 分支调用是 #2（KF5），KF35 = #8
+        # （仍是早期），KF40 = #9 起走 itr_late。
+        # 初始化关键帧自己的建图预算是 init_itr_num（1050，硬编码、B 臂同值），
+        # **不受调度覆写**（否则 C vs B 不再单变量）；它只参与序数计数。
+        # 关闭时这些计数无人消费，行为不变。
+        # G3-次要 整改：arm-activity 计数也随 reset 归零（二次 init 后旧计数会让
+        # 「日志 vs backend_timing」对账出现假 MECH_INVALID）。
+        self._kf_calls = 1
+        self.adaptive_itr_early_calls = 0
+        self.adaptive_itr_late_calls = 0
 
         # remove all gaussians
         self.gaussians.prune_points(self.gaussians.unique_kfIDs >= 0)
@@ -400,8 +456,22 @@ class BackEnd(mp.Process):
                     self.gaussians.max_radii2D[visibility_filter],
                     radii[visibility_filter],
                 )
+                # MaskStat（P3-D2-016，prereg_maskstat §0）：init 段统计同样按视角静态
+                # 占比 w 加权；默认关 ⇒ weight=None ⇒ 与原式逐位一致。
+                if maskstat_active(self.config):
+                    weight, dyn_ratio = compute_stats_weight(self.config, viewpoint)
+                    self._maskstat_tracer().log_call(
+                        "init",
+                        self.iteration_count,
+                        [weight],
+                        [dyn_ratio],
+                    )
+                else:
+                    weight = None
+                if miss_streak_active(self.config):
+                    self.gaussians.update_miss_streak(visibility_filter)
                 self.gaussians.add_densification_stats(
-                    viewspace_point_tensor, visibility_filter
+                    viewspace_point_tensor, visibility_filter, weight=weight
                 )
                 if mapping_iteration % self.init_gaussian_update == 0:
                     if bpw_active(self.config):
@@ -435,6 +505,17 @@ class BackEnd(mp.Process):
                         thr_vec, pd_vec = compute_per_gaussian_knobs(
                             self.config, self.gaussians, self.iteration_count
                         )
+                    # E2 逐事件落盘（prereg_e2_event_pairing_2026-11-06 P1）。
+                    # 门 = E2.trace_events（默认 False ⇒ 零开销、逐位不变）。
+                    # 作用量口径：n_gated = 被机制门槛排除的高斯数（thr_vec=+inf 的个数），
+                    # n_added = 事件后高斯数 − 事件前（含 prune 的净变化）。
+                    _e2_on = e2_enabled(self.config)
+                    _e2_n0 = int(self.gaussians.get_xyz.shape[0]) if _e2_on else 0
+                    _e2_gated = None
+                    # 分位数必须在 densify 之前抓（之后 denom 已被重置为 0）
+                    _e2_inputs = snapshot_e2_inputs(self.gaussians) if _e2_on else None
+                    if _e2_on and thr_vec is not None:
+                        _e2_gated = int((~torch.isfinite(thr_vec)).sum().item())
                     self.gaussians.densify_and_prune(
                         self.opt_params.densify_grad_threshold,
                         self.init_gaussian_th,
@@ -443,6 +524,15 @@ class BackEnd(mp.Process):
                         grad_threshold_vec=thr_vec,
                         percent_dense_vec=pd_vec,
                     )
+                    if _e2_on:
+                        log_e2_event(
+                            self.config, _e2_inputs, self.iteration_count,
+                            self._e2_event_idx,
+                            n_gated=_e2_gated,
+                            n_added=int(self.gaussians.get_xyz.shape[0]) - _e2_n0,
+                            log_fn=Log,
+                        )
+                        self._e2_event_idx += 1
 
                 if self.iteration_count == self.init_gaussian_reset or (
                     self.iteration_count == self.opt_params.densify_from_iter
@@ -678,6 +768,8 @@ class BackEnd(mp.Process):
             visibility_filter_acm = []
             radii_acm = []
             n_touched_acm = []
+            # MaskStat：与 _acm 平行的视角清单（统计权重按视角静态占比算，prereg §0）
+            stats_views_acm = []
 
             keyframes_opt = []
 
@@ -732,6 +824,7 @@ class BackEnd(mp.Process):
                 visibility_filter_acm.append(visibility_filter)
                 radii_acm.append(radii)
                 n_touched_acm.append(n_touched)
+                stats_views_acm.append(viewpoint)
 
             # Counter-based keyed RNG (causal-twin): the random-KF subsample is
             # paired across lifecycle arms at the same iteration, not coupled to
@@ -786,6 +879,7 @@ class BackEnd(mp.Process):
                 viewspace_point_tensor_acm.append(viewspace_point_tensor)
                 visibility_filter_acm.append(visibility_filter)
                 radii_acm.append(radii)
+                stats_views_acm.append(viewpoint)
 
             # Advance EMA state once after the loop, so all probes see the same
             # pre-update state (lagged-residual semantics).
@@ -843,13 +937,36 @@ class BackEnd(mp.Process):
                     self.mapping_iterations += iters
                     return False
 
+                # MaskStat（P3-D2-016，prereg_maskstat §0/§2 G4）：每个 entry 的统计
+                # 贡献按该视角静态像素占比 w 加权（w=1 ⇒ 与基线逐位一致）；
+                # 掩码不可得 ⇒ RuntimeError（G3 fail-closed，不静默退化）。
+                # 默认关 ⇒ weight=None ⇒ 与原式逐位一致。
+                maskstat_weights = None
+                if maskstat_active(self.config):
+                    maskstat_weights, maskstat_ratios = [], []
+                    for idx in range(len(viewspace_point_tensor_acm)):
+                        w, dyn_ratio = compute_stats_weight(
+                            self.config, stats_views_acm[idx]
+                        )
+                        maskstat_weights.append(w)
+                        maskstat_ratios.append(dyn_ratio)
+                    self._maskstat_tracer().log_call(
+                        "map",
+                        self.iteration_count,
+                        maskstat_weights,
+                        maskstat_ratios,
+                    )
                 for idx in range(len(viewspace_point_tensor_acm)):
                     self.gaussians.max_radii2D[visibility_filter_acm[idx]] = torch.max(
                         self.gaussians.max_radii2D[visibility_filter_acm[idx]],
                         radii_acm[idx][visibility_filter_acm[idx]],
                     )
                     self.gaussians.add_densification_stats(
-                        viewspace_point_tensor_acm[idx], visibility_filter_acm[idx]
+                        viewspace_point_tensor_acm[idx],
+                        visibility_filter_acm[idx],
+                        weight=None
+                        if maskstat_weights is None
+                        else maskstat_weights[idx],
                     )
 
                 # Phase 1: keep the residual-EMA ledger live INSIDE the backend
@@ -1774,6 +1891,11 @@ class BackEnd(mp.Process):
             "mapping_time_s": self.mapping_time_s,
             "mapping_calls": self.mapping_calls,
             "mapping_iterations": self.mapping_iterations,
+            # Adaptive itr arm-activity ledger（E 轴，默认关 ⇒ 恒 0）。
+            # 只读诊断：一个标着 scheduled 的臂这里为 0 ⇒ 它没跑机制，
+            # 其 ATE/算力读数无意义（DISCIPLINE「组件生效验证」#9）。
+            "adaptive_itr_early_calls": self.adaptive_itr_early_calls,
+            "adaptive_itr_late_calls": self.adaptive_itr_late_calls,
             "color_refinement_time_s": self.color_refinement_time_s,
             # arm-activity ledger (see __init__): a treatment arm that reports
             # zero here did not run its treatment, whatever its metrics say.
@@ -1817,6 +1939,13 @@ class BackEnd(mp.Process):
         payload = clone_obj(self.gaussians)
         msg = [tag, payload, self.occ_aware_visibility, keyframes]
         self.frontend_queue.put(msg)
+
+    def _maskstat_tracer(self):
+        """惰性建 trace（maskstat 开时才调用；run 级 CSV，prereg §2 G4）。"""
+        if getattr(self, "_maskstat_tracer_obj", None) is None:
+            self._maskstat_tracer_obj = MaskStatTracer(self.config)
+            Log(f"maskstat: active, trace={self._maskstat_tracer_obj.path}")
+        return self._maskstat_tracer_obj
 
     def _release_cuda_state_for_shutdown(self):
         """Drop tensors imported from the frontend before this process exits."""
@@ -1951,6 +2080,7 @@ class BackEnd(mp.Process):
                     opt_params = []
                     frames_to_optimize = self.config["Training"]["pose_window"]
                     iter_per_kf = self.mapping_itr_num if self.single_thread else self.async_iter_per_kf
+                    initial_ba = False
                     if not self.initialized:
                         if (
                             len(self.current_window)
@@ -1960,9 +2090,33 @@ class BackEnd(mp.Process):
                                 self.config["Training"]["window_size"] - 1
                             )
                             iter_per_kf = 50 if self.live_mode else 300
+                            initial_ba = True
                             Log("Performing initial BA for initialization")
                         else:
                             iter_per_kf = self.mapping_itr_num
+                    # Adaptive itr（E 轴，默认关；prereg_adaptive_itr_schedule
+                    # _2026-11-08 §1）：按关键帧序数两段式选 per-call itr。
+                    # 关闭时 schedule_iters 原样返回 iter_per_kf（逐位不变）；
+                    # 开启时不覆盖初始化 BA（其预算硬编码、B 臂同样 300，改它
+                    # 会破坏 C vs B 的单变量）。
+                    if self.adaptive_itr_on and not initial_ba:
+                        self._kf_calls += 1
+                        iter_per_kf = schedule_iters(
+                            self.config, self._kf_calls, iter_per_kf
+                        )
+                        if self._kf_calls <= self.adaptive_itr_kf_threshold:
+                            self.adaptive_itr_early_calls += 1
+                        else:
+                            self.adaptive_itr_late_calls += 1
+                        # 逐调用落盘（M1 机制门要逐条核对「前 kf_threshold 全
+                        # itr_early、其后全 itr_late」；115 行，成本可忽略）。
+                        # **不用 `[...]` 前缀**：rich 会把方括号当 markup 标签静默
+                        # 吞掉（PITFALLS 已有同类踩坑），计数与判读只认稳定子串
+                        # `adaptive_itr KF#`。
+                        Log(
+                            f"adaptive_itr KF#{self._kf_calls} "
+                            f"(frame {cur_frame_idx}) itr={iter_per_kf}"
+                        )
                     for cam_idx in range(len(self.current_window)):
                         if self.current_window[cam_idx] == 0:
                             continue

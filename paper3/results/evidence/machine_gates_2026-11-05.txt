@@ -1,0 +1,17 @@
+== 2026-11-05 机器门工件（G2-M3 整改附证；P3-D2-026 判决落盘前复跑）==
+
+--- gate1_class_sweep.py --quiet ---
+
+机械类扫：16 文件 × 类别[口径/账目/预算/负结果身份]，命中 94，ALLOWED 9（放行理由见上），UNMARKED = 0，轮次非规范 = 0（规范: 已送 7 轮），失效引用 = 0（VOIDED 表 1 文件），α 墙冲突 = 0，缺件 = 0
+rc=0
+
+--- sweep_citation_claims.py ---
+UNMARKED = 0
+rc=0
+
+--- pytest tests -q ---
+487 passed, 2 warnings in 61.32s (0:01:01)
+
+--- health_check.py（PASS/FAIL 计数）---
+38
+  ❌ [FAIL] Sync: 本地工作区干净

@@ -1,0 +1,21 @@
+# 仪器模式基线臂（9 序列扩展，P3-D2-030 标准派生）：base = maskstat_off_person_tracking 同链，唯一差别 = 序列 + save_dir
+inherit_from: "configs/rgbd/bonn/crowd.yaml"
+method_from: "configs/experiments/combined_prune/method.yaml"
+method: "Combined-Prune"
+
+rng_sequence: "crowd"
+
+SelectiveDensification:
+  enabled: false
+
+Training:
+  single_thread: true
+Dataset:
+  single_thread: true
+
+Rasterizer:
+  deterministic_backward: true
+
+Results:
+  save_dir: "results/paper3_bpw/instr_off_crowd"
+  save_per_frame_ape: true

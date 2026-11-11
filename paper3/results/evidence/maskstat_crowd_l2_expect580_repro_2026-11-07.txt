@@ -1,0 +1,8 @@
+seed   off_ATE    on_ATE      ΔATE  gauss_off  gauss_on   ratio
+   0  INVALID: seed_0 无 580 帧的完成 run；候选: 2026-11-06-07-10-50(frames=40), 2026-11-07-02-57-10(frames=928), 2026-11-07-04-13-12(frames=928)
+   1  INVALID: seed_1 无 580 帧的完成 run；候选: 2026-11-07-05-29-18(frames=928)
+
+VERDICT: INSTRUMENT_INVALID
+  - seed0: seed_0 无 580 帧的完成 run；候选: 2026-11-06-07-10-50(frames=40), 2026-11-07-02-57-10(frames=928), 2026-11-07-04-13-12(frames=928)
+  - seed1: seed_1 无 580 帧的完成 run；候选: 2026-11-07-05-29-18(frames=928)
+rc=0

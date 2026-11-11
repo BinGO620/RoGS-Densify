@@ -1,0 +1,221 @@
+{
+ "prereg": "paper3/results/evidence/prereg_dose_response_2026-11-04.md",
+ "runs_manifest": "paper3/results/evidence/dose_runs_3090_2026-11-05.json",
+ "per_seed": {
+  "0": [
+   {
+    "tau_scale": 0.5,
+    "completion_anchor": "done",
+    "tau": 0.0001,
+    "run_dir": "results/paper3_bpw/dose_tau05x_person_tracking/datasets_bonn/dose_tau05x_person_tracking/seed_0/2026-11-04-22-17-47",
+    "ate_cm": 11.8448,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 75284,
+    "refined_num_gaussians": 75284,
+    "elapsed_s": 1553,
+    "render_report": {
+     "psnr": 28.9647,
+     "ssim": 0.9032,
+     "lpips": 0.1554,
+     "depth_l1_cm": 23.6178,
+     "mask_type": "static"
+    }
+   },
+   {
+    "tau_scale": 1.0,
+    "completion_anchor": "done",
+    "tau": 0.0002,
+    "run_dir": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_0/2026-11-05-00-44-00",
+    "ate_cm": 11.3558,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 47973,
+    "refined_num_gaussians": 52973,
+    "elapsed_s": 1513,
+    "render_report": {
+     "psnr": 27.6427,
+     "ssim": 0.892,
+     "lpips": 0.1656,
+     "depth_l1_cm": 18.6864,
+     "mask_type": "static"
+    }
+   },
+   {
+    "tau_scale": 2.0,
+    "completion_anchor": "done",
+    "tau": 0.0004,
+    "run_dir": "results/paper3_bpw/dose_tau2x_person_tracking/datasets_bonn/dose_tau2x_person_tracking/seed_0/2026-11-04-23-09-05",
+    "ate_cm": 12.4991,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 50122,
+    "refined_num_gaussians": 50122,
+    "elapsed_s": 1240,
+    "render_report": {
+     "psnr": 27.6249,
+     "ssim": 0.8823,
+     "lpips": 0.1927,
+     "depth_l1_cm": 21.206,
+     "mask_type": "static"
+    }
+   },
+   {
+    "tau_scale": 4.0,
+    "completion_anchor": "done",
+    "tau": 0.0008,
+    "run_dir": "results/paper3_bpw/dose_tau4x_person_tracking/datasets_bonn/dose_tau4x_person_tracking/seed_0/2026-11-04-22-17-47",
+    "ate_cm": 14.5228,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 37980,
+    "refined_num_gaussians": 42980,
+    "elapsed_s": 1456,
+    "render_report": {
+     "psnr": 26.9497,
+     "ssim": 0.8757,
+     "lpips": 0.1947,
+     "depth_l1_cm": 19.0274,
+     "mask_type": "static"
+    }
+   }
+  ],
+  "1": [
+   {
+    "tau_scale": 0.5,
+    "completion_anchor": "done",
+    "tau": 0.0001,
+    "run_dir": "results/paper3_bpw/dose_tau05x_person_tracking/datasets_bonn/dose_tau05x_person_tracking/seed_1/2026-11-04-22-43-41",
+    "ate_cm": 11.5173,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 113071,
+    "refined_num_gaussians": 113071,
+    "elapsed_s": 1526,
+    "render_report": {
+     "psnr": 29.0823,
+     "ssim": 0.9067,
+     "lpips": 0.1482,
+     "depth_l1_cm": 19.5469,
+     "mask_type": "static"
+    }
+   },
+   {
+    "tau_scale": 1.0,
+    "completion_anchor": "done",
+    "tau": 0.0002,
+    "run_dir": "results/paper3_bpw/maskstat_off_person_tracking/datasets_bonn/maskstat_off_person_tracking/seed_1/2026-11-05-01-09-13",
+    "ate_cm": 12.1748,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 68062,
+    "refined_num_gaussians": 68062,
+    "elapsed_s": 1518,
+    "render_report": {
+     "psnr": 28.9282,
+     "ssim": 0.9036,
+     "lpips": 0.1529,
+     "depth_l1_cm": 20.3186,
+     "mask_type": "static"
+    }
+   },
+   {
+    "tau_scale": 2.0,
+    "completion_anchor": "done",
+    "tau": 0.0004,
+    "run_dir": "results/paper3_bpw/dose_tau2x_person_tracking/datasets_bonn/dose_tau2x_person_tracking/seed_1/2026-11-04-23-29-46",
+    "ate_cm": 11.0159,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 38279,
+    "refined_num_gaussians": 43279,
+    "elapsed_s": 1250,
+    "render_report": {
+     "psnr": 26.9132,
+     "ssim": 0.8724,
+     "lpips": 0.1961,
+     "depth_l1_cm": 22.4299,
+     "mask_type": "static"
+    }
+   },
+   {
+    "tau_scale": 4.0,
+    "completion_anchor": "done",
+    "tau": 0.0008,
+    "run_dir": "results/paper3_bpw/dose_tau4x_person_tracking/datasets_bonn/dose_tau4x_person_tracking/seed_1/2026-11-04-22-42-03",
+    "ate_cm": 8.9711,
+    "status": "OK",
+    "num_frames": 580,
+    "online_num_gaussians": 34601,
+    "refined_num_gaussians": 34601,
+    "elapsed_s": 1365,
+    "render_report": {
+     "psnr": 28.1631,
+     "ssim": 0.892,
+     "lpips": 0.1755,
+     "depth_l1_cm": 16.8965,
+     "mask_type": "static"
+    }
+   }
+  ]
+ },
+ "analysis": {
+  "per_seed": {
+   "0": {
+    "d1_dose_monotone": false,
+    "d1_dose_changed": false,
+    "d1_total_drop_pct": 49.55103342011583,
+    "d3_frames_ok": true,
+    "ate_span_cm": 3.167,
+    "min_ate_arm_tau": 1.0,
+    "shape": "PLATEAU",
+    "platform": {
+     "gap_2x_4x_cm": 2.0237,
+     "gap_2x_1x_cm": 1.1433,
+     "gap_4x_1x_cm": 3.167,
+     "platform_ok": true
+    }
+   },
+   "1": {
+    "d1_dose_monotone": true,
+    "d1_dose_changed": true,
+    "d1_total_drop_pct": 69.39887327431437,
+    "d3_frames_ok": true,
+    "ate_span_cm": 3.2036999999999995,
+    "min_ate_arm_tau": 4.0,
+    "shape": "PLATEAU",
+    "platform": {
+     "gap_2x_4x_cm": 2.0448000000000004,
+     "gap_2x_1x_cm": 1.1588999999999992,
+     "gap_4x_1x_cm": 3.2036999999999995,
+     "platform_ok": true
+    }
+   }
+  },
+  "d1_all_seeds": false,
+  "d3_frames_ok": true,
+  "platform_replicates": [
+   true,
+   true
+  ],
+  "platform_all_seeds": true,
+  "n_seeds": 2,
+  "floor_cm": 3.83,
+  "d1_min_drop_pct": 3.0,
+  "expect_frames": 580,
+  "note_dose_keep": {
+   "0": [
+    "0.5x: 75,284 (refined 75,284)",
+    "1x: 47,973 (refined 52,973)",
+    "2x: 50,122 (refined 50,122)",
+    "4x: 37,980 (refined 42,980)"
+   ],
+   "1": [
+    "0.5x: 113,071 (refined 113,071)",
+    "1x: 68,062 (refined 68,062)",
+    "2x: 38,279 (refined 43,279)",
+    "4x: 34,601 (refined 34,601)"
+   ]
+  }
+ }
+}

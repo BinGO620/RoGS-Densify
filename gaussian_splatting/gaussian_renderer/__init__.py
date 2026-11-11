@@ -55,6 +55,12 @@ def render(
     tanfovx = math.tan(viewpoint_camera.FoVx * 0.5)
     tanfovy = math.tan(viewpoint_camera.FoVy * 0.5)
 
+    # det-raster（P3-D2-027）：config 门 `Rasterizer.deterministic_backward`，
+    # 缺省 False = 原 float atomicAdd 路径（默认关 = 主线行为）。
+    _det_bw = bool(
+        (pc.config.get("Rasterizer", {}) or {}).get("deterministic_backward", False)
+    ) if getattr(pc, "config", None) else False
+
     raster_settings = GaussianRasterizationSettings(
         image_height=int(viewpoint_camera.image_height),
         image_width=int(viewpoint_camera.image_width),
@@ -69,6 +75,7 @@ def render(
         campos=viewpoint_camera.camera_center,
         prefiltered=False,
         debug=False,
+        deterministic_backward=_det_bw,
     )
 
     rasterizer = GaussianRasterizer(raster_settings=raster_settings)

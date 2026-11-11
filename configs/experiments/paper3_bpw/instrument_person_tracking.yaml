@@ -1,0 +1,28 @@
+# 仪器模式（instrument mode）—— 机制研究的标准测量配置（P3-D2-030 / prereg_instrument_mode_2026-11-05）。
+#
+# 这不是部署配置，是**尺子**。它把两个设备无关的分叉源都关掉：
+#   ① 多进程异步调度（backend 队列空时无上限自由跑 map()，每 KF 迭代数由墙上时钟决定）
+#   ② rasterizer backward 的跨 block float atomicAdd 顺序
+# 证据：2×2 四格中只有本格（单线程 × det-ON）达成 40 帧 ×2 逐位一致
+#       （detraster_L2_2x2_2026-11-05.md）。
+#
+# **两个 single_thread key 必须同时设**（坑）：前端读 Training.single_thread
+# （slam_frontend.py:357），后端读 Dataset.single_thread（slam_backend.py:317）。
+# 只设前者 ⇒ 后端仍 async ⇒ 仪器无效。
+#
+# 接线（runner 必须同时 export）：
+#   PYTHONPATH=scripts/paper3_bpw/deterministic_probe
+#   PYTHONHASHSEED=0                       # 须在解释器启动前（sitecustomize 里设太晚）
+#   CUBLAS_WORKSPACE_CONFIG=:4096:8
+inherit_from: "configs/experiments/paper3_bpw/maskstat_off_person_tracking.yaml"
+
+Training:
+  single_thread: true
+Dataset:
+  single_thread: true
+
+Rasterizer:
+  deterministic_backward: true
+
+Results:
+  save_dir: "results/paper3_bpw/instrument_person_tracking"

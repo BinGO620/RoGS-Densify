@@ -1,0 +1,8 @@
+arm=tau4x
+seed=0
+gpu=1
+rc=0
+elapsed_s=1456
+head=1ee5b05f5
+console=/home/jiangwenheng/dose_full_runs/tau4x_seed0.consolelog
+finished_rc0=yes

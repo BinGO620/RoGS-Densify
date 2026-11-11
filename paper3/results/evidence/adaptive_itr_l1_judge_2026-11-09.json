@@ -1,0 +1,96 @@
+{
+  "prereg": "paper3/results/evidence/prereg_adaptive_itr_schedule_2026-11-08.md",
+  "amendments": [
+    "paper3/results/evidence/prereg_adaptive_itr_amendment_a1_2026-11-09.md",
+    "paper3/results/evidence/prereg_adaptive_itr_amendment_a2_2026-11-09.md"
+  ],
+  "seed": 0,
+  "frames_expected": 580,
+  "claim_floor_cm": 0.5,
+  "expected_saving_pct": -2.02,
+  "arms": {
+    "A": {
+      "run": "2026-11-09-20-15-37",
+      "dir": "results/paper3_bpw/instrument_person_tracking/datasets_bonn/instrument_person_tracking/seed_0/2026-11-09-20-15-37",
+      "ate_cm": 13.5941,
+      "gaussians": 51073,
+      "mapping_iterations": 18415,
+      "mapping_calls": 231,
+      "iterations_source": "backend_timing",
+      "frames": 580,
+      "backend_early_calls": 0,
+      "backend_late_calls": 0,
+      "backend_mapping_iterations": 18415,
+      "iterations_consistent": true
+    },
+    "B": {
+      "run": "2026-11-09-21-03-01",
+      "dir": "results/paper3_bpw/itrsweep50_maskstat_off/datasets_bonn/itrsweep50_maskstat_off/seed_0/2026-11-09-21-03-01",
+      "ate_cm": 10.6579,
+      "gaussians": 62164,
+      "mapping_iterations": 6915,
+      "mapping_calls": 231,
+      "iterations_source": "backend_timing",
+      "frames": 580,
+      "backend_early_calls": 0,
+      "backend_late_calls": 0,
+      "backend_mapping_iterations": 6915,
+      "iterations_consistent": true
+    },
+    "C": {
+      "run": "2026-11-09-19-17-31",
+      "dir": "results/paper3_bpw/adaptive_itr_person_tracking/datasets_bonn/adaptive_itr_person_tracking/seed_0/2026-11-09-19-17-31",
+      "ate_cm": 9.8258,
+      "gaussians": 57370,
+      "mapping_iterations": 6775,
+      "mapping_calls": 231,
+      "iterations_source": "backend_timing",
+      "frames": 580,
+      "backend_early_calls": 7,
+      "backend_late_calls": 108,
+      "backend_mapping_iterations": 6775,
+      "iterations_consistent": true
+    }
+  },
+  "m1": {
+    "ok": true,
+    "n_lines": 115,
+    "early_calls": 7,
+    "late_calls": 108,
+    "itr_early": 30,
+    "itr_late": 50,
+    "kf_threshold": 8,
+    "first_late_frame": 40
+  },
+  "m2": {
+    "ok": false,
+    "delta_ate_cm": -0.8321,
+    "gate_cm": 0.5
+  },
+  "m3": {
+    "ok": true,
+    "b_iterations": 6915,
+    "c_iterations": 6775,
+    "saving_iterations": 140,
+    "saving_pct": 2.025,
+    "expected_pct_prereg": -5.0,
+    "expected_pct_measured_density": -2.02,
+    "sign_convention": "saving_pct positive = fewer iterations in C"
+  },
+  "r_valid": {
+    "ok": true,
+    "files_compared": 10,
+    "diffs": 0
+  },
+  "verdict": "L1_ATE_GAIN",
+  "reasons": [
+    "ATE_C=9.8258 < ATE_B−0.5=10.1579"
+  ],
+  "arm_errors": {},
+  "report_only": {
+    "a_ate_cm": 13.5941,
+    "a_iterations": 18415,
+    "delta_ca_cm": -3.7683,
+    "delta_ba_cm": -2.9362
+  }
+}

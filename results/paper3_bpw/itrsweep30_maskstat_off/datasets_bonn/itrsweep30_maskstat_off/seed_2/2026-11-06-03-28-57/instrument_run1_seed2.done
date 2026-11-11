@@ -1,0 +1,14 @@
+arm=itrsweep30_maskstat_off
+stage=instrument
+run=1
+seed=2
+rc=0
+elapsed_s=2805
+max_frames=0
+hashseed=0
+cublas=:4096:8
+head=db5eb8b71
+deterministic=on
+single_thread=on
+det_backward=on
+finished_rc0=yes

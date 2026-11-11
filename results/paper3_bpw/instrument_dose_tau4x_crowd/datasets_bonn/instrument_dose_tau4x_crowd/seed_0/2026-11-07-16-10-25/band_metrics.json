@@ -1,0 +1,30 @@
+{
+ "mask_subdir": "dynamic_mask",
+ "frames_scored": 186,
+ "bands": {
+  "band10": {
+   "radius_px": 10,
+   "psnr": 22.5856,
+   "ssim": 0.8749,
+   "depth_l1_pen_cm": 14.4692,
+   "support_px_mean": 15998,
+   "frames_with_support": 133
+  },
+  "band25": {
+   "radius_px": 25,
+   "psnr": 23.4293,
+   "ssim": 0.8856,
+   "depth_l1_pen_cm": 13.921,
+   "support_px_mean": 37831,
+   "frames_with_support": 133
+  },
+  "band50": {
+   "radius_px": 50,
+   "psnr": 24.0935,
+   "ssim": 0.8932,
+   "depth_l1_pen_cm": 13.8709,
+   "support_px_mean": 67424,
+   "frames_with_support": 133
+  }
+ }
+}

@@ -1,0 +1,14 @@
+{
+  "frames": 578,
+  "mean_mean_w": 0.6954143640285545,
+  "mean_min_w": 0.1845726459971903,
+  "mean_flow_valid_frac": 0.8645914541396302,
+  "mean_mean_s": 0.6740573678668395,
+  "ego_projection": 0,
+  "ego_fit_applied_frames": 0,
+  "ego_fit_applied_frac": 0.0,
+  "ego_reject_counts": {
+    "none": 578
+  },
+  "ego_pose_oracle": 0
+}

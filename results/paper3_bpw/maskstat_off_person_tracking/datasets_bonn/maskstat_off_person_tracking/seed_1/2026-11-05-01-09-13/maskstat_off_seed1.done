@@ -1,0 +1,9 @@
+arm=off
+seed=1
+gpu=0
+rc=0
+elapsed_s=1518
+head=1ee5b05f5
+max_frames=0
+console=/home/jiangwenheng/maskstat_3090_runs/off_seed1.consolelog
+finished_rc0=yes
