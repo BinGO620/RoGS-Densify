@@ -7,7 +7,7 @@
 #
 # 全部派生自 instrument_maskstat_off（off 臂，无机制），只改 mapping_itr_num。
 set -eu
-REPO=${MONOGS_REPO:-/data/monogs-ours}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
 CFGDIR="$REPO/configs/experiments/paper3_bpw"
 BASE="instrument_maskstat_off"
 

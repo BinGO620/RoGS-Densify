@@ -8,8 +8,12 @@
 # 派发唯一形态（后台，绝对路径，命令行禁含目标进程名字面量——PITFALLS 自匹配第三形态）。
 set -u
 
-REPO=${MONOGS_REPO:-/data/monogs-ours}
-PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
+PY=${MONOGS_PY:-${CONDA_PREFIX:-}/bin/python}
+if [ ! -x "$PY" ]; then
+    echo "set MONOGS_PY, or activate the conda env first (CONDA_PREFIX unset)" >&2
+    exit 2
+fi
 export MONOGS_REPO="$REPO" MONOGS_PY="$PY"
 BATCH_LOG="$REPO/paper3/results/evidence/device_floor_async_cm_batch_20261109.log"
 

@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Temporal-Aware Densification for Dynamic 3D Gaussian Splatting SLAM"
+type: software
+authors:
+  - family-names: Chen
+    given-names: Bin
+  - family-names: Su
+    given-names: Jie
+  - family-names: Zhang
+    given-names: Jing
+repository-code: "https://github.com/BinGO620/RoGS-Densify"
+license: LicenseRef-Gaussian-Splatting-NonCommercial
+preferred-citation:
+  type: article
+  title: "Temporal-Aware Densification for Dynamic 3D Gaussian Splatting SLAM"
+  authors:
+    - family-names: Chen
+      given-names: Bin
+    - family-names: Su
+      given-names: Jie
+    - family-names: Zhang
+      given-names: Jing
+  journal: "The Visual Computer"
+  year: 2026
+  notes: "In preparation / submitted."

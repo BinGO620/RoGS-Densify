@@ -17,8 +17,12 @@
 #   <n_runs>    = run 数（复现性检查用 2；臂级配对 >=3）
 set -u
 
-REPO=${MONOGS_REPO:-/data/monogs-ours}
-PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
+PY=${MONOGS_PY:-${CONDA_PREFIX:-}/bin/python}
+if [ ! -x "$PY" ]; then
+    echo "set MONOGS_PY, or activate the conda env first (CONDA_PREFIX unset)" >&2
+    exit 2
+fi
 ARM=${1:-}
 SEED=${2:-0}
 MAXF=${3:-40}

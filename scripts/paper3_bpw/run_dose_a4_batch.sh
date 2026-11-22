@@ -13,8 +13,12 @@
 #   setsid env bash scripts/paper3_bpw/run_dose_a4_batch.sh >> paper3/results/evidence/dose_a4_batch.log 2>&1 &
 set -u
 
-REPO=${MONOGS_REPO:-/data/monogs-ours}
-PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
+PY=${MONOGS_PY:-${CONDA_PREFIX:-}/bin/python}
+if [ ! -x "$PY" ]; then
+    echo "set MONOGS_PY, or activate the conda env first (CONDA_PREFIX unset)" >&2
+    exit 2
+fi
 ARM_A4=instrument_dose_a4_person_tracking
 ARM_OFF=instrument_maskstat_off
 RUNNER="$REPO/scripts/paper3_bpw/run_instrument.sh"

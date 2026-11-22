@@ -11,7 +11,7 @@
 # 用法：
 #   bash scripts/paper3_bpw/make_instrument_arm.sh <base_arm> [<instrument_name>]
 set -eu
-REPO=${MONOGS_REPO:-/data/monogs-ours}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
 BASE_ARM=${1:-}
 NAME=${2:-"instrument_${BASE_ARM}"}
 [ -n "$BASE_ARM" ] || { echo "用法: $0 <base_arm> [<instrument_name>]" >&2; exit 2; }

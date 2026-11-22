@@ -12,8 +12,12 @@
 # 注意：串行。本地 2060 只有一张卡，并发会互相抢显存。
 set -u
 
-REPO=${MONOGS_REPO:-/data/monogs-ours}
-PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
+PY=${MONOGS_PY:-${CONDA_PREFIX:-}/bin/python}
+if [ ! -x "$PY" ]; then
+    echo "set MONOGS_PY, or activate the conda env first (CONDA_PREFIX unset)" >&2
+    exit 2
+fi
 ARMS="off on negctl"
 MAX_FRAMES=${MAX_FRAMES:-0}
 

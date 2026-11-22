@@ -87,3 +87,19 @@ submodules/              # diff-gaussian-rasterization-w-pose + simple-knn（pin
 
 Built on [MonoGS](https://github.com/muskie82/MonoGS) and
 [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting).
+
+## Reproducing
+
+Full step-by-step instructions — requirements, CUDA checks, environment, dataset
+download, the FDose three-stage pipeline, judges, and the test suite — are in
+**[REPRODUCING.md](REPRODUCING.md)**.
+
+## License
+
+Released for **non-commercial research and evaluation use only**, inherited from
+the Inria/MPII Gaussian-Splatting License that covers the rasterizer submodule.
+See [LICENSE](LICENSE) for the combined terms and the per-component table.
+
+## Citation
+
+If you use this code, please cite the paper — see [CITATION.cff](CITATION.cff).

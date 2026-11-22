@@ -20,8 +20,12 @@
 # 判活以工件 mtime + 后台退出通知为准（pgrep 会误命中嵌 "slam.py" 字样的无关进程）。
 set -u
 
-REPO=${MONOGS_REPO:-/data/monogs-ours}
-PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
+PY=${MONOGS_PY:-${CONDA_PREFIX:-}/bin/python}
+if [ ! -x "$PY" ]; then
+    echo "set MONOGS_PY, or activate the conda env first (CONDA_PREFIX unset)" >&2
+    exit 2
+fi
 SEQ=${SEQ:-person_tracking}
 SEEDS=${SEEDS:-"0"}
 MAX_FRAMES=${MAX_FRAMES:-0}

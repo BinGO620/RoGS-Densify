@@ -26,8 +26,12 @@ set -u
 
 log() { echo "[$(date +%H:%M:%S)] $*"; }
 
-REPO=${MONOGS_REPO:-/data/monogs-ours}
-PY=${MONOGS_PY:-/data/conda_envs/monogs-ours/bin/python}
+REPO=${MONOGS_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}
+PY=${MONOGS_PY:-${CONDA_PREFIX:-}/bin/python}
+if [ ! -x "$PY" ]; then
+    echo "set MONOGS_PY, or activate the conda env first (CONDA_PREFIX unset)" >&2
+    exit 2
+fi
 # 派发机器（G3-致命A 整改）：远程路径 = /home/jiangwenheng/cron/monogs-ours +
 # anaconda3/envs/monogs-ours-3090/bin/python；默认值指向本地 cb 路径，
 # 远程未覆盖时下面的前置检查会 fail-closed 退出（不会静默跑成 fixed-150）。
