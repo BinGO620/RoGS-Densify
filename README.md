@@ -1,98 +1,117 @@
 # RoGS-Densify
 
-**动态场景 3D 高斯地图的时间感知致密化策略**（研究内容三 / 论文 3，进行中）。
+**Temporal-aware densification for dynamic 3D Gaussian maps** (research content 3;
+paper 3, in progress).
 
-在动态场景 3DGS-SLAM（RoGS-SLAM 平台，见[继承说明](#继承的平台)）之上，研究地图**在线
-生长过程中的致密化决策**：每个 densify 事件该把预算花在哪些高斯上。当前机制形态为
-**FDose**（冻结剂量计划：从 k0 臂 trace 冻结逐事件剂量 K_i，G/S 臂用不同选点键消费同
-一份外生计划）。研究状态与判据见 `paper3/PREREGISTRATION.md` 与 `paper3/results/evidence/`。
+Built on a dynamic-scene 3DGS-SLAM platform (RoGS-SLAM; see
+[the inherited platform](#inherited-platform-paper-1-method-frozen)), this work
+studies the **densification decisions made while a map grows online**: for each
+densify event, which Gaussians should receive the budget. The current mechanism
+is **FDose** — a frozen dose plan that freezes per-event doses `K_i` from a k0-arm
+trace, then has the G and S arms consume the same exogenous plan through
+different selection keys. Study status and criteria are in
+`paper3/PREREGISTRATION.md` and `paper3/results/evidence/`.
 
-> 三仓库关系：`RoGS-SLAM`（论文1，可靠观测）→ `RoGS-Map`（论文2，地图表示与维护）→
-> 本仓库（论文3，地图生长）。本仓库的实验臂继承论文1 的完整方法作为基线平台。
+> Three-repo relation: `RoGS-SLAM` (paper 1, reliable observations) →
+> `RoGS-Map` (paper 2, map representation and maintenance) → this repo
+> (paper 3, map growth). This repo's experiment arms inherit paper 1's full
+> method as their baseline platform.
 
 ## Installation
 
 ```bash
 git clone --recursive https://github.com/BinGO620/RoGS-Densify.git
 cd RoGS-Densify
-./setup_env.sh        # conda env + 编译两个 CUDA 扩展 + 下载数据集
+./setup_env.sh        # conda env + build two CUDA extensions + download datasets
 conda activate rogs-densify
 ```
 
-要求：CUDA 11.8 工具链；GPU ≥ 6GB（论文数字产自 RTX 3090）。
+Requirements: CUDA 11.8 toolchain; GPU ≥ 6 GB (paper numbers were produced on an
+RTX 3090).
+
+For a full step-by-step walkthrough — requirements, CUDA checks, environment,
+dataset download, the FDose three-stage pipeline, judges, and the test suite —
+see **[REPRODUCING.md](REPRODUCING.md)**.
 
 ## Usage
 
 ```bash
-# 单跑一臂（person_tracking 序列，580 帧 ≈ 34 min on RTX 2060）
+# One arm (person_tracking, 580 frames, ~34 min on an RTX 2060)
 python slam.py --config configs/experiments/paper3_bpw/bpw_off_person_tracking.yaml --seed 0 --eval
 
-# 冒烟（40 帧）
+# Smoke test (40 frames)
 python slam.py --config configs/experiments/paper3_bpw/bpw_off_person_tracking.yaml --seed 0 --eval --max-frames 40
 
-# FDose 三段式（stage1 计划源 → freeze 冻结剂量计划 → stage2 两机制臂）
+# FDose three stages (stage1 plan source -> freeze -> stage2 two mechanism arms)
 bash scripts/paper3_bpw/run_fdose_l1.sh stage1
 bash scripts/paper3_bpw/run_fdose_l1.sh freeze
 bash scripts/paper3_bpw/run_fdose_l1.sh stage2
 
-# 判据（正式批必须 --require-done）
-python scripts/paper3_bpw/check_fdose_gate.py --runs <run 目录> --require-done
-python scripts/paper3_bpw/judge_fdose.py --runs <显式 run 清单 JSON>
+# Judges (a formal batch must pass --require-done)
+python scripts/paper3_bpw/check_fdose_gate.py --runs <run-dir> --require-done
+python scripts/paper3_bpw/judge_fdose.py --runs <explicit-run-list.json>
 
-# 门禁测试（105 个）
+# Gates (105 tests)
 pytest tests/densification tests/paper3_bpw tests/test_config_valid.py -q
 ```
 
-## 配置与实验臂
+## Configuration and experiment arms
 
-配置 = YAML 继承链：`configs/rgbd/tum/base_config.yaml`（全默认+全开关，默认关闭）
-→ `configs/rgbd/bonn/{base_config,<seq>}.yaml`（数据/标定）→ `method_from
-configs/experiments/combined_prune/method.yaml`（论文1 方法主干，见继承说明）→
-`configs/experiments/paper3_bpw/<arm>.yaml`（**臂间只差 `SelectiveDensification` 块**）。
+Config = a YAML inheritance chain: `configs/rgbd/tum/base_config.yaml` (all
+defaults and switches, all off) → `configs/rgbd/bonn/{base_config,<seq>}.yaml`
+(data/calibration) → `configs/experiments/combined_prune/method.yaml` (paper 1's
+method core; see the inherited-platform section) →
+`configs/experiments/paper3_bpw/<arm>.yaml` (**arms differ only in the
+`SelectiveDensification` block**).
 
-| 臂 | 机制 | 配置 |
+| Arm | Mechanism | Config |
 |---|---|---|
-| off | 预算匹配致密化（参考实现，选中集=梯度阈值集） | `bpw_off_person_tracking.yaml` |
-| on / negctl | BPW（持久性加权，Phase 0 已过） | `bpw_{on,negctl}_person_tracking.yaml` |
-| k0 / G / S | FDose（计划源 / 梯度键 / 稀疏键） | `fdose_{k0,G,S}_person_tracking.yaml` |
+| off | budget-matched densification (reference; selected set = gradient-threshold set) | `bpw_off_person_tracking.yaml` |
+| on / negctl | BPW (persistence weighting; Phase 0 passed) | `bpw_{on,negctl}_person_tracking.yaml` |
+| k0 / G / S | FDose (plan source / gradient key / sparse key) | `fdose_{k0,G,S}_person_tracking.yaml` |
 
-## 继承的平台（论文1 方法，已冻结）
+## Inherited platform (paper 1 method, frozen)
 
-本仓库的运行主干包含论文1（MMM 2027, RoGS-SLAM）的四个方法组件，作为所有实验臂的
-共同基线平台，`method.yaml` 中默认开启：K 统一关键帧覆盖（`DynamicKeyframe`）、
-R 鲁棒重加权（`RobustTracking`）、L 可靠性信号（`ReliabilitySignal`，光流一致性）、
-D lineage 生命周期（`DeferredCommit`）+ 可选语义掩码（`SemanticMask`）。
-这些组件**属于论文1，本仓库不修改**；其方法说明见 RoGS-SLAM 仓库。
+This repo's runtime core contains paper 1's (MMM 2027, RoGS-SLAM) four method
+components as the common baseline platform for all experiment arms, enabled by
+default in `method.yaml`: **K** unified keyframe coverage (`DynamicKeyframe`),
+**R** robust re-weighting (`RobustTracking`), **L** reliability signal
+(`ReliabilitySignal`, optical-flow consistency), **D** lineage lifecycle
+(`DeferredCommit`), plus an optional semantic mask (`SemanticMask`). These
+components **belong to paper 1 and are not modified here**; for the method
+description see the RoGS-SLAM repository.
 
 ## Project Structure
 
 ```
-slam.py                  # 唯一入口（--config/--seed/--eval/--max-frames）
-utils/                   # SLAM 核心 + 机制模块（裁剪与修改清单见 PROVENANCE.md）
-gaussian_splatting/      # 3DGS 渲染器（MonoGS 派生）
-configs/                 # 数据集配置 + 实验臂
-scripts/paper3_bpw/      # 批跑 runner + 判据机（judge/check/plan）
-tests/                   # 门禁测试（mechanism 层 CPU 单测）
-results/paper3_bpw/      # 判据小件（逐 run CSV/JSON/config）+ evidence/
-paper3/                  # 预注册（PREREGISTRATION/PROBLEM）+ 审查证据
-submodules/              # diff-gaussian-rasterization-w-pose + simple-knn（pin SHA）
+slam.py                  # single entry point (--config/--seed/--eval/--max-frames)
+utils/                   # SLAM core + mechanism modules (pruning/edits in PROVENANCE.md)
+gaussian_splatting/      # 3DGS renderer (MonoGS-derived)
+configs/                 # dataset configs + experiment arms
+scripts/paper3_bpw/      # batch runners + judges (judge/check/plan)
+tests/                   # gates (mechanism-layer CPU unit tests)
+results/paper3_bpw/      # criterion artifacts (per-run CSV/JSON/config) + evidence/
+paper3/                  # pre-registration (PREREGISTRATION/PROBLEM) + review evidence
+submodules/              # diff-gaussian-rasterization-w-pose + simple-knn (SHA-pinned)
+```
+
+## Testing
+
+```bash
+pytest tests/densification tests/paper3_bpw tests/test_config_valid.py -q
+# 316 passed
 ```
 
 ## Provenance
 
-本仓库由 monogs-ours@`31b0f0367` 按依赖闭包裁剪重建：复制清单、删改明细、验证记录见
-[PROVENANCE.md](PROVENANCE.md)。
+This repository was rebuilt from monogs-ours@`31b0f0367` by dependency-closure
+pruning; the copy list, deletions, and verification record are in
+[PROVENANCE.md](PROVENANCE.md).
 
 ## Acknowledgements
 
 Built on [MonoGS](https://github.com/muskie82/MonoGS) and
 [3D Gaussian Splatting](https://github.com/graphdeco-inria/gaussian-splatting).
-
-## Reproducing
-
-Full step-by-step instructions — requirements, CUDA checks, environment, dataset
-download, the FDose three-stage pipeline, judges, and the test suite — are in
-**[REPRODUCING.md](REPRODUCING.md)**.
 
 ## License
 
