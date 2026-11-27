@@ -1,7 +1,25 @@
 # RoGS-Densify
 
-**Temporal-aware densification for dynamic 3D Gaussian maps** (research content 3;
-paper 3, in progress).
+> **Status: inactive since 2026-11-27.** This snapshot belongs to an earlier line
+> of research content 3 — temporal-aware densification for dynamic 3DGS maps.
+> That line was stopped after the arm-level effect proved to lie below the
+> measurement floor of the available hardware: repeated runs at an identical
+> configuration and seed differed by up to **96.8%** in terminal map size, and
+> enabling the full PyTorch determinism suite still left **65.3%** divergence.
+> At that resolution, arm-to-arm differences of the size the mechanism was meant
+> to produce are not measurable, so the line was closed rather than continued.
+>
+> The current research content 3 is
+> [**RoGS-Takeover**](https://github.com/BinGO620/RoGS-Takeover), which addresses
+> cross-session map takeover through a lifecycle state consistency contract.
+>
+> This repository is kept as a record of the exploration — the instrumentation,
+> the regime probes, and the dose-frontier measurements — not as an active
+> codebase. The corresponding research records remain in the private source
+> repository.
+
+**Temporal-aware densification for dynamic 3D Gaussian maps** (research content 3,
+earlier line; stopped 2026-11-27).
 
 Built on a dynamic-scene 3DGS-SLAM platform (RoGS-SLAM; see
 [the inherited platform](#inherited-platform-paper-1-method-frozen)), this work
